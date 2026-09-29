@@ -1,495 +1,421 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>About | Pragathi Ilango</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,500&display=swap"
-    rel="stylesheet"
-  >
-
-  <link rel="stylesheet" href="about.css">
-</head>
-
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About | Pragathi Ilango</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,500;1,500&amp;display=swap" rel="stylesheet"/>
+<link href="about.css" rel="stylesheet"/>
+<link href="shared.css" rel="stylesheet"/></head>
 <body>
+<!-- =====================================================
 
-  <!-- =====================================================
        HEADER
-       ===================================================== -->
-  <header class="site-header">
-    <a class="site-logo-link" href="index.html" aria-label="Pragathi Ilango home">
-      <img class="site-logo" src="assets/images/pi_logo.svg" alt="Pragathi Ilango">
-    </a>
 
-    <nav class="main-nav" aria-label="Primary navigation">
-      <a class="active" href="about.html">About</a>
-      <a href="index.html#calendar">Playground</a>
-      <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
-    </nav>
+       \===================================================== -->
+<header class="site-header">
+<a aria-label="Pragathi Ilango home" class="site-logo-link" href="index.html">
+<img alt="Pragathi Ilango" class="site-logo" src="assets/images/pi_logo.svg"/>
+</a>
+<nav aria-label="Primary navigation" class="main-nav">
+<a class="active" href="about.html">About</a>
+<a href="playground.html">Playground</a>
+<a href="resume.pdf" rel="noopener" target="_blank">Resume</a>
+</nav>
+<button aria-expanded="false" aria-label="Open menu" class="menu-button" type="button">
+<span></span>
+<span></span>
+<span></span>
+</button>
+</header>
+<main>
+<!-- =====================================================
 
-    <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </header>
-
-
-  <main>
-
-    <!-- =====================================================
          ABOUT HERO
-         ===================================================== -->
-    <section class="about-hero">
 
-      <div class="about-hero-inner">
+         \===================================================== -->
+<section class="about-hero">
+<div class="about-hero-inner">
+<!--
 
-        <!--
           The invisible ghost keeps the final headline height reserved
+
           while the visible copy types over it, so the page does not jump.
-        -->
-        <div class="about-headline-stage reveal">
-          <h1 class="about-headline-ghost" aria-hidden="true">
+
+        \-->
+<div class="about-headline-stage reveal">
+<h1 aria-hidden="true" class="about-headline-ghost">
+
             Because great ideas deserve to be built just as beautifully as they’re imagined.
+
           </h1>
+<h1 aria-label="Because great ideas deserve to be built just as beautifully as they’re imagined." class="about-headline" id="aboutHeadline"></h1>
+</div>
+<div class="about-intro">
+<!-- PINBOARD / MEDIA COLLAGE -->
+<div class="about-media-column reveal">
+<div aria-label="A small collection of moments from Pragathi's life" class="media-pinboard">
+<figure class="media-piece media-piece-one">
+<div class="media-placeholder">
+<span>photo 1</span>
+</div>
+</figure>
+<figure class="media-piece media-piece-two">
+<div class="media-placeholder">
+<span>photo 2</span>
+</div>
+</figure>
+<figure class="media-piece media-piece-three instax-piece">
+<div class="media-placeholder video-ready">
+<span>photo / video</span>
+</div>
+<figcaption>a tiny piece of my world</figcaption>
+</figure>
+</div>
+<p class="about-photo-note" id="aboutSignature">
 
-          <h1
-            class="about-headline"
-            id="aboutHeadline"
-            aria-label="Because great ideas deserve to be built just as beautifully as they’re imagined."
-          ></h1>
-        </div>
-
-
-        <div class="about-intro">
-
-          <!-- PINBOARD / MEDIA COLLAGE -->
-          <div class="about-media-column reveal">
-
-            <div class="media-pinboard" aria-label="A small collection of moments from Pragathi's life">
-
-              <figure class="media-piece media-piece-one">
-                <div class="media-placeholder">
-                  <span>photo 1</span>
-                </div>
-              </figure>
-
-              <figure class="media-piece media-piece-two">
-                <div class="media-placeholder">
-                  <span>photo 2</span>
-                </div>
-              </figure>
-
-              <figure class="media-piece media-piece-three instax-piece">
-                <div class="media-placeholder video-ready">
-                  <span>photo / video</span>
-                </div>
-                <figcaption>a tiny piece of my world</figcaption>
-              </figure>
-
-            </div>
-
-            <p class="about-photo-note" id="aboutSignature">
               Hi, I’m Pragathi Ilango
+
             </p>
+</div>
+<!-- BIO -->
+<div class="about-copy reveal">
+<p>
 
-          </div>
-
-
-          <!-- BIO -->
-          <div class="about-copy reveal">
-
-            <p>
               I’m a web designer/developer based in New Haven, CT, currently building
+
               digital experiences at Wesleyan University. With a background in Computer
+
               Science and a Master’s in Interaction Design from UT Dallas, my work balances
+
               technical depth with thoughtful design.
-            </p>
 
-            <p>
+            </p>
+<p>
+
               My not-so-secret superpower? I can code and bring my designs to life.
+
               The coder side of me keeps my ideas grounded — practical, scalable,
+
               and dev-friendly (you’re welcome, developers) — while the designer in me
+
               keeps asking how the experience could feel clearer, easier, or just better.
+
               Having lived in three countries and stumbled through more apps than I can count,
+
               I bring a global lens to the way I notice and solve problems.
-            </p>
 
-            <p>
+            </p>
+<p>
+
               I used to be the person thinking, “Ugh, they could’ve just done this better.”
+
               Now? I’m the person making it better. And if I’m not designing, chances are
+
               I’m teaching my dog a new trick, frantically writing down an idea before I
+
               forget it, or — let’s be honest — scrolling through social media
+
               (I’m working on that habit).
+
             </p>
+</div>
+</div>
+</div>
+</section>
+<!-- =====================================================
 
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
          SKILLS
-         ===================================================== -->
-    <section class="skills-section" id="skills">
 
-      <div class="section-shell">
+         \===================================================== -->
+<section class="skills-section" id="skills">
+<div class="section-shell">
+<h2 class="section-display smooth-title reveal">SKILLS</h2>
+<div class="skills-grid">
+<article class="skill-card stagger-card">
+<h3>UX &amp; Product Thinking</h3>
+<ul>
+<li>User research &amp; discovery</li>
+<li>User journeys &amp; task flows</li>
+<li>Wireframes &amp; information architecture</li>
+<li>Usability testing</li>
+<li>Accessibility / WCAG</li>
+<li>Design systems</li>
+</ul>
+</article>
+<article class="skill-card stagger-card">
+<h3>Visual &amp; Interaction Design</h3>
+<ul>
+<li>UI design</li>
+<li>Visual design &amp; typography</li>
+<li>Brand identity</li>
+<li>Responsive web design</li>
+<li>Microinteractions</li>
+<li>Prototyping</li>
+</ul>
+</article>
+<article class="skill-card stagger-card">
+<h3>Front-End Development</h3>
+<ul>
+<li>HTML / CSS / JavaScript</li>
+<li>PHP &amp; WordPress</li>
+<li>REST APIs</li>
+<li>Responsive implementation</li>
+<li>Accessibility engineering</li>
+<li>Git / GitHub</li>
+</ul>
+</article>
+<article class="skill-card stagger-card">
+<h3>AI &amp; Automation Tools</h3>
+<ul>
+<li>ChatGPT</li>
+<li>GitHub Copilot</li>
+<li>Gemini</li>
+<li>Lovable</li>
+<li>Figma Make</li>
+<li>Workflow experimentation</li>
+</ul>
+</article>
+<article class="skill-card stagger-card">
+<h3>Web Platforms &amp; Site Builders</h3>
+<ul>
+<li>WordPress</li>
+<li>Wix Studio</li>
+<li>Figma</li>
+<li>Squarespace</li>
+<li>Google Analytics / GA4</li>
+<li>CMS customization</li>
+</ul>
+</article>
+<article class="skill-card stagger-card">
+<h3>Currently Working On</h3>
+<ul>
+<li>3D web development</li>
+<li>WebGL / GLSL</li>
+<li>Creative coding</li>
+<li>Motion on the web</li>
+<li>Experimental interactions</li>
+<li>Small playful builds</li>
+</ul>
+</article>
+</div>
+</div>
+</section>
+<!-- =====================================================
 
-        <h2 class="section-display smooth-title reveal">SKILLS</h2>
-
-        <div class="skills-grid">
-
-          <article class="skill-card stagger-card">
-            <h3>UX & Product Thinking</h3>
-            <ul>
-              <li>User research & discovery</li>
-              <li>User journeys & task flows</li>
-              <li>Wireframes & information architecture</li>
-              <li>Usability testing</li>
-              <li>Accessibility / WCAG</li>
-              <li>Design systems</li>
-            </ul>
-          </article>
-
-          <article class="skill-card stagger-card">
-            <h3>Visual & Interaction Design</h3>
-            <ul>
-              <li>UI design</li>
-              <li>Visual design & typography</li>
-              <li>Brand identity</li>
-              <li>Responsive web design</li>
-              <li>Microinteractions</li>
-              <li>Prototyping</li>
-            </ul>
-          </article>
-
-          <article class="skill-card stagger-card">
-            <h3>Front-End Development</h3>
-            <ul>
-              <li>HTML / CSS / JavaScript</li>
-              <li>PHP & WordPress</li>
-              <li>REST APIs</li>
-              <li>Responsive implementation</li>
-              <li>Accessibility engineering</li>
-              <li>Git / GitHub</li>
-            </ul>
-          </article>
-
-          <article class="skill-card stagger-card">
-            <h3>AI & Automation Tools</h3>
-            <ul>
-              <li>ChatGPT</li>
-              <li>GitHub Copilot</li>
-              <li>Gemini</li>
-              <li>Lovable</li>
-              <li>Figma Make</li>
-              <li>Workflow experimentation</li>
-            </ul>
-          </article>
-
-          <article class="skill-card stagger-card">
-            <h3>Web Platforms & Site Builders</h3>
-            <ul>
-              <li>WordPress</li>
-              <li>Wix Studio</li>
-              <li>Figma</li>
-              <li>Squarespace</li>
-              <li>Google Analytics / GA4</li>
-              <li>CMS customization</li>
-            </ul>
-          </article>
-
-          <article class="skill-card stagger-card">
-            <h3>Currently Working On</h3>
-            <ul>
-              <li>3D web development</li>
-              <li>WebGL / GLSL</li>
-              <li>Creative coding</li>
-              <li>Motion on the web</li>
-              <li>Experimental interactions</li>
-              <li>Small playful builds</li>
-            </ul>
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
          EXPERIENCE
-         ===================================================== -->
-    <section class="experience-section" id="experience">
 
-      <div class="experience-layout">
+         \===================================================== -->
+<section class="experience-section" id="experience">
+<div class="experience-layout">
+<div class="experience-title-column">
+<div class="experience-sticky">
+<h2 class="section-display smooth-title">
 
-        <div class="experience-title-column">
-          <div class="experience-sticky">
-            <h2 class="section-display smooth-title">
               EXPERIENCE
+
             </h2>
-          </div>
-        </div>
+</div>
+</div>
+<!-- The border on this column IS the full vertical divider. -->
+<div class="experience-content">
+<article class="experience-current experience-block reveal-card">
+<p class="experience-kicker">Current</p>
+<h3>
 
-
-        <!-- The border on this column IS the full vertical divider. -->
-        <div class="experience-content">
-
-          <article class="experience-current experience-block reveal-card">
-
-            <p class="experience-kicker">Current</p>
-
-            <h3>
               Computer Systems Engineer / Web Developer
+
             </h3>
+<p class="experience-meta">
 
-            <p class="experience-meta">
               Wesleyan University · Since 2023
-            </p>
 
-            <p class="experience-description">
+            </p>
+<p class="experience-description">
+
               Designing and developing accessible web experiences, maintaining
+
               large-scale content systems, and translating research-focused
+
               information into clear, usable interfaces.
+
             </p>
+</article>
+<div class="experience-previous">
+<p class="experience-kicker reveal-card">
 
-          </article>
-
-
-          <div class="experience-previous">
-
-            <p class="experience-kicker reveal-card">
               Previous
+
             </p>
+<article class="experience-block reveal-card">
+<h3>Front-end Design &amp; Developer</h3>
+<p class="experience-meta">
 
-            <article class="experience-block reveal-card">
-              <h3>Front-end Design & Developer</h3>
+                SARAS Analytics &amp; Consulting · 2022–2023
 
-              <p class="experience-meta">
-                SARAS Analytics & Consulting · 2022–2023
               </p>
+<p class="experience-description">
 
-              <p class="experience-description">
                 Created front-end interfaces, visual systems, responsive pages,
+
                 and implementation-ready design work across client projects.
+
               </p>
-            </article>
+</article>
+<article class="experience-block reveal-card">
+<h3>Graduate Grader</h3>
+<p class="experience-meta">
 
-            <article class="experience-block reveal-card">
-              <h3>Graduate Grader</h3>
-
-              <p class="experience-meta">
                 The University of Texas at Dallas · 2022–2023
-              </p>
 
-              <p class="experience-description">
+              </p>
+<p class="experience-description">
+
                 Supported interaction-design coursework and evaluated student work
+
                 across design, usability, and interface-development topics.
+
               </p>
-            </article>
+</article>
+</div>
+</div>
+</div>
+</section>
+<!-- =====================================================
 
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
          CERTIFICATIONS
-         ===================================================== -->
-    <section class="certifications-section">
 
-      <div class="certifications-inner">
+         \===================================================== -->
+<section class="certifications-section">
+<div class="certifications-inner">
+<h2 class="section-display smooth-title section-display-light reveal">
 
-        <h2 class="section-display smooth-title section-display-light reveal">
           CERTIFICATIONS
+
         </h2>
+<div aria-label="Professional certifications" class="certification-stack">
+<div class="cert-circle reveal-card">
+<img alt="HFI Certified Usability Analyst" src="assets/images/hfi.png"/>
+</div>
+<div class="cert-circle reveal-card">
+<img alt="Interaction Design Foundation" src="assets/images/idf.png"/>
+</div>
+<div class="cert-circle reveal-card">
+<img alt="PMI CAPM" src="assets/images/pmi.png"/>
+</div>
+<div class="cert-circle reveal-card">
+<img alt="Google UX Design certificate" src="assets/images/google.png"/>
+</div>
+<div class="cert-circle reveal-card">
+<img alt="freeCodeCamp" src="assets/images/FreeCodeCamp_logo 1.svg"/>
+</div>
+</div>
+</div>
+</section>
+<!-- =====================================================
 
-        <div class="certification-stack" aria-label="Professional certifications">
-
-          <div class="cert-circle reveal-card">
-            <img src="assets/images/hfi.png" alt="HFI Certified Usability Analyst">
-          </div>
-
-          <div class="cert-circle reveal-card">
-            <img src="assets/images/idf.png" alt="Interaction Design Foundation">
-          </div>
-
-          <div class="cert-circle reveal-card">
-            <img src="assets/images/pmi.png" alt="PMI CAPM">
-          </div>
-
-          <div class="cert-circle reveal-card">
-            <img src="assets/images/google.png" alt="Google UX Design certificate">
-          </div>
-
-          <div class="cert-circle reveal-card">
-            <img src="assets/images/FreeCodeCamp_logo 1.svg" alt="freeCodeCamp">
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
          5 TO 9
-         ===================================================== -->
-    <section class="after-hours-section">
 
-      <div class="after-hours-heading reveal">
+         \===================================================== -->
+<section class="after-hours-section" id="after-hours">
+<div class="after-hours-heading reveal">
+<h2>
 
-        <h2>
           My 5–9 after my 9–5
+
         </h2>
+<p>
 
-        <p>
           Off the clock... sort of.
+
         </p>
+</div>
+<!-- TOP SCRAPBOOK ROW -->
+<div class="scrapbook-row scrapbook-row-top">
+<div class="scrap-card card-1"><span>1</span></div>
+<div class="scrap-card card-2"><span>2</span></div>
+<div class="scrap-card card-3"><span>3</span></div>
+<div class="scrap-card card-4"><span>4</span></div>
+<div class="scrap-card card-5"><span>5</span></div>
+<div class="scrap-card card-6"><span>6</span></div>
+<div class="scrap-card card-7"><span>7</span></div>
+</div>
+<!-- MARQUEE -->
+<div aria-label="Photography, Travel, Dogs, Family, Cooking, Music, Hiking, Movies" class="hobby-marquee">
+<div class="hobby-marquee-track">
+<span>Photography.</span>
+<span>Travel.</span>
+<span>Dogs.</span>
+<span>Family.</span>
+<span>Cooking.</span>
+<span>Music.</span>
+<span>Hiking.</span>
+<span>Movies.</span>
+<span aria-hidden="true">Photography.</span>
+<span aria-hidden="true">Travel.</span>
+<span aria-hidden="true">Dogs.</span>
+<span aria-hidden="true">Family.</span>
+<span aria-hidden="true">Cooking.</span>
+<span aria-hidden="true">Music.</span>
+<span aria-hidden="true">Hiking.</span>
+<span aria-hidden="true">Movies.</span>
+</div>
+</div>
+<!-- BOTTOM SCRAPBOOK ROW -->
+<div class="scrapbook-row scrapbook-row-bottom">
+<div class="scrap-card card-8"><span>8</span></div>
+<div class="scrap-card card-9"><span>9</span></div>
+<div class="scrap-card card-10"><span>10</span></div>
+<div class="scrap-card card-11"><span>11</span></div>
+<div class="scrap-card card-12"><span>12</span></div>
+<div class="scrap-card card-13"><span>13</span></div>
+<div class="scrap-card card-14"><span>14</span></div>
+</div>
+</section>
+</main>
+<!-- =====================================================
 
-      </div>
-
-
-      <!-- TOP SCRAPBOOK ROW -->
-      <div class="scrapbook-row scrapbook-row-top">
-
-        <div class="scrap-card card-1"><span>1</span></div>
-        <div class="scrap-card card-2"><span>2</span></div>
-        <div class="scrap-card card-3"><span>3</span></div>
-        <div class="scrap-card card-4"><span>4</span></div>
-        <div class="scrap-card card-5"><span>5</span></div>
-        <div class="scrap-card card-6"><span>6</span></div>
-        <div class="scrap-card card-7"><span>7</span></div>
-
-      </div>
-
-
-      <!-- MARQUEE -->
-      <div
-        class="hobby-marquee"
-        aria-label="Photography, Travel, Dogs, Family, Cooking, Music, Hiking, Movies"
-      >
-
-        <div class="hobby-marquee-track">
-
-          <span>Photography.</span>
-          <span>Travel.</span>
-          <span>Dogs.</span>
-          <span>Family.</span>
-          <span>Cooking.</span>
-          <span>Music.</span>
-          <span>Hiking.</span>
-          <span>Movies.</span>
-
-          <span aria-hidden="true">Photography.</span>
-          <span aria-hidden="true">Travel.</span>
-          <span aria-hidden="true">Dogs.</span>
-          <span aria-hidden="true">Family.</span>
-          <span aria-hidden="true">Cooking.</span>
-          <span aria-hidden="true">Music.</span>
-          <span aria-hidden="true">Hiking.</span>
-          <span aria-hidden="true">Movies.</span>
-
-        </div>
-
-      </div>
-
-
-      <!-- BOTTOM SCRAPBOOK ROW -->
-      <div class="scrapbook-row scrapbook-row-bottom">
-
-        <div class="scrap-card card-8"><span>8</span></div>
-        <div class="scrap-card card-9"><span>9</span></div>
-        <div class="scrap-card card-10"><span>10</span></div>
-        <div class="scrap-card card-11"><span>11</span></div>
-        <div class="scrap-card card-12"><span>12</span></div>
-        <div class="scrap-card card-13"><span>13</span></div>
-        <div class="scrap-card card-14"><span>14</span></div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- =====================================================
        FOOTER — same asset structure as homepage
-       ===================================================== -->
-  <footer class="site-footer">
 
-    <div class="footer-display">
+       \===================================================== -->
+<footer class="site-footer">
+<div class="footer-display">
+<img alt="This is your cue" class="footer-cue-svg" src="assets/images/This_is_your_cue.svg"/>
+<p>
 
-      <img
-        class="footer-cue-svg"
-        src="assets/images/This_is_your_cue.svg"
-        alt="This is your cue"
-      >
-
-      <p>
         say hi
+
       </p>
+</div>
+<div class="footer-contact">
+<div class="footer-socials">
+<a aria-label="LinkedIn" href="#">
+<img alt="" src="assets/images/linkedin.svg"/>
+</a>
+<a aria-label="Behance" href="#">
+<img alt="" src="assets/images/behance.svg"/>
+</a>
+<a aria-label="Dribbble" href="#">
+<img alt="" src="assets/images/dribbble.svg"/>
+</a>
+<a aria-label="Resume" href="resume.pdf">
+<img alt="" src="assets/images/resume.svg"/>
+</a>
+</div>
+<a class="footer-email" href="mailto:pragathi.ilango@gmail.com">
 
-    </div>
-
-
-    <div class="footer-contact">
-
-      <div class="footer-socials">
-
-        <a href="#" aria-label="LinkedIn">
-          <img src="assets/images/linkedin.svg" alt="">
-        </a>
-
-        <a href="#" aria-label="Behance">
-          <img src="assets/images/behance.svg" alt="">
-        </a>
-
-        <a href="#" aria-label="Dribbble">
-          <img src="assets/images/dribbble.svg" alt="">
-        </a>
-
-        <a href="resume.pdf" aria-label="Resume">
-          <img src="assets/images/resume.svg" alt="">
-        </a>
-
-      </div>
-
-
-      <a
-        class="footer-email"
-        href="mailto:pragathi.ilango@gmail.com"
-      >
         pragathi.ilango@gmail.com
+
       </a>
-
-    </div>
-
-
-    <div class="footer-bottom">
-      <p>© Pragathi Ilango 2026</p>
-      <p>Made with love and a sugar rush 🍰</p>
-    </div>
-
-  </footer>
-
-
-  <script src="about.js"></script>
+</div>
+<div class="footer-bottom">
+<p>© Pragathi Ilango 2026</p>
+<p>Made with love and a sugar rush 🍰</p>
+</div>
+</footer>
+<script src="about.js"></script>
 </body>
 </html>
