@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#fff7de" />
+  <title>Pragathi Ilango — Portfolio Calendar Demo</title>
+  <meta name="description" content="Interactive portfolio calendar concept for Pragathi Ilango." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=League+Gothic&family=Playfair+Display:ital,wght@0,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="wordmark" href="#top">pragathi ilango</a>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="#about">About</a><a href="#playground">Playground</a><a href="#resume">Resume</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-title-wrap">
+          <h1 id="hero-title" class="hero-title"><span>UI/UX DESIGNER</span><span>WEB DEVELOPER</span></h1>
+          <div class="portrait-stamp" aria-hidden="true">
+            <div class="portrait-face">PI</div>
+            <span class="portrait-note">design<br>code<br>repeat ♥</span>
+          </div>
+        </div>
+        <div class="hero-bottom">
+          <p class="hero-copy">I design and build digital experiences where <em>clarity, accessibility, and personality</em> can coexist.</p>
+          <a class="text-link" href="#calendar">View my day ↓</a>
+        </div>
+      </section>
+
+      <section class="calendar-intro reveal" id="calendar">
+        <div><p class="eyebrow">A vertical portfolio index</p><h2>A DAY IN MY BRAIN</h2></div>
+        <p class="intro-copy">A day planner made from real work, experiments, ideas, and the things that keep me curious.</p>
+      </section>
+
+      <section class="planner" aria-label="Pragathi's project calendar">
+        <aside class="planner-date reveal"><span class="month">SEP</span><span class="day">16</span><span class="year">2026</span><span class="tiny-note">click any block to explore</span></aside>
+        <div class="planner-track">
+          <div class="progress-line" aria-hidden="true"><span class="progress-fill"></span></div>
+
+          <article class="calendar-event event-work reveal">
+            <div class="time-column"><span class="time">8:30</span><span class="meridiem">AM</span></div>
+            <a class="event-card" href="#project-up">
+              <div class="event-meta"><span class="event-kicker">Designing for real impact</span><span class="event-duration">90 min</span></div>
+              <h3>Understanding Prejudice</h3><p>UX · Information Architecture · Accessibility · Front-End</p>
+              <div class="event-bottom"><span class="pill">Featured case study</span><span class="arrow">↗</span></div>
+            </a>
+            <div class="side-note note-one">real users<br>real constraints<br>real launch</div>
+          </article>
+
+          <article class="calendar-event event-team reveal">
+            <div class="time-column"><span class="time">10:30</span><span class="meridiem">AM</span></div>
+            <a class="event-card compact" href="#project-spn">
+              <div class="event-meta"><span class="event-kicker">Team sync</span><span class="event-duration">45 min</span></div>
+              <h3>Social Psychology Network</h3><p>Web systems · content architecture · university collaboration</p>
+              <div class="event-bottom"><span class="pill">Professional work</span><span class="arrow">↗</span></div>
+            </a>
+          </article>
+
+          <article class="calendar-event event-build reveal">
+            <div class="time-column"><span class="time">12:00</span><span class="meridiem">PM</span></div>
+            <a class="event-card tall" href="#project-build">
+              <div class="event-meta"><span class="event-kicker">Building what I design</span><span class="event-duration">2 hr</span></div>
+              <h3>Front-End Development</h3><p>HTML · CSS · JavaScript · WordPress · responsive systems</p>
+              <div class="code-lines" aria-hidden="true"><span></span><span></span><span></span></div>
+              <div class="event-bottom"><span class="pill">Design + code</span><span class="arrow">↗</span></div>
+            </a>
+            <div class="side-note note-two">yes, I design<br><u>and</u> build it</div>
+          </article>
+
+          <article class="calendar-event event-creative reveal">
+            <div class="time-column"><span class="time">2:30</span><span class="meridiem">PM</span></div>
+            <a class="event-card" href="#playground">
+              <div class="event-meta"><span class="event-kicker">Creative exploration</span><span class="event-duration">75 min</span></div>
+              <h3>Posters, Branding & Visual Play</h3><p>Identity · editorial layouts · type experiments · competitions</p>
+              <div class="mini-gallery" aria-hidden="true"><span class="mini-card mini-a">TYPE</span><span class="mini-card mini-b">PLAY</span><span class="mini-card mini-c">MAKE</span></div>
+              <div class="event-bottom"><span class="pill">Playground</span><span class="arrow">↗</span></div>
+            </a>
+          </article>
+
+          <article class="calendar-event event-code reveal">
+            <div class="time-column"><span class="time">4:30</span><span class="meridiem">PM</span></div>
+            <a class="event-card compact" href="#playground">
+              <div class="event-meta"><span class="event-kicker">Coding experiments</span><span class="event-duration">60 min</span></div>
+              <h3>Small interactions, big joy</h3><p>CSS · JS · WebGL experiments · tiny tools</p>
+              <div class="event-bottom"><span class="pill">In progress</span><span class="arrow">↗</span></div>
+            </a>
+          </article>
+
+          <article class="calendar-event event-life reveal">
+            <div class="time-column"><span class="time">6:00</span><span class="meridiem">PM</span></div>
+            <a class="event-card compact" href="#about">
+              <div class="event-meta"><span class="event-kicker">Offline, briefly</span><span class="event-duration">45 min</span></div>
+              <h3>Walk with Prince</h3><p>Fresh air · reset · probably still thinking about layout</p>
+              <div class="event-bottom"><span class="pill">Very important</span><span class="arrow">↗</span></div>
+            </a>
+          </article>
+
+          <article class="calendar-event event-night reveal">
+            <div class="time-column"><span class="time">8:00</span><span class="meridiem">PM</span></div>
+            <a class="event-card" href="#playground">
+              <div class="event-meta"><span class="event-kicker">Probably still designing...</span><span class="event-duration">until ??</span></div>
+              <h3>Ideas, inspiration & tomorrow's tabs</h3><p>Reference hunting · side projects · learning something new</p>
+              <div class="event-bottom"><span class="pill">After hours</span><span class="arrow">↗</span></div>
+            </a>
+            <div class="side-note note-three">good design<br>brightens days ♥</div>
+          </article>
+
+          <div class="end-marker reveal"><span>END OF DAY</span><i></i></div>
+        </div>
+      </section>
+
+      <section class="selected-work" id="project-up">
+        <div class="section-heading reveal"><p class="eyebrow">For recruiters who just want the work</p><h2>SELECTED WORK</h2></div>
+        <div class="project-grid">
+          <article class="project-card reveal" id="project-spn"><span class="project-index">01</span><div class="project-thumb thumb-orange"><span>UNDERSTANDING<br>PREJUDICE</span></div><div class="project-text"><p class="project-role">UX · IA · Accessibility · Front-End</p><h3>Understanding Prejudice</h3><p>A large-scale redesign of a long-running social psychology resource.</p></div><span class="project-arrow">↗</span></article>
+          <article class="project-card reveal" id="project-build"><span class="project-index">02</span><div class="project-thumb thumb-dark"><span>SPN</span></div><div class="project-text"><p class="project-role">Web development · CMS · Systems</p><h3>Social Psychology Network</h3><p>Designing, maintaining, and improving academic web systems.</p></div><span class="project-arrow">↗</span></article>
+          <article class="project-card reveal"><span class="project-index">03</span><div class="project-thumb thumb-cream"><span>PLAY<br>GROUND</span></div><div class="project-text"><p class="project-role">Branding · Type · Motion · Code</p><h3>Creative Explorations</h3><p>Experiments that keep the visual side of my brain awake.</p></div><span class="project-arrow">↗</span></article>
+        </div>
+      </section>
+
+      <section class="playground-preview" id="playground">
+        <div class="section-heading reveal"><p class="eyebrow">Things nobody asked me to make</p><h2>PLAYGROUND</h2></div>
+        <div class="play-grid"><div class="play-tile tile-a reveal">TYPE<br>PLAY</div><div class="play-tile tile-b reveal">BENTO</div><div class="play-tile tile-c reveal">3D</div><div class="play-tile tile-d reveal">CSS<br>EXPTS.</div><div class="play-tile tile-e reveal">POSTERS</div><div class="play-tile tile-f reveal">BRANDING</div></div>
+      </section>
+
+      <section class="about-teaser" id="about"><div class="about-title reveal"><h2>ABOUT ME</h2></div><div class="about-copy reveal"><p>Designer, developer, and lifelong learner. I care about making digital experiences more accessible, human, and delightful — especially when the information behind them is complex.</p><p class="about-small">When I'm not designing or coding, you'll probably find me walking, cooking, listening to music, or collecting screenshots of things I wish I'd designed first.</p></div></section>
+    </main>
+
+    <footer class="site-footer" id="resume">
+      <div class="footer-top"><h2>THIS IS YOUR CUE,</h2><p class="say-hi">say hi</p></div>
+      <div class="footer-contact"><div class="social-row"><a href="#">in</a><a href="#">Bē</a><a href="#">◉</a><a href="#">▤</a></div><a class="email" href="mailto:pragathi.ilango@gmail.com">pragathi.ilango@gmail.com</a></div>
+      <div class="footer-bottom"><p>© Pragathi Ilango 2026</p><p>Made with love and a sugar rush 🍰</p></div>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

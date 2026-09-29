@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Pragathi Ilango | UI/UX Designer & Web Developer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ======================================================
+       HEADER
+       ====================================================== -->
+  <header class="site-header">
+    <a class="site-logo-link" href="#top" aria-label="Pragathi Ilango home">
+      <img
+        class="site-logo"
+        src="assets/images/pi_logo.svg"
+        alt="Pragathi Ilango"
+      >
+    </a>
+
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="#about">About</a>
+      <a href="#calendar">Playground</a>
+      <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
+
+    <button class="menu-button" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+
+  <main id="top">
+
+    <!-- ======================================================
+         HERO
+         ====================================================== -->
+    <section class="hero" id="hero">
+
+      <div class="hero-stage">
+          <h1 class="hero-title" aria-label="UI UX Designer Web Developer">
+
+            <span class="hero-line hero-line-top">
+              <span class="word">UI</span>
+              <span class="word">UX</span>
+              <span class="word">
+                <em>D</em>ESIGNER
+              </span>
+            </span>
+
+            <span class="hero-line hero-line-bottom">
+              <span class="word">WEB</span>
+              <span class="word developer-word">
+                DEVELO<em>P</em>ER
+              </span>
+            </span>
+
+          </h1>
+
+        <img
+          class="hero-portrait"
+          src="assets/images/pragathi-icon.png"
+          alt=""
+          aria-hidden="true"
+        >
+
+      </div>
+
+      <div class="hero-name-row">
+        <span>Pragathi</span>
+        <span>Ilango</span>
+      </div>
+
+    </section>
+
+
+    <!-- ======================================================
+         CALENDAR INTRO
+         ====================================================== -->
+    <section class="calendar-intro" id="calendar">
+      <div class="calendar-intro-inner reveal">
+        <p class="eyebrow">A day in my brain</p>
+
+        <div class="calendar-heading-row">
+          <h2>MY DAY</h2>
+          <p>
+            A little bit of professional work, a little bit of play,
+            and probably too many tabs open.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================
+         GOOGLE-CALENDAR STYLE DAY
+         ====================================================== -->
+    <section class="calendar-section">
+
+      <div class="calendar-shell reveal">
+
+        <div class="calendar-toolbar">
+          <div class="calendar-month">
+            <span class="calendar-month-small">September</span>
+            <strong>16</strong>
+          </div>
+
+          <div class="calendar-toolbar-center">
+            <button type="button" aria-label="Previous day">‹</button>
+            <span>Wednesday</span>
+            <button type="button" aria-label="Next day">›</button>
+          </div>
+
+          <div class="calendar-today">
+            Today
+          </div>
+        </div>
+
+
+        <div class="calendar-body">
+
+          <!-- time labels -->
+          <div class="calendar-times" aria-hidden="true">
+            <span>8 AM</span>
+            <span>9 AM</span>
+            <span>10 AM</span>
+            <span>11 AM</span>
+            <span>12 PM</span>
+            <span>1 PM</span>
+            <span>2 PM</span>
+            <span>3 PM</span>
+            <span>4 PM</span>
+            <span>5 PM</span>
+            <span>6 PM</span>
+            <span>7 PM</span>
+            <span>8 PM</span>
+            <span>9 PM</span>
+          </div>
+
+
+          <div class="calendar-grid">
+
+            <!-- subtle current-time marker -->
+            <div class="now-line" aria-hidden="true">
+              <i></i>
+            </div>
+
+
+            <a class="calendar-event work-event reveal-event"
+               href="#"
+               style="--start: 0.6; --span: 1.55;">
+              <span class="event-time">8:35 – 10:05</span>
+              <strong>Designing for real impact</strong>
+              <small>Understanding Prejudice · UX · Accessibility</small>
+            </a>
+
+
+            <a class="calendar-event meeting-event reveal-event"
+               href="#"
+               style="--start: 2.15; --span: .95;">
+              <span class="event-time">10:10 – 11:05</span>
+              <strong>Team sync</strong>
+              <small>Wesleyan · Social Psychology Network</small>
+            </a>
+
+
+            <a class="calendar-event build-event reveal-event"
+               href="#"
+               style="--start: 3.35; --span: 2.1;">
+              <span class="event-time">11:20 – 1:25</span>
+              <strong>Building what I design</strong>
+              <small>Front-end · WordPress · CSS · JavaScript</small>
+            </a>
+
+
+            <a class="calendar-event lunch-event reveal-event"
+               href="#"
+               style="--start: 5.65; --span: .75;">
+              <span class="event-time">1:40 – 2:20</span>
+              <strong>Lunch + scrolling for inspiration</strong>
+              <small>Totally productive, obviously.</small>
+            </a>
+
+
+            <a class="calendar-event creative-event reveal-event"
+               href="#"
+               style="--start: 6.6; --span: 1.65;">
+              <span class="event-time">2:35 – 4:10</span>
+              <strong>Creative exploration</strong>
+              <small>Posters · Branding · Typography</small>
+            </a>
+
+
+            <a class="calendar-event code-event reveal-event"
+               href="#"
+               style="--start: 8.55; --span: 1.25;">
+              <span class="event-time">4:30 – 5:45</span>
+              <strong>Coding experiments</strong>
+              <small>CSS · JS · WebGL · tiny interactions</small>
+            </a>
+
+
+            <a class="calendar-event prince-event reveal-event"
+               href="#about"
+               style="--start: 10.1; --span: 1;">
+              <span class="event-time">6:05 – 7:00</span>
+              <strong>Walk with Prince</strong>
+              <small>Very important appointment.</small>
+            </a>
+
+
+            <a class="calendar-event night-event reveal-event"
+               href="#"
+               style="--start: 11.4; --span: 1.65;">
+              <span class="event-time">7:25 – 9:00</span>
+              <strong>Probably still designing…</strong>
+              <small>Ideas · reference hunting · tomorrow’s tabs</small>
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================
+         ABOUT TEASER
+         ====================================================== -->
+    <section class="about-teaser" id="about">
+      <div class="about-copy reveal">
+        <p class="eyebrow">A little more context</p>
+        <h2>I DESIGN.<br>I BUILD.<br>I PLAY.</h2>
+        <p class="about-text">
+          I’m a designer and developer who likes making complex information
+          easier to understand — while still leaving room for character.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ======================================================
+       FOOTER
+       ====================================================== -->
+  <footer class="site-footer">
+
+    <div class="footer-display">
+      <h2>THIS IS YOUR CUE,</h2>
+      <p>say hi</p>
+    </div>
+
+    <div class="footer-contact">
+      <div class="footer-socials">
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="Behance">Bē</a>
+        <a href="#" aria-label="Dribbble">◎</a>
+        <a href="#" aria-label="Resume">▤</a>
+      </div>
+
+      <a class="footer-email"
+         href="mailto:pragathi.ilango@gmail.com">
+        pragathi.ilango@gmail.com
+      </a>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© Pragathi Ilango 2026</p>
+      <p>Made with love and a sugar rush 🍰</p>
+    </div>
+
+  </footer>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>

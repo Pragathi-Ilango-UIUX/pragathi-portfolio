@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Pragathi Ilango | UI/UX Designer & Web Developer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Playfair+Display:ital,wght@0,400;1,500&display=swap"
+  rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <a class="site-logo-link" href="#top" aria-label="Pragathi Ilango home">
+      <img
+        class="site-logo"
+        src="assets/images/pi_logo.svg"
+        alt="Pragathi Ilango"
+      >
+    </a>
+
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="#about">About</a>
+      <a href="#calendar">Playground</a>
+      <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
+
+    <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+
+      <div class="hero-stage">
+        <h1 class="hero-title" aria-label="UI UX Designer Web Developer">
+
+          <span class="hero-line hero-line-top">
+            <span class="word">UI</span>
+            <span class="word">UX</span>
+            <span class="word"><em>D</em>ESIGNER</span>
+          </span>
+
+          <span class="hero-line hero-line-bottom">
+            <span class="word">WEB</span>
+            <span class="word developer-word">DEVELO<em>P</em>ER</span>
+          </span>
+
+        </h1>
+
+        <img
+          class="hero-portrait"
+          src="assets/images/pragathi-icon.png"
+          alt=""
+          aria-hidden="true"
+        >
+      </div>
+
+      <div class="hero-name-row" aria-label="Pragathi Ilango">
+        <span>Pragathi</span>
+        <span>Ilango</span>
+      </div>
+
+    </section>
+
+
+<!-- EXPERIENCE / TECH STACK -->
+<section class="experience-section" id="about">
+
+  <div class="experience-inner">
+
+    <div class="experience-copy reveal">
+      <p>
+        I’m a
+        <span class="experience-highlight">designer</span>
+        and
+        <span class="experience-highlight">developer</span>
+        with <strong>3+ years</strong> of experience, creating digital experiences
+        that feel thoughtful, useful, and human.
+      </p>
+    </div>
+
+
+    <div class="stack-art reveal" aria-label="Tech stack illustrations">
+
+      <div class="stack-image stack-image-one">
+        <span>image 1</span>
+      </div>
+
+      <div class="stack-image stack-image-two">
+        <span>image 2</span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <a class="scroll-note reveal" href="#calendar">
+
+    <svg
+      class="scroll-circle"
+      viewBox="0 0 500 150"
+      aria-hidden="true"
+    >
+      <path
+        d="M35,82
+           C55,22 184,9 308,25
+           C423,40 475,74 456,108
+           C433,145 286,145 151,132
+           C61,123 17,108 35,82Z"
+      />
+    </svg>
+
+<span>
+  scroll to see what<br>
+  my day looks like
+</span>
+  </a>
+
+<!-- ======================================================
+     MY DAY — SINGLE DAY CALENDAR
+     ====================================================== -->
+
+<section class="calendar-section calendar-dark" id="calendar">
+
+  <!-- TOP BAR -->
+  <div class="calendar-topbar reveal">
+
+    <div class="calendar-date-heading">
+      <span class="calendar-weekday" id="calendarWeekday">
+        Sunday
+      </span>
+
+      <h2 id="calendarFullDate">
+        September 13, 2026
+      </h2>
+    </div>
+
+
+    <!-- DARK / LIGHT ONLY -->
+    <button
+      class="theme-toggle"
+      id="calendarThemeToggle"
+      type="button"
+      aria-label="Switch calendar to light mode"
+    >
+      <span
+        class="theme-icon theme-icon-light"
+        aria-hidden="true"
+      >
+        ☀
+      </span>
+
+      <span
+        class="theme-icon theme-icon-dark"
+        aria-hidden="true"
+      >
+        ☾
+      </span>
+    </button>
+
+  </div>
+
+
+  <!-- CALENDAR DAY -->
+  <div class="day-calendar">
+
+    <!-- TIME GRID -->
+    <div class="time-grid" aria-hidden="true">
+
+      <div class="time-row">
+        <span>8 AM</span>
+        <i></i>
+      </div>
+
+      <div class="time-row">
+        <span>9 AM</span>
+        <i></i>
+      </div>
+
+      <div class="time-row">
+        <span>10 AM</span>
+        <i></i>
+      </div>
+
+      <div class="time-row">
+        <span>11 AM</span>
+        <i></i>
+      </div>
+
+      <div class="time-row">
+        <span>12 PM</span>
+        <i></i>
+      </div>
+
+      <div class="time-row">
+        <span>1 PM</span>
+        <i></i>
+      </div>
+
+      <div class="time-row">
+        <span>2 PM</span>
+        <i></i>
+      </div>
+
+      <div class="time-row">
+        <span>3 PM</span>
+        <i></i>
+      </div>
+
+      <div class="time-row">
+        <span>4 PM</span>
+        <i></i>
+      </div>
+
+      <div class="time-row">
+        <span>5 PM</span>
+        <i></i>
+      </div>
+
+      <div class="time-row">
+        <span>6 PM</span>
+        <i></i>
+      </div>
+
+      <div class="time-row">
+        <span>7 PM</span>
+        <i></i>
+      </div>
+
+      <div class="time-row">
+        <span>8 PM</span>
+        <i></i>
+      </div>
+
+      <div class="time-row">
+        <span>9 PM</span>
+        <i></i>
+      </div>
+
+      <div class="time-row">
+        <span>10 PM</span>
+        <i></i>
+      </div>
+
+      <div class="time-row">
+        <span>11 PM</span>
+        <i></i>
+      </div>
+
+    </div>
+
+
+    <!-- EVENTS -->
+    <div class="day-events">
+
+      <!--
+        --start:
+        number of hours after 8AM
+
+        --span:
+        event duration in hours
+      -->
+
+
+      <a
+        class="calendar-event work-event"
+        href="#"
+        style="--start: .5; --span: 1.5;"
+      >
+        <div class="event-meta">
+          <span>8:30 – 10:00</span>
+          <span>Work</span>
+        </div>
+
+        <strong>
+          Designing for real impact
+        </strong>
+
+        <p>
+          UX, accessibility, content architecture and design work
+          for Understanding Prejudice.
+        </p>
+
+        <span class="event-link">
+          View project ↗
+        </span>
+      </a>
+
+
+      <a
+        class="calendar-event meeting-event"
+        href="#"
+        style="--start: 2.1; --span: .85;"
+      >
+        <div class="event-meta">
+          <span>10:05 – 10:55</span>
+          <span>Collaboration</span>
+        </div>
+
+        <strong>
+          Team sync
+        </strong>
+
+        <p>
+          Reviewing priorities, content updates and development
+          progress with the Social Psychology Network team.
+        </p>
+
+        <span class="event-link">
+          More about my role ↗
+        </span>
+      </a>
+
+
+      <a
+        class="calendar-event build-event"
+        href="#"
+        style="--start: 3.15; --span: 1.9;"
+      >
+        <div class="event-meta">
+          <span>11:10 – 1:05</span>
+          <span>Development</span>
+        </div>
+
+        <strong>
+          Building what I design
+        </strong>
+
+        <p>
+          Turning layouts into responsive interfaces with
+          WordPress, PHP, CSS and JavaScript.
+        </p>
+
+        <span class="event-link">
+          See development work ↗
+        </span>
+      </a>
+
+
+      <a
+        class="calendar-event lunch-event"
+        href="#"
+        style="--start: 5.25; --span: .7;"
+      >
+        <div class="event-meta">
+          <span>1:20 – 2:00</span>
+          <span>Recharge</span>
+        </div>
+
+        <strong>
+          Lunch + inspiration scroll
+        </strong>
+
+        <p>
+          Somewhere between actual lunch and saving seventeen
+          references I absolutely needed.
+        </p>
+      </a>
+
+
+      <a
+        class="calendar-event creative-event"
+        href="#"
+        style="--start: 6.2; --span: 1.45;"
+      >
+        <div class="event-meta">
+          <span>2:15 – 3:40</span>
+          <span>Design</span>
+        </div>
+
+        <strong>
+          Creative exploration
+        </strong>
+
+        <p>
+          Posters, identity systems, typography experiments and
+          visual ideas that live outside client work.
+        </p>
+
+        <span class="event-link">
+          Enter the playground ↗
+        </span>
+      </a>
+
+
+      <a
+        class="calendar-event code-event"
+        href="#"
+        style="--start: 8; --span: 1.15;"
+      >
+        <div class="event-meta">
+          <span>4:00 – 5:10</span>
+          <span>Experiments</span>
+        </div>
+
+        <strong>
+          Coding experiments
+        </strong>
+
+        <p>
+          Testing interactions, CSS ideas, JavaScript and
+          whatever new web technique I am curious about that week.
+        </p>
+
+        <span class="event-link">
+          See experiments ↗
+        </span>
+      </a>
+
+
+      <a
+        class="calendar-event prince-event"
+        href="#"
+        style="--start: 9.4; --span: .9;"
+      >
+        <div class="event-meta">
+          <span>5:25 – 6:20</span>
+          <span>Important meeting</span>
+        </div>
+
+        <strong>
+          Walk with Prince
+        </strong>
+
+        <p>
+          Non-negotiable calendar appointment.
+        </p>
+      </a>
+
+
+      <a
+        class="calendar-event night-event"
+        href="#"
+        style="--start: 10.7; --span: 1.6;"
+      >
+        <div class="event-meta">
+          <span>6:40 – 8:15</span>
+          <span>Personal work</span>
+        </div>
+
+        <strong>
+          Probably still designing…
+        </strong>
+
+        <p>
+          Portfolio work, references, side projects and
+          tomorrow's collection of open tabs.
+        </p>
+
+        <span class="event-link">
+          Keep exploring ↗
+        </span>
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+
+    <div class="footer-display">
+      <h2>THIS IS YOUR CUE,</h2>
+      <p>say hi</p>
+    </div>
+
+    <div class="footer-contact">
+      <div class="footer-socials">
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="Behance">Bē</a>
+        <a href="#" aria-label="Dribbble">◎</a>
+        <a href="resume.pdf" aria-label="Resume">▤</a>
+      </div>
+
+      <a
+        class="footer-email"
+        href="mailto:pragathi.ilango@gmail.com"
+      >
+        pragathi.ilango@gmail.com
+      </a>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© Pragathi Ilango 2026</p>
+      <p>Made with love and a sugar rush 🍰</p>
+    </div>
+
+  </footer>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>

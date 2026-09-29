@@ -1,0 +1,2378 @@
+/* =========================================================
+   PRAGATHI PORTFOLIO — HOMEPAGE V8
+   ========================================================= */
+
+:root {
+  --cream: #FFF7DE;
+  --orange: #FE943C;
+  --name-orange: #FFA60F;
+  --ink: #111111;
+
+  --header-h: clamp(72px, 5.7vw, 94px);
+  --page-pad: clamp(18px, 2.5vw, 42px);
+
+  --hero-left: 0px;
+  --hero-right: 0px;
+  --portrait-drop: 0px;
+
+  --cal-bg: #090909;
+  --cal-line: #242424;
+  --cal-soft: #A9A9A9;
+  --cal-text: #F4F4F4;
+}
+
+
+@font-face {
+  font-family: "Smooth Elegant";
+  src: url("assets/fonts/smooth-elegant/Smooth Elegant.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--cream);
+  color: var(--ink);
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+  overflow-x: hidden;
+}
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.site-header {
+  height: var(--header-h);
+  padding: 0 var(--page-pad);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  background: var(--cream);
+
+  position: relative;
+  z-index: 20;
+}
+
+
+.site-logo-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+
+.site-logo {
+  width: clamp(150px, 13vw, 220px);
+  height: auto;
+  display: block;
+}
+
+
+.main-nav {
+  display: flex;
+  gap: clamp(22px, 3vw, 46px);
+}
+
+
+.main-nav a {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(17px, 1.25vw, 21px);
+  color: var(--orange);
+}
+
+
+.menu-button {
+  display: none;
+  width: 28px;
+  height: 23px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.menu-button span {
+  height: 2px;
+  width: 100%;
+  display: block;
+  background: var(--orange);
+}
+
+
+/* =========================================================
+   HERO
+   SVG title artwork + portrait.
+   Header + hero + name row fit inside the first viewport.
+   ========================================================= */
+
+.hero {
+  width: 100%;
+
+  height:
+    calc(
+      100svh
+      -
+      var(--header-h)
+    );
+
+  min-height: 620px;
+  max-height: 900px;
+
+  display: grid;
+
+  grid-template-rows:
+    minmax(0, 1fr)
+    auto;
+
+  background: var(--cream);
+}
+
+
+.hero-stage {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+
+/*
+  ui.svg + developer.svg are treated as one centered poster unit.
+  This keeps the two lines proportional while the viewport changes.
+*/
+.hero-title-art {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: min(98vw, 1650px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+   gap: clamp(18px, 1.4vw, 26px);
+
+  transform: translate(-50%, -50%);
+
+  z-index: 1;
+}
+
+
+/*
+  Both SVG files scale from exactly the same parent width.
+  Make sure both SVG artboards are tightly cropped around the lettering.
+*/
+.hero-title-svg {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+
+  flex: 0 0 auto;
+
+  will-change: transform;
+}
+
+
+/* top line scrolls gently left */
+.hero-title-svg-top {
+  transform: translateX(var(--hero-left));
+}
+
+
+/* bottom line scrolls gently right */
+.hero-title-svg-bottom {
+  width: 100%;
+  margin-top: 0;
+  transform: translateX(var(--hero-right));
+}
+
+
+/*
+  Portrait is intentionally large and centered over both SVG lines.
+*/
+.hero-portrait {
+  position: absolute;
+
+  z-index: 3;
+
+  left: 50%;
+  top: 50%;
+
+  width: clamp(430px, 46vw, 760px);
+  height: auto;
+
+  max-height: 88%;
+
+  object-fit: contain;
+
+  transform:
+    translate(
+      -50%,
+      calc(-48% + var(--portrait-drop))
+    );
+
+  pointer-events: none;
+  user-select: none;
+
+  will-change: transform;
+}
+
+
+.hero-name-row {
+  width: 100%;
+
+  padding:
+    0
+    var(--page-pad)
+    clamp(
+      10px,
+      1.2vw,
+      18px
+    );
+
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+
+  color: var(--name-orange);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      46px,
+      6vw,
+      96px
+    );
+
+  font-weight: 400;
+
+  line-height: .9;
+
+  letter-spacing: -.045em;
+}
+
+
+/* =========================================================
+   ABOUT / TYPEWRITER SECTION
+   ========================================================= */
+
+.experience-section {
+  position: relative;
+  overflow: hidden;
+
+  width: 100%;
+
+  /* Let the content determine the height instead of forcing a giant blank panel. */
+  min-height: 0;
+
+  padding:
+    clamp(72px, 6vw, 108px)
+    var(--page-pad)
+    clamp(64px, 6vw, 96px);
+
+  background-color: #fff;
+
+  background-image:
+    radial-gradient(
+      circle,
+      var(--name-orange) 1.25px,
+      transparent 1.45px
+    );
+
+  background-size: 38px 38px;
+}
+
+
+/*
+  Very subtle dot drift.
+*/
+
+.experience-section::before {
+  content: "";
+
+  position: absolute;
+
+  inset: -12px;
+
+  background-image:
+    radial-gradient(
+      circle,
+      var(--name-orange) 1.15px,
+      transparent 1.35px
+    );
+
+  background-size:
+    38px
+    38px;
+
+  opacity: .14;
+
+  pointer-events: none;
+
+  animation:
+    dotDrift
+    18s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+@keyframes dotDrift {
+
+  from {
+    transform:
+      translate3d(
+        0,
+        0,
+        0
+      );
+  }
+
+  to {
+    transform:
+      translate3d(
+        8px,
+        -6px,
+        0
+      );
+  }
+
+}
+
+
+.experience-inner {
+  position: relative;
+  z-index: 2;
+
+  width: min(1500px, 100%);
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: clamp(22px, 2.3vw, 40px);
+}
+
+
+.typewriter-block {
+  /* Give the sentence more room on desktop; it still wraps naturally on smaller screens. */
+  width: min(1450px, 100%);
+  max-width: none;
+}
+
+
+.typewriter-question {
+  margin:
+    0
+    0
+    14px;
+
+  color: #777;
+
+  font-family:
+    "Caveat",
+    cursive;
+
+  font-size:
+    clamp(
+      24px,
+      2vw,
+      34px
+    );
+
+  font-weight: 400;
+
+  transform:
+    rotate(-1deg);
+}
+
+
+.typewriter-line {
+  min-height: 2.3em;
+
+  display: block;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:
+    clamp(
+      38px,
+      4.6vw,
+      72px
+    );
+
+  line-height: 1.08;
+
+  letter-spacing: -.045em;
+
+  color: #2A2A2A;
+}
+
+.typewriter-text {
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+  text-wrap: wrap;
+}
+
+
+/*
+  The cursor is attached directly to the typed text.
+  This prevents it from wrapping onto an unrelated line.
+*/
+
+.typewriter-text::after {
+  content: "";
+
+  display: inline-block;
+
+  width: 3px;
+  height: .9em;
+
+  margin-left: 5px;
+
+  background: var(--orange);
+
+  vertical-align: -.06em;
+
+  animation:
+    cursorBlink
+    .8s
+    steps(1)
+    infinite;
+}
+
+
+@keyframes cursorBlink {
+
+  50% {
+    opacity: 0;
+  }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-oval-path {
+    animation: none;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+
+
+
+/* =========================================================
+   FIVE STICKY-NOTE / IMAGE CARDS
+   ========================================================= */
+
+.stack-art {
+  position: relative;
+  z-index: 2;
+
+  width: min(1560px, 100%);
+  margin: clamp(8px, 1.2vw, 16px) auto 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px clamp(10px, 1vw, 20px) 14px;
+
+  overflow: visible;
+}
+
+
+.stack-image {
+  position: relative;
+
+  flex: 1 1 0;
+  min-width: 0;
+
+  aspect-ratio: 1 / 1.12;
+
+  margin-left: clamp(-72px, -4vw, -28px);
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(255,255,255,.95);
+
+  border:
+    2px
+    dashed
+    rgba(17,17,17,.20);
+
+  box-shadow:
+    0 14px 30px
+    rgba(0,0,0,.09);
+
+  color:
+    rgba(17,17,17,.34);
+
+  font-family:
+    "Caveat",
+    cursive;
+
+  font-size:
+    clamp(28px, 2vw, 40px);
+
+  transform-origin: center;
+
+  transition:
+    transform .35s cubic-bezier(.2,.8,.2,1),
+    box-shadow .35s ease,
+    border-color .35s ease;
+
+  cursor: pointer;
+}
+
+
+.stack-image:first-child {
+  margin-left: 0;
+}
+
+
+.stack-image-one {
+  z-index: 2;
+  transform:
+    rotate(-4.2deg)
+    translateY(2px);
+}
+
+.stack-image-two {
+  z-index: 6;
+  transform:
+    rotate(1.5deg)
+    translateY(-12px);
+}
+
+.stack-image-three {
+  z-index: 4;
+  transform:
+    rotate(-2.4deg)
+    translateY(5px);
+}
+
+.stack-image-four {
+  z-index: 7;
+  transform:
+    rotate(2.7deg)
+    translateY(-8px);
+}
+
+.stack-image-five {
+  z-index: 5;
+  transform:
+    rotate(-1.6deg)
+    translateY(2px);
+}
+
+
+.stack-image:hover,
+.stack-image.is-hovered {
+  border-color:
+    rgba(17,17,17,.38);
+
+  box-shadow:
+    0 26px 50px
+    rgba(0,0,0,.15);
+}
+
+
+.stack-image-one:hover,
+.stack-image-one.is-hovered {
+  z-index: 20;
+  transform:
+    rotate(-4.2deg)
+    translateY(-12px)
+    scale(1.04);
+}
+
+.stack-image-two:hover,
+.stack-image-two.is-hovered {
+  z-index: 21;
+  transform:
+    rotate(1.6deg)
+    translateY(-26px)
+    scale(1.04);
+}
+
+.stack-image-three:hover,
+.stack-image-three.is-hovered {
+  z-index: 22;
+  transform:
+    rotate(-2.4deg)
+    translateY(-14px)
+    scale(1.04);
+}
+
+.stack-image-four:hover,
+.stack-image-four.is-hovered {
+  z-index: 23;
+  transform:
+    rotate(2.7deg)
+    translateY(-18px)
+    scale(1.04);
+}
+
+.stack-image-five:hover,
+.stack-image-five.is-hovered {
+  z-index: 24;
+  transform:
+    rotate(-1.6deg)
+    translateY(-16px)
+    scale(1.04);
+}
+
+
+/* =========================================================
+   SCROLL PROMPT
+   ========================================================= */
+
+.scroll-note {
+  width: fit-content;
+  margin: clamp(30px, 3vw, 46px) auto 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: #171717;
+  text-decoration: none;
+  text-align: center;
+}
+
+.scroll-note span {
+  position: relative;
+  z-index: 2;
+
+  font-family: "Caveat", cursive;
+  font-size: clamp(25px, 2vw, 34px);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.scroll-underline {
+  width: min(390px, 88vw);
+  height: 24px;
+  margin-top: -1px;
+  overflow: visible;
+}
+
+.scroll-underline-path {
+  fill: none;
+  stroke: #252525;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+
+  stroke-dasharray: 560;
+  stroke-dashoffset: 560;
+
+  animation: drawScrollUnderline 2.25s ease-in-out infinite;
+}
+
+@keyframes drawScrollUnderline {
+  0% {
+    stroke-dashoffset: 560;
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 1;
+  }
+
+  62% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  82% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   CALENDAR
+   One clean calendar definition — no duplicated event rules.
+   ========================================================= */
+
+.calendar-section {
+  --calendar-bg: #080808;
+  --calendar-grid: rgba(255,255,255,.12);
+  --calendar-text: #f8f3e8;
+  --calendar-muted: rgba(255,255,255,.65);
+
+  /*
+    More vertical space per hour means the shorter cards have room
+    for title + time + description + CTA without clipping.
+  */
+  --hour-height: clamp(108px, 6.7vw, 124px);
+  --time-gutter: clamp(84px, 7vw, 116px);
+
+  position: relative;
+  width: 100%;
+  padding: clamp(26px, 3vw, 48px) clamp(16px, 2.3vw, 40px) 0;
+
+  background: var(--calendar-bg);
+  color: var(--calendar-text);
+  overflow: hidden;
+
+  transition:
+    background-color .35s ease,
+    color .35s ease;
+}
+
+.calendar-section.calendar-light {
+  --calendar-bg: #f7f7f5;
+  --calendar-grid: rgba(0,0,0,.12);
+  --calendar-text: #151515;
+  --calendar-muted: rgba(0,0,0,.58);
+}
+
+
+/* ---------- top note + theme ---------- */
+
+.calendar-topbar {
+  min-height: 62px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  border-bottom: 1px solid var(--calendar-grid);
+}
+
+.calendar-kicker {
+  margin: 0;
+
+  font-family: "Caveat", cursive;
+  font-size: clamp(26px, 2vw, 34px);
+  font-weight: 500;
+
+  color: var(--calendar-muted);
+}
+
+.theme-toggle {
+  width: 72px;
+  height: 46px;
+  padding: 0 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 1px solid var(--calendar-grid);
+  border-radius: 9px;
+
+  background: transparent;
+  color: var(--calendar-text);
+
+  cursor: pointer;
+}
+
+.theme-icon {
+  font-size: 19px;
+  line-height: 1;
+  opacity: .55;
+}
+
+.calendar-dark .theme-icon-dark,
+.calendar-light .theme-icon-light {
+  opacity: 1;
+}
+
+
+/* ---------- decorative week ---------- */
+
+.week-header {
+  display: grid;
+  grid-template-columns: var(--time-gutter) 1fr;
+
+  border-bottom: 1px solid var(--calendar-grid);
+}
+
+.week-header-spacer {
+  border-right: 1px solid var(--calendar-grid);
+}
+
+.week-days {
+  min-height: clamp(98px, 7vw, 122px);
+
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items: center;
+}
+
+.week-day {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+}
+
+.week-day-name {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+
+  color: var(--calendar-muted);
+}
+
+.week-day-number {
+  width: 48px;
+  height: 48px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.week-day.today .week-day-number {
+  background: var(--orange);
+  color: #111;
+}
+
+
+/* ---------- full day grid ---------- */
+
+.day-calendar {
+  position: relative;
+
+  /*
+    One intentionally blank hour before the 6 AM line, then
+    6 AM -> 12 AM, plus only a small extension after midnight.
+  */
+  height: calc((var(--hour-height) * 20) + 42px);
+
+  overflow: visible;
+}
+
+.time-grid {
+  position: absolute;
+  inset: 0 0 auto 0;
+
+  /*
+    This pushes the 6 AM line down one hour so it no longer collides
+    with the week header.
+  */
+  padding-top: var(--hour-height);
+
+  z-index: 1;
+  pointer-events: none;
+}
+
+.time-row {
+  height: var(--hour-height);
+
+  display: grid;
+  grid-template-columns: var(--time-gutter) 1fr;
+  align-items: start;
+}
+
+.time-row span {
+  display: block;
+
+  padding-right: 16px;
+
+  transform: translateY(-.55em);
+
+  text-align: right;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(12px, .85vw, 15px);
+  font-weight: 500;
+
+  color: var(--calendar-muted);
+}
+
+.time-row i {
+  display: block;
+  height: 1px;
+
+  background: var(--calendar-grid);
+}
+
+
+/* vertical timeline rule */
+.day-calendar::before {
+  content: "";
+
+  position: absolute;
+
+  top: var(--hour-height);
+  bottom: 24px;
+  left: var(--time-gutter);
+
+  width: 1px;
+
+  background: var(--calendar-grid);
+
+  z-index: 1;
+}
+
+
+/* ---------- event layout ---------- */
+
+.day-events {
+  position: absolute;
+
+  top: var(--hour-height);
+  right: 0;
+  bottom: 0;
+  left: var(--time-gutter);
+
+  z-index: 4;
+  pointer-events: none;
+}
+
+.calendar-event {
+  --event-bg: #f5e7cf;
+  --event-accent: #d17819;
+
+  position: absolute;
+  top: calc(var(--start) * var(--hour-height));
+
+  /*
+    Use the scheduled duration as the MINIMUM height rather than
+    forcing a fixed height. Copy can expand naturally and never clips.
+  */
+  min-height:
+    calc(
+      (var(--span) * var(--hour-height))
+      - 14px
+    );
+
+  padding:
+    clamp(24px, 1.7vw, 32px)
+    clamp(28px, 2.15vw, 40px)
+    clamp(27px, 2vw, 36px);
+
+  display: block;
+
+  border-left: 9px solid var(--event-accent);
+  border-radius: 0;
+
+  background: var(--event-bg);
+  color: var(--event-accent);
+
+  text-decoration: none;
+
+  overflow: visible;
+  pointer-events: auto;
+
+  transition:
+    transform .26s ease,
+    box-shadow .26s ease;
+}
+
+.calendar-event:hover,
+.calendar-event:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(0,0,0,.22);
+  outline: none;
+}
+
+.calendar-event strong {
+  display: block;
+
+  max-width: 100%;
+  margin: 0;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(24px, 1.85vw, 32px);
+  font-weight: 600;
+  line-height: 1.13;
+}
+
+.event-time {
+  display: block;
+
+  margin-top: 10px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(14px, .98vw, 17px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: .01em;
+}
+
+.calendar-event p {
+  max-width: min(980px, 94%);
+
+  margin: 14px 0 0;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(15px, 1.04vw, 18px);
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.event-link {
+  display: inline-block;
+
+  margin-top: 16px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(14px, .98vw, 17px);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+
+/* varied widths — still generous enough for readable copy */
+
+.event-wide {
+  left: 2.5%;
+  width: 83%;
+}
+
+.event-medium {
+  width: 72%;
+}
+
+.event-short {
+  left: 4%;
+  width: 62%;
+}
+
+.event-wide-ish {
+  left: 1.5%;
+  width: 76%;
+}
+
+.event-narrow {
+  width: 65%;
+}
+
+.event-offset-right {
+  left: 29%;
+}
+
+
+/* event palette */
+
+.work-event {
+  --event-bg: #f7e4c7;
+  --event-accent: #c97013;
+}
+
+.lunch-event {
+  --event-bg: #f0ecd7;
+  --event-accent: #8c7b28;
+}
+
+.play-event {
+  --event-bg: #edd1e2;
+  --event-accent: #a7437d;
+}
+
+.life-event {
+  --event-bg: #f2d7db;
+  --event-accent: #bd5662;
+}
+
+.code-event {
+  --event-bg: #d6e8d6;
+  --event-accent: #377c45;
+}
+
+.night-event {
+  --event-bg: #ded6ef;
+  --event-accent: #6a50ad;
+}
+
+
+/* ---------- handwritten notes ---------- */
+
+.wake-up-note,
+.back-to-work-note,
+.sleep-note {
+  position: absolute;
+  z-index: 8;
+
+  font-family: "Caveat", cursive;
+  font-weight: 600;
+
+  color: var(--orange);
+
+  pointer-events: none;
+}
+
+.wake-up-note {
+  top: calc(var(--hour-height) * 1.18);
+  right: 9%;
+
+  width: min(520px, 42vw);
+
+  font-size: clamp(29px, 2.5vw, 45px);
+  text-align: right;
+}
+
+.wake-up-note svg {
+  width: min(240px, 45%);
+  height: auto;
+
+  margin: -5px 4% 0 auto;
+
+  display: block;
+}
+
+.back-to-work-note {
+  top: calc(var(--hour-height) * 8.55);
+  left: 10%;
+
+  font-size: clamp(27px, 2.25vw, 40px);
+}
+
+.back-to-work-note svg {
+  width: 190px;
+  height: auto;
+  display: block;
+}
+
+.wake-up-note path,
+.back-to-work-note path {
+  fill: none;
+  stroke: var(--orange);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sleep-note {
+  top: calc((var(--hour-height) * 19.03));
+  right: 7%;
+
+  font-size: clamp(31px, 2.4vw, 44px);
+  text-align: right;
+}
+
+
+/* ---------- image placeholders ---------- */
+
+.calendar-image-slot {
+  position: absolute;
+  z-index: 10;
+
+  display: grid;
+  place-items: center;
+
+  aspect-ratio: 1 / 1.08;
+
+  background: rgba(255,255,255,.96);
+  color: rgba(20,20,20,.32);
+
+  box-shadow: 0 18px 42px rgba(0,0,0,.22);
+
+  font-family: "Caveat", cursive;
+  font-size: clamp(24px, 1.8vw, 32px);
+
+  transform-origin: center;
+}
+
+.calendar-image-one {
+  top: calc(var(--hour-height) * 3.4);
+  right: 1%;
+
+  width: clamp(190px, 17vw, 270px);
+
+  transform: rotate(4deg);
+}
+
+.calendar-image-two {
+  top: calc(var(--hour-height) * 15.3);
+  left: 0;
+
+  width: clamp(178px, 16vw, 250px);
+
+  transform: rotate(-4deg);
+}
+
+
+/* ---------- scroll-only reveals ---------- */
+
+.calendar-scroll-reveal {
+  opacity: 0;
+
+  transform:
+    translateY(34px)
+    scale(.985);
+
+  transition:
+    opacity .7s cubic-bezier(.2,.75,.2,1),
+    transform .7s cubic-bezier(.2,.75,.2,1);
+}
+
+.calendar-scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* restore rotations on image slots after reveal */
+.calendar-image-one.calendar-scroll-reveal.is-visible {
+  transform: rotate(4deg);
+}
+
+.calendar-image-two.calendar-scroll-reveal.is-visible {
+  transform: rotate(-4deg);
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.site-footer {
+  min-height: 100svh;
+
+  padding:
+    clamp(46px, 5vw, 78px)
+    var(--page-pad)
+    22px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background: var(--orange);
+  color: var(--cream);
+}
+
+.footer-display {
+  position: relative;
+
+  min-height:
+    clamp(
+      300px,
+      34vw,
+      470px
+    );
+}
+
+.footer-cue-svg {
+  display: block;
+
+  width: min(82vw, 1260px);
+  max-width: 96%;
+  height: auto;
+
+  object-fit: contain;
+}
+
+.footer-display p {
+  position: absolute;
+
+  right: clamp(10px, 5vw, 72px);
+  top: clamp(115px, 13vw, 205px);
+
+  margin: 0;
+
+  color: #000;
+
+  font-family: "Playfair Display", serif;
+  font-size: clamp(95px, 13vw, 210px);
+  font-style: italic;
+  font-weight: 500;
+
+  line-height: .78;
+  letter-spacing: -0.075em;
+
+  transform: rotate(-4deg);
+}
+
+.footer-contact {
+  display: grid;
+  gap: 18px;
+}
+
+.footer-socials {
+  display: flex;
+  align-items: center;
+
+  gap: clamp(7px, .65vw, 11px);
+}
+
+.footer-socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  background: transparent;
+}
+
+.footer-socials img {
+  display: block;
+
+  width: clamp(48px, 3.5vw, 62px);
+  height: clamp(48px, 3.5vw, 62px);
+
+  object-fit: contain;
+}
+
+.footer-email {
+  width: fit-content;
+  max-width: 100%;
+
+  color: #000;
+  text-decoration: none;
+
+  font-family: "Playfair Display", serif;
+  font-size: clamp(36px, 5vw, 76px);
+  line-height: 1;
+
+  word-break: break-word;
+}
+
+.footer-bottom {
+  padding-top: 20px;
+
+  text-align: center;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.footer-bottom p {
+  margin: 3px;
+}
+
+
+/* =========================================================
+   GENERIC REVEAL
+   ========================================================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+
+  transition:
+    opacity .85s cubic-bezier(.2,.75,.2,1),
+    transform .85s cubic-bezier(.2,.75,.2,1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .site-logo {
+    width: clamp(140px, 22vw, 190px);
+  }
+
+  .hero {
+    min-height: 620px;
+  }
+
+  .hero-title-art {
+    width: 96vw;
+    gap: 18px;
+  }
+
+  .hero-portrait {
+    width: clamp(330px, 52vw, 540px);
+    max-height: 82%;
+  }
+
+  .experience-section {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .typewriter-text {
+    font-size: clamp(46px, 7vw, 74px);
+  }
+
+  .stack-art {
+    width: 100%;
+  }
+
+  .calendar-section {
+    --hour-height: 112px;
+    --time-gutter: 78px;
+  }
+
+  .calendar-event {
+    padding: 21px 24px 25px;
+  }
+
+  .calendar-event strong {
+    font-size: clamp(22px, 3vw, 28px);
+  }
+
+  .event-time {
+    font-size: 13px;
+  }
+
+  .calendar-event p {
+    max-width: 100%;
+    font-size: 14px;
+  }
+
+  .event-link {
+    font-size: 13px;
+  }
+
+  .event-wide {
+    width: 88%;
+  }
+
+  .event-medium {
+    width: 80%;
+  }
+
+  .event-short {
+    width: 70%;
+  }
+
+  .event-wide-ish {
+    width: 83%;
+  }
+
+  .event-narrow {
+    width: 76%;
+  }
+
+  .event-offset-right {
+    left: 18%;
+  }
+
+  .calendar-image-one {
+    width: clamp(160px, 20vw, 210px);
+  }
+
+  .calendar-image-two {
+    width: clamp(150px, 19vw, 195px);
+  }
+
+  .footer-cue-svg {
+    width: 90vw;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 620px) {
+
+  :root {
+    --header-h: 66px;
+    --page-pad: 14px;
+  }
+
+  .site-logo {
+    width: 122px;
+  }
+
+  .main-nav {
+    display: none;
+  }
+
+  .main-nav.mobile-open {
+    position: absolute;
+
+    top: 66px;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 18px;
+
+    background: var(--cream);
+
+    z-index: 50;
+  }
+
+  .menu-button {
+    display: flex;
+  }
+
+  .hero {
+    min-height: 100svh;
+  }
+
+  .hero-stage {
+    min-height: 0;
+  }
+
+  .hero-title-art {
+    width: 112vw;
+    gap: 13px;
+  }
+
+  .hero-portrait {
+    width: clamp(250px, 68vw, 360px);
+  }
+
+  .hero-name-row {
+    font-size: clamp(42px, 12vw, 64px);
+  }
+
+  .experience-section {
+    padding:
+      70px
+      14px
+      55px;
+  }
+
+  .typewriter-question {
+    font-size: 25px;
+  }
+
+  .typewriter-text {
+    font-size: clamp(39px, 11vw, 56px);
+  }
+
+  .stack-art {
+    flex-direction: column;
+    width: min(330px, 86vw);
+    gap: 0;
+  }
+
+  .stack-image {
+    width: 100%;
+    flex: none;
+
+    margin:
+      clamp(-44px, -8vw, -24px)
+      0
+      0;
+
+    aspect-ratio: 1 / 1.08;
+  }
+
+  .stack-image:first-child {
+    margin-top: 0;
+  }
+
+  .scroll-note span {
+    font-size: 24px;
+  }
+
+  .scroll-underline {
+    width: 285px;
+  }
+
+  .calendar-section {
+    --hour-height: 118px;
+    --time-gutter: 57px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .calendar-kicker {
+    font-size: 24px;
+  }
+
+  .week-day-name {
+    font-size: 9px;
+  }
+
+  .week-day-number {
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
+  }
+
+  .time-row span {
+    padding-right: 8px;
+    font-size: 10px;
+  }
+
+  .calendar-event {
+    padding: 16px 16px 19px;
+
+    border-left-width: 6px;
+  }
+
+  .calendar-event strong {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .event-time {
+    margin-top: 7px;
+    font-size: 10.5px;
+  }
+
+  .calendar-event p {
+    margin-top: 8px;
+    font-size: 11.5px;
+    line-height: 1.38;
+  }
+
+  .event-link {
+    margin-top: 10px;
+    font-size: 11px;
+  }
+
+  /*
+    Keep the zig-zag feeling, but widen everything enough that
+    mobile copy remains readable and never spills outside its card.
+  */
+  .event-wide {
+    left: 2%;
+    width: 94%;
+  }
+
+  .event-medium {
+    width: 86%;
+  }
+
+  .event-short {
+    left: 2%;
+    width: 82%;
+  }
+
+  .event-wide-ish {
+    left: 2%;
+    width: 90%;
+  }
+
+  .event-narrow {
+    width: 84%;
+  }
+
+  .event-offset-right {
+    left: 12%;
+  }
+
+  .wake-up-note {
+    right: 4%;
+    width: 68vw;
+    font-size: 28px;
+  }
+
+  .back-to-work-note {
+    left: 7%;
+    font-size: 26px;
+  }
+
+  .calendar-image-one {
+    width: 128px;
+    right: -4px;
+  }
+
+  .calendar-image-two {
+    width: 122px;
+    left: -3px;
+  }
+
+  .sleep-note {
+    right: 4%;
+    font-size: 28px;
+  }
+
+  .site-footer {
+    min-height: 760px;
+  }
+
+  .footer-display {
+    min-height: 285px;
+  }
+
+  .footer-cue-svg {
+    width: 94vw;
+    max-width: none;
+  }
+
+  .footer-display p {
+    top: 118px;
+    right: 12px;
+
+    font-size: clamp(76px, 24vw, 124px);
+    letter-spacing: -0.065em;
+  }
+
+  .footer-socials {
+    gap: 5px;
+  }
+
+  .footer-socials img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .footer-email {
+    font-size: clamp(30px, 9vw, 48px);
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .reveal,
+  .calendar-scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .scroll-underline-path {
+    animation: none !important;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+
+/* ===== Current calendar refinements ===== */
+
+.life-event.event-medium.event-offset-right {
+  width: 66%;
+}
+
+/* Move the second image lower so it sits beneath the green card. */
+.calendar-image-two {
+  top: calc(var(--hour-height) * 15.85);
+}
+
+/* Center and enlarge the end-of-day zzz note. */
+.sleep-note {
+  top: calc(var(--hour-height) * 18.92);
+  left: 50%;
+  right: auto;
+
+  transform: translateX(-50%);
+
+  font-size: clamp(38px, 3vw, 54px);
+  text-align: center;
+}
+
+/* Footer cue SVG, same approach as hero title SVGs. */
+.footer-cue-svg {
+  display: block;
+
+  width: min(88vw, 1320px);
+  max-width: 96%;
+  height: auto;
+
+  object-fit: contain;
+}
+
+/* Slightly tighter "say hi". */
+.footer-display p {
+  letter-spacing: -0.085em;
+}
+
+@media (max-width: 900px) {
+  .life-event.event-medium.event-offset-right {
+    width: 72%;
+  }
+
+  .calendar-image-two {
+    top: calc(var(--hour-height) * 15.95);
+  }
+
+  .sleep-note {
+    font-size: clamp(34px, 4vw, 48px);
+  }
+}
+
+@media (max-width: 620px) {
+  .scroll-note span {
+    font-size: 24px;
+  }
+
+  .scroll-underline {
+    width: 285px;
+  }
+
+  .life-event.event-medium.event-offset-right {
+    width: 82%;
+  }
+
+  .calendar-image-two {
+    top: calc(var(--hour-height) * 16.05);
+  }
+
+  .sleep-note {
+    left: 54%;
+    font-size: 31px;
+  }
+
+  .footer-cue-svg {
+    width: 95vw;
+    max-width: none;
+  }
+}
+
+
+/* =========================================================
+   FINAL REFINEMENTS — 2026-09-20
+   ========================================================= */
+
+/* 1) Scroll note: smaller, lower, slower underline draw */
+.scroll-note {
+  margin-top: clamp(56px, 5vw, 88px);
+}
+
+.scroll-note span {
+  font-size: clamp(21px, 1.65vw, 28px);
+}
+
+.scroll-underline {
+  width: min(360px, 80vw);
+  margin-top: 3px;
+}
+
+.scroll-underline-path {
+  animation-duration: 3.4s;
+}
+
+
+/* 2) Theme toggle selected state gets the orange fill */
+.calendar-section:not(.calendar-light) .theme-toggle .theme-icon-dark,
+.calendar-section.calendar-light .theme-toggle .theme-icon-light {
+  background: var(--orange, #ff9238);
+  color: #111;
+  border-radius: 999px;
+}
+
+/* keep each icon box aligned and give room for selected background */
+.theme-toggle .theme-icon {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* 3) Connect the calendar side rail cleanly into the grid */
+.calendar-body {
+  position: relative;
+}
+
+.calendar-body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--time-column-width, 92px);
+  width: 1px;
+  background: rgba(255,255,255,.13);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.calendar-light .calendar-body::before {
+  background: rgba(20,20,20,.15);
+}
+
+
+/* 4) Move ONLY the 'okay... back to work' note farther down */
+.back-to-work-note {
+  top: calc(var(--hour-height) * 9.25);
+}
+
+
+/* 5) Footer: make 'say hi' larger, pull contact area upward */
+.footer-display p {
+  font-size: clamp(88px, 11vw, 190px);
+  line-height: .8;
+  letter-spacing: -0.1em;
+  margin-top: clamp(-8px, -0.5vw, -2px);
+}
+
+.footer-contact {
+  margin-top: clamp(-26px, -2vw, -12px);
+  row-gap: clamp(10px, 1.2vw, 18px);
+}
+
+.footer-socials {
+  gap: clamp(10px, 1vw, 16px);
+  margin-bottom: 0;
+}
+
+.footer-email {
+  margin-top: 0;
+}
+
+
+/* Smaller screens */
+@media (max-width: 900px) {
+  .scroll-note {
+    margin-top: 48px;
+  }
+
+  .scroll-note span {
+    font-size: clamp(20px, 2.5vw, 25px);
+  }
+
+  .back-to-work-note {
+    top: calc(var(--hour-height) * 9.35);
+  }
+
+  .footer-display p {
+    font-size: clamp(74px, 12vw, 128px);
+  }
+
+  .footer-contact {
+    margin-top: -10px;
+  }
+}
+
+@media (max-width: 620px) {
+  .scroll-note {
+    margin-top: 42px;
+  }
+
+  .scroll-note span {
+    font-size: 21px;
+  }
+
+  .scroll-underline {
+    width: 270px;
+  }
+
+  .back-to-work-note {
+    top: calc(var(--hour-height) * 9.45);
+  }
+
+  .footer-display p {
+    font-size: clamp(58px, 15vw, 92px);
+  }
+
+  .footer-contact {
+    margin-top: 0;
+  }
+}
+
+
+/* =========================================================
+   FINAL POLISH — FOOTER + CALENDAR HEADER
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   CALENDAR: connect the left timeline rule from the week
+   header all the way through the blank lead-in to 6 AM.
+   --------------------------------------------------------- */
+.day-calendar::before {
+  top: 0;
+}
+
+
+/* ---------------------------------------------------------
+   THEME TOGGLE: selected mode uses a small rounded rectangle,
+   not a circle.
+   --------------------------------------------------------- */
+.theme-toggle {
+  width: 76px;
+  height: 46px;
+  padding: 5px;
+  gap: 4px;
+}
+
+.theme-toggle .theme-icon {
+  width: 30px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
+
+  background: transparent;
+  color: var(--calendar-text);
+
+  opacity: .55;
+
+  transition:
+    background-color .22s ease,
+    color .22s ease,
+    opacity .22s ease,
+    transform .22s ease;
+}
+
+.calendar-section:not(.calendar-light)
+.theme-toggle .theme-icon-dark,
+
+.calendar-section.calendar-light
+.theme-toggle .theme-icon-light {
+  background: var(--orange);
+  color: #111;
+  opacity: 1;
+}
+
+.theme-toggle:hover .theme-icon {
+  transform: scale(1.03);
+}
+
+
+/* ---------------------------------------------------------
+   SECOND CALENDAR IMAGE: move it farther right so it never
+   crowds or touches the time-axis rule.
+   --------------------------------------------------------- */
+.calendar-image-two {
+  left: 5.25%;
+}
+
+
+/* ---------------------------------------------------------
+   FOOTER: larger "say hi", slightly more breathing room
+   between letters, and pull contact info upward.
+   --------------------------------------------------------- */
+.footer-display p {
+  font-size: clamp(112px, 14.4vw, 235px);
+  letter-spacing: -0.035em;
+  right: clamp(10px, 4vw, 62px);
+  top: clamp(112px, 12.2vw, 190px);
+}
+
+.footer-contact {
+  transform: translateY(clamp(-150px, -8.5vw, -95px));
+  gap: clamp(10px, 1vw, 16px);
+}
+
+.footer-socials {
+  gap: clamp(8px, .75vw, 13px);
+}
+
+.footer-socials a {
+  transition:
+    transform .22s ease,
+    filter .22s ease;
+  transform-origin: center;
+}
+
+.footer-socials a:hover,
+.footer-socials a:focus-visible {
+  transform: scale(1.12) translateY(-2px);
+  outline: none;
+}
+
+.footer-socials a:hover img,
+.footer-socials a:focus-visible img {
+  filter: drop-shadow(0 6px 8px rgba(0,0,0,.12));
+}
+
+.footer-email {
+  margin-top: 0;
+}
+
+
+/* ---------------------------------------------------------
+   RESPONSIVE TUNING
+   --------------------------------------------------------- */
+@media (max-width: 900px) {
+  .calendar-image-two {
+    left: 7%;
+  }
+
+  .footer-display p {
+    font-size: clamp(92px, 16vw, 155px);
+    letter-spacing: -0.03em;
+  }
+
+  .footer-contact {
+    transform: translateY(-58px);
+  }
+}
+
+@media (max-width: 620px) {
+  .theme-toggle {
+    width: 70px;
+    height: 42px;
+    padding: 4px;
+  }
+
+  .theme-toggle .theme-icon {
+    width: 28px;
+    height: 30px;
+    border-radius: 5px;
+  }
+
+  .calendar-image-two {
+    left: 8%;
+  }
+
+  .footer-display p {
+    font-size: clamp(70px, 18vw, 112px);
+    letter-spacing: -0.025em;
+  }
+
+  .footer-contact {
+    transform: none;
+    margin-top: 8px;
+  }
+}
+
+
+/* =========================================================
+   FINAL FOOTER SPACING TWEAK
+   Compact the empty space while keeping the copyright block
+   comfortably separated from the email.
+   ========================================================= */
+
+.site-footer {
+  min-height: auto;
+
+  padding:
+    clamp(46px, 5vw, 78px)
+    var(--page-pad)
+    clamp(26px, 2.2vw, 38px);
+
+  justify-content: flex-start;
+}
+
+.footer-bottom {
+  margin-top: clamp(42px, 4vw, 64px);
+  padding-top: 0;
+}
+
+@media (max-width: 900px) {
+  .footer-bottom {
+    margin-top: clamp(34px, 5vw, 52px);
+  }
+}
+
+@media (max-width: 620px) {
+  .site-footer {
+    padding-bottom: 24px;
+  }
+
+  .footer-bottom {
+    margin-top: 32px;
+  }
+}
+
+
+/* =========================================================
+   FOOTER SPACING FIX — final
+   The previous translateY visually moved the contact block up
+   but left its original layout space behind, which caused the
+   large empty gap below the email.
+   ========================================================= */
+
+.site-footer {
+  min-height: auto;
+  justify-content: flex-start;
+  padding-bottom: clamp(24px, 2vw, 34px);
+}
+
+/* Keep a little breathing room after the big cue / say-hi area. */
+.footer-display {
+  min-height: clamp(330px, 31vw, 455px);
+}
+
+/* IMPORTANT: keep this block in normal document flow. */
+.footer-contact {
+  transform: none;
+  margin-top: clamp(18px, 1.6vw, 28px);
+  gap: clamp(10px, 1vw, 16px);
+}
+
+/* Keep the copyright close to the email instead of at the bottom
+   of a full viewport-sized footer. */
+.footer-bottom {
+  margin-top: clamp(34px, 3vw, 50px);
+  padding-top: 0;
+}
+
+@media (max-width: 900px) {
+  .footer-display {
+    min-height: clamp(285px, 37vw, 390px);
+  }
+
+  .footer-contact {
+    transform: none;
+    margin-top: 18px;
+  }
+
+  .footer-bottom {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 620px) {
+  .footer-display {
+    min-height: clamp(230px, 48vw, 315px);
+  }
+
+  .footer-contact {
+    transform: none;
+    margin-top: 16px;
+  }
+
+  .footer-bottom {
+    margin-top: 26px;
+  }
+}
+
+
+/* =========================================================
+   FINAL FOOTER LAYOUT — match reference
+   ========================================================= */
+
+.site-footer {
+  min-height: auto !important;
+  padding:
+    clamp(34px, 3vw, 54px)
+    var(--page-pad)
+    clamp(18px, 1.5vw, 26px) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important;
+}
+
+/* Keep the large cue area, but do not let it create a giant
+   empty footer underneath everything else. */
+.footer-display {
+  min-height: clamp(300px, 27vw, 400px) !important;
+  margin-bottom: 0 !important;
+}
+
+/* Pull the social/email group up so it sits visually near
+   the lower edge of "say hi", like the reference image. */
+.footer-contact {
+  transform: none !important;
+  margin-top: clamp(-6px, -0.4vw, -2px) !important;
+  gap: clamp(8px, 0.7vw, 12px) !important;
+}
+
+/* Keep the icon row compact. */
+.footer-socials {
+  margin: 0 0 clamp(6px, 0.5vw, 9px) 0 !important;
+}
+
+/* Then bring the copyright block up close to the email,
+   leaving only a neat breathing gap. */
+.footer-bottom {
+  margin-top: clamp(28px, 2.2vw, 38px) !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Kill any old height/min-height rules that may still be
+   forcing extra orange space after the email. */
+.site-footer,
+.footer-contact,
+.footer-bottom {
+  height: auto !important;
+}
+
+@media (max-width: 900px) {
+  .footer-display {
+    min-height: clamp(270px, 35vw, 350px) !important;
+  }
+
+  .footer-contact {
+    margin-top: 0 !important;
+  }
+
+  .footer-bottom {
+    margin-top: 26px !important;
+  }
+}
+
+@media (max-width: 620px) {
+  .site-footer {
+    padding-bottom: 18px !important;
+  }
+
+  .footer-display {
+    min-height: clamp(220px, 46vw, 300px) !important;
+  }
+
+  .footer-contact {
+    margin-top: 4px !important;
+  }
+
+  .footer-bottom {
+    margin-top: 22px !important;
+  }
+}

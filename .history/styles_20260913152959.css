@@ -1,0 +1,1775 @@
+/* =========================================================
+   PRAGATHI PORTFOLIO — HOMEPAGE V4
+   ========================================================= */
+
+:root {
+  --cream: #FFF7DE;
+  --orange: #FE943C;
+  --name-orange: #FFA60F;
+  --ink: #111111;
+
+  --header-h: clamp(72px, 5.7vw, 94px);
+  --page-pad: clamp(18px, 2.5vw, 42px);
+
+  --hero-left: 0px;
+  --hero-right: 0px;
+  --portrait-drop: 0px;
+
+  --cal-bg: #090909;
+  --cal-panel: #101010;
+  --cal-line: #242424;
+  --cal-soft: #A9A9A9;
+  --cal-text: #F4F4F4;
+  --cal-event-text: #101010;
+}
+
+
+@font-face {
+  font-family: "Smooth Elegant";
+  src: url("assets/fonts/smooth-elegant/Smooth Elegant.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--cream);
+  color: var(--ink);
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+  overflow-x: hidden;
+}
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.site-header {
+  height: var(--header-h);
+  padding: 0 var(--page-pad);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  background: var(--cream);
+
+  position: relative;
+  z-index: 20;
+}
+
+
+.site-logo-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+
+.site-logo {
+  width: clamp(150px, 13vw, 220px);
+  height: auto;
+  display: block;
+}
+
+
+.main-nav {
+  display: flex;
+  gap: clamp(22px, 3vw, 46px);
+}
+
+
+.main-nav a {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(17px, 1.25vw, 21px);
+  color: var(--orange);
+}
+
+
+.menu-button {
+  display: none;
+
+  width: 28px;
+  height: 23px;
+
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.menu-button span {
+  height: 2px;
+  width: 100%;
+  display: block;
+  background: var(--orange);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+  width: 100%;
+  background: var(--cream);
+}
+
+
+.hero-stage {
+  position: relative;
+  width: 100%;
+  height: clamp(270px, 39vw, 650px);
+  overflow: hidden;
+}
+
+
+.hero-title {
+  position: absolute;
+  inset: 0;
+
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--orange);
+
+  font-family: "Smooth Elegant", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+
+  letter-spacing: -0.4em;
+  line-height: .76;
+}
+
+
+.hero-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+
+  width: max-content;
+
+  white-space: nowrap;
+  text-align: center;
+
+  will-change: transform;
+}
+
+
+.hero-line .word {
+  display: inline-block;
+  margin-right: .30em;
+}
+
+
+.hero-line .word:last-child {
+  margin-right: 0;
+}
+
+
+.hero-line-top {
+  font-size: clamp(105px, 23.4vw, 390px);
+
+  transform:
+    translateX(var(--hero-left));
+}
+
+
+.hero-line-bottom {
+  font-size: clamp(94px, 20.65vw, 345px);
+
+  margin-top: .075em;
+
+  transform:
+    translateX(var(--hero-right));
+}
+
+
+.hero-line-bottom .developer-word {
+  margin-left: .15em;
+}
+
+
+.hero-line em {
+  display: inline-block;
+
+  font-style: italic;
+  font-weight: 400;
+
+  letter-spacing: -.05em;
+
+  margin-left: .08em;
+  margin-right: .13em;
+}
+
+
+.hero-portrait {
+  position: absolute;
+  z-index: 3;
+
+  left: 50%;
+  top: 50%;
+
+  width: clamp(205px, 30vw, 500px);
+  height: auto;
+  max-height: 72%;
+
+  object-fit: contain;
+
+  transform:
+    translate(
+      -50%,
+      calc(-48% + var(--portrait-drop))
+    );
+
+  pointer-events: none;
+  user-select: none;
+
+  will-change: transform;
+}
+
+
+.hero-name-row {
+  width: 100%;
+
+  padding:
+    0
+    var(--page-pad)
+    clamp(12px, 1.5vw, 24px);
+
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+
+  color: var(--name-orange);
+
+  font-family: "Playfair Display", Georgia, serif;
+
+  font-size: clamp(42px, 6.7vw, 108px);
+  font-weight: 400;
+
+  line-height: .9;
+  letter-spacing: -.045em;
+}
+
+
+/* =========================================================
+   EXPERIENCE / DOTTED SECTION
+   ========================================================= */
+
+.experience-section {
+  position: relative;
+
+  padding:
+    clamp(70px, 7vw, 105px)
+    var(--page-pad)
+    clamp(58px, 6vw, 90px);
+
+  background-color: #FFF;
+
+  /*
+    Tighter dot spacing than before.
+  */
+  background-image:
+    radial-gradient(
+      circle,
+      var(--name-orange) 1.45px,
+      transparent 1.65px
+    );
+
+  background-size:
+    36px 36px;
+}
+
+
+/* main two-column layout */
+
+.experience-inner {
+  width: min(1320px, 100%);
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.4fr)
+    minmax(260px, .6fr);
+
+  gap:
+    clamp(38px, 5vw, 76px);
+
+  align-items: center;
+}
+
+
+/* copy */
+
+.experience-copy {
+  max-width: 920px;
+}
+
+
+.experience-copy p {
+  margin: 0;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  /*
+    Much smaller than before.
+    Should generally land in 2–3 lines on desktop.
+  */
+  font-size:
+    clamp(30px, 3.6vw, 54px);
+
+  line-height: 1.18;
+
+  letter-spacing: -0.045em;
+
+  color: #333;
+}
+
+
+.experience-highlight {
+  color: #FFD887;
+}
+
+
+.experience-copy strong {
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   TWO IMAGE PLACEHOLDERS
+   ========================================================= */
+
+.stack-art {
+  position: relative;
+
+  min-height:
+    clamp(250px, 26vw, 390px);
+
+  width: 100%;
+}
+
+
+/*
+  These are placeholders only.
+
+  Later you can replace:
+  <div class="stack-image ...">
+
+  with:
+  <img src="assets/images/your-image.png">
+*/
+
+.stack-image {
+  position: absolute;
+
+  display: grid;
+
+  place-items: center;
+
+  width:
+    clamp(165px, 15vw, 235px);
+
+  aspect-ratio:
+    1 / 1.15;
+
+  border:
+    2px dashed
+    rgba(17,17,17,.25);
+
+  background:
+    rgba(255,255,255,.8);
+
+  color:
+    rgba(17,17,17,.4);
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size:
+    12px;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    .12em;
+}
+
+
+.stack-image-one {
+  top: 2%;
+  left: 10%;
+  transform: rotate(-7deg);
+}
+
+.stack-image-two {
+  right: 0;
+  bottom: -12%;
+  transform: rotate(8deg);
+}
+
+
+/* =========================================================
+   SCROLL PROMPT
+   ========================================================= */
+
+.scroll-note {
+  position: relative;
+
+  display: grid;
+  place-items: center;
+
+  width: min(380px, 82%);
+  min-height: 105px;
+
+  margin:
+    clamp(42px, 5vw, 70px)
+    auto
+    0;
+
+  color: #181818;
+
+  text-align: center;
+  text-decoration: none;
+}
+
+.scroll-note span {
+  position: relative;
+  z-index: 2;
+
+  max-width: 230px;
+
+  font-family: "Caveat", cursive;
+  font-style: normal;
+  font-weight: 400;
+
+  font-size: clamp(17px, 1.4vw, 22px);
+  line-height: 0.95;
+
+  text-align: center;
+
+  transform: rotate(-2deg);
+}
+/* hand-drawn circular outline */
+
+.scroll-circle {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: visible;
+
+  transform:
+    rotate(-3deg);
+}
+
+
+.scroll-circle path {
+  fill:
+    none;
+
+  stroke:
+    #1B1B1B;
+
+  stroke-width:
+    2.3;
+
+  stroke-linecap:
+    round;
+
+  stroke-linejoin:
+    round;
+
+  opacity:
+    .68;
+}
+
+
+/* =========================================================
+   CALENDAR — INTEGRATED DARK SECTION
+   ========================================================= */
+
+.calendar-section {
+  width: 100%;
+
+  padding:
+    clamp(26px, 3vw, 44px)
+    var(--page-pad)
+    clamp(80px, 10vw, 150px);
+
+  background:
+    var(--cal-bg);
+
+  color:
+    var(--cal-text);
+
+  transition:
+    background .35s ease,
+    color .35s ease;
+}
+
+
+/* light calendar mode */
+
+.calendar-section.calendar-light {
+  --cal-bg: #F8F8F7;
+  --cal-panel: #FFFFFF;
+  --cal-line: #E4E4E4;
+  --cal-soft: #737373;
+  --cal-text: #161616;
+  --cal-event-text: #161616;
+}
+
+
+.calendar-topbar {
+  min-height:
+    76px;
+
+  max-width:
+    1500px;
+
+  margin:
+    0
+    auto;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap:
+    24px;
+
+  border-bottom:
+    1px
+    solid
+    var(--cal-line);
+}
+
+
+.calendar-brand {
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  font-family:
+    Arial,
+    sans-serif;
+}
+
+
+.calendar-month-label {
+  font-size:
+    clamp(18px, 1.5vw, 24px);
+
+  font-weight:
+    500;
+}
+
+
+.calendar-view-label {
+  padding:
+    7px
+    11px;
+
+  border:
+    1px
+    solid
+    var(--cal-line);
+
+  border-radius:
+    6px;
+
+  color:
+    var(--cal-soft);
+
+  font-size:
+    12px;
+}
+
+
+.calendar-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+.calendar-nav-btn,
+.calendar-today-btn,
+.theme-toggle {
+  min-width:
+    38px;
+
+  height:
+    38px;
+
+  padding:
+    0
+    12px;
+
+  border:
+    1px
+    solid
+    var(--cal-line);
+
+  background:
+    transparent;
+
+  color:
+    var(--cal-text);
+
+  border-radius:
+    6px;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  cursor:
+    pointer;
+}
+
+
+.calendar-today-btn {
+  padding:
+    0
+    16px;
+}
+
+
+.theme-toggle {
+  width:
+    58px;
+
+  position:
+    relative;
+
+  display:
+    inline-grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  align-items:
+    center;
+
+  justify-items:
+    center;
+
+  padding:
+    0
+    7px;
+}
+
+
+.theme-icon {
+  font-size:
+    15px;
+}
+
+
+.theme-icon-light {
+  opacity:
+    .4;
+}
+
+
+.calendar-light .theme-icon-light {
+  opacity:
+    1;
+}
+
+
+.calendar-light .theme-icon-dark {
+  opacity:
+    .35;
+}
+
+
+/* week days */
+
+.week-header {
+  max-width:
+    1500px;
+
+  margin:
+    auto;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    70px
+    1fr;
+
+  border-bottom:
+    1px
+    solid
+    var(--cal-line);
+}
+
+
+.week-header-spacer {
+  border-right:
+    1px
+    solid
+    var(--cal-line);
+}
+
+
+.week-days {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(7, 1fr);
+}
+
+
+.week-day {
+  min-height:
+    82px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    7px;
+
+  border-right:
+    1px
+    solid
+    var(--cal-line);
+
+  font-family:
+    Arial,
+    sans-serif;
+}
+
+
+.week-day:last-child {
+  border-right:
+    0;
+}
+
+
+.week-day-name {
+  color:
+    var(--cal-soft);
+
+  font-size:
+    10px;
+
+  letter-spacing:
+    .12em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.week-day-number {
+  width:
+    36px;
+
+  height:
+    36px;
+
+  border-radius:
+    50%;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  font-size:
+    15px;
+}
+
+
+.week-day.today .week-day-number {
+  background:
+    var(--orange);
+
+  color:
+    #111;
+
+  font-weight:
+    600;
+}
+
+
+/* calendar body */
+
+.calendar-body {
+  max-width:
+    1500px;
+
+  margin:
+    auto;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    70px
+    minmax(0, 1fr);
+
+  min-height:
+    1120px;
+}
+
+
+.calendar-times {
+  display:
+    grid;
+
+  grid-template-rows:
+    repeat(14, 1fr);
+
+  border-right:
+    1px
+    solid
+    var(--cal-line);
+
+  color:
+    var(--cal-soft);
+
+  font-family:
+    Arial,
+    sans-serif;
+}
+
+
+.calendar-times span {
+  padding:
+    7px
+    10px
+    0
+    0;
+
+  text-align:
+    right;
+
+  font-size:
+    10px;
+}
+
+
+.calendar-grid {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  background:
+
+    repeating-linear-gradient(
+      to bottom,
+
+      transparent 0,
+
+      transparent
+      calc((100% / 14) - 1px),
+
+      var(--cal-line)
+      calc((100% / 14) - 1px),
+
+      var(--cal-line)
+      calc(100% / 14)
+    ),
+
+    repeating-linear-gradient(
+      to right,
+
+      transparent 0,
+
+      transparent
+      calc((100% / 7) - 1px),
+
+      var(--cal-line)
+      calc((100% / 7) - 1px),
+
+      var(--cal-line)
+      calc(100% / 7)
+    );
+}
+
+
+/* current time */
+
+.now-line {
+  position:
+    absolute;
+
+  z-index:
+    2;
+
+  top:
+    28%;
+
+  left:
+    0;
+
+  right:
+    0;
+
+  height:
+    1px;
+
+  background:
+    #EA4335;
+}
+
+
+.now-line i {
+  position:
+    absolute;
+
+  left:
+    -4px;
+
+  top:
+    -4px;
+
+  width:
+    9px;
+
+  height:
+    9px;
+
+  border-radius:
+    50%;
+
+  background:
+    #EA4335;
+}
+
+
+/* events */
+
+.calendar-event {
+  position:
+    absolute;
+
+  z-index:
+    4;
+
+  /*
+    Put each event in one of the seven weekday columns.
+    --col: 1 through 7
+  */
+
+  left:
+    calc(
+      ((var(--col) - 1) * (100% / 7))
+      + 8px
+    );
+
+  width:
+    calc(
+      (100% / 7)
+      - 16px
+    );
+
+  top:
+    calc(
+      (100% / 14)
+      *
+      var(--start)
+    );
+
+  height:
+    calc(
+      (100% / 14)
+      *
+      var(--span)
+      -
+      5px
+    );
+
+  min-height:
+    52px;
+
+  padding:
+    10px;
+
+  border-radius:
+    5px;
+
+  overflow:
+    hidden;
+
+  color:
+    var(--cal-event-text);
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  transition:
+    transform .25s ease,
+    filter .25s ease,
+    box-shadow .25s ease;
+}
+
+
+.calendar-event:hover {
+  transform:
+    translateY(-2px);
+
+  filter:
+    saturate(1.08);
+
+  box-shadow:
+    0 12px 32px
+    rgba(0,0,0,.22);
+}
+
+
+.calendar-event strong {
+  display:
+    block;
+
+  margin-top:
+    4px;
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(15px, 1.2vw, 20px);
+
+  line-height:
+    1.05;
+
+  font-weight:
+    500;
+}
+
+
+.calendar-event small {
+  display:
+    block;
+
+  margin-top:
+    5px;
+
+  font-size:
+    10px;
+
+  line-height:
+    1.25;
+}
+
+
+.event-time {
+  font-size:
+    9px;
+
+  opacity:
+    .65;
+}
+
+
+.work-event {
+  background: #F0B15C;
+}
+
+
+.meeting-event {
+  background: #F5D16F;
+}
+
+
+.build-event {
+  background: #D994BD;
+}
+
+
+.lunch-event {
+  background: #C6B978;
+}
+
+
+.creative-event {
+  background: #91B7DF;
+}
+
+
+.code-event {
+  background: #97C399;
+}
+
+
+.prince-event {
+  background: #E6A2AB;
+}
+
+
+.night-event {
+  background: #B3A0DB;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.site-footer {
+  min-height:
+    clamp(560px, 65vw, 820px);
+
+  padding:
+    clamp(44px, 6vw, 80px)
+    var(--page-pad)
+    24px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  justify-content:
+    space-between;
+
+  background:
+    var(--orange);
+
+  color:
+    var(--cream);
+}
+
+
+.footer-display {
+  min-height:
+    clamp(260px, 32vw, 420px);
+
+  position:
+    relative;
+}
+
+
+.footer-display h2 {
+  margin:
+    0;
+
+  font-family:
+    "Smooth Elegant",
+    sans-serif;
+
+  font-size:
+    clamp(110px, 17vw, 285px);
+
+  line-height:
+    .8;
+
+  font-weight:
+    400;
+
+  white-space:
+    nowrap;
+}
+
+
+.footer-display p {
+  position:
+    absolute;
+
+  right:
+    clamp(10px, 5vw, 80px);
+
+  top:
+    clamp(130px, 14vw, 225px);
+
+  margin:
+    0;
+
+  color:
+    #000;
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-style:
+    italic;
+
+  font-size:
+    clamp(95px, 14vw, 225px);
+
+  line-height:
+    .75;
+
+  transform:
+    rotate(-4deg);
+}
+
+
+.footer-contact {
+  display:
+    grid;
+
+  gap:
+    18px;
+}
+
+
+.footer-socials {
+  display:
+    flex;
+
+  gap:
+    14px;
+}
+
+
+.footer-socials a {
+  width:
+    48px;
+
+  height:
+    48px;
+
+  border-radius:
+    50%;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  background:
+    var(--cream);
+
+  color:
+    var(--orange);
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-weight:
+    600;
+}
+
+
+.footer-email {
+  width:
+    fit-content;
+
+  max-width:
+    100%;
+
+  color:
+    #000;
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(36px, 5vw, 76px);
+
+  line-height:
+    1;
+
+  word-break:
+    break-word;
+}
+
+
+.footer-bottom {
+  text-align:
+    center;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size:
+    12px;
+
+  line-height:
+    1.3;
+}
+
+
+.footer-bottom p {
+  margin:
+    3px;
+}
+
+
+/* =========================================================
+   SCROLL REVEALS
+   ========================================================= */
+
+.reveal {
+  opacity:
+    0;
+
+  transform:
+    translateY(38px);
+
+  transition:
+    opacity
+    .95s
+    cubic-bezier(.16,.8,.2,1),
+
+    transform
+    .95s
+    cubic-bezier(.16,.8,.2,1);
+}
+
+
+.reveal.visible {
+  opacity:
+    1;
+
+  transform:
+    translateY(0);
+}
+
+
+.reveal-event {
+  opacity:
+    0;
+
+  transform:
+    translateY(22px)
+    scale(.985);
+
+  transition:
+    opacity
+    .72s
+    cubic-bezier(.16,.8,.2,1),
+
+    transform
+    .72s
+    cubic-bezier(.16,.8,.2,1);
+}
+
+
+.reveal-event.visible {
+  opacity:
+    1;
+
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .experience-inner {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      54px;
+  }
+
+
+  .tech-note {
+    justify-self:
+      start;
+  }
+
+
+  .calendar-event strong {
+    font-size:
+      14px;
+  }
+
+
+  .calendar-event small {
+    display:
+      none;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 620px) {
+
+  :root {
+    --header-h:
+      66px;
+
+    --page-pad:
+      14px;
+  }
+
+
+  .site-logo {
+    width:
+      125px;
+  }
+
+
+  .main-nav {
+    display:
+      none;
+  }
+
+
+  .menu-button {
+    display:
+      flex;
+  }
+
+
+  /* HERO */
+
+  .hero-stage {
+    height:
+      clamp(250px, 52vw, 320px);
+  }
+
+
+  .hero-title {
+    letter-spacing:
+      -.4em;
+
+    line-height:
+      .76;
+  }
+
+
+  .hero-line-top {
+    font-size:
+      clamp(82px, 28vw, 145px);
+  }
+
+
+  .hero-line-bottom {
+    font-size:
+      clamp(75px, 25.2vw, 132px);
+  }
+
+
+  .hero-line .word {
+    margin-right:
+      .25em;
+  }
+
+
+  .hero-line-bottom .developer-word {
+    margin-left:
+      .12em;
+  }
+
+
+  .hero-line em {
+    margin-left:
+      .08em;
+
+    margin-right:
+      .13em;
+  }
+
+
+  .hero-portrait {
+    width:
+      clamp(155px, 43vw, 225px);
+
+    max-height:
+      72%;
+  }
+
+
+  .hero-name-row {
+    font-size:
+      clamp(38px, 11.5vw, 56px);
+
+    padding-bottom:
+      14px;
+  }
+
+
+  /* EXPERIENCE */
+
+  .experience-section {
+    padding-top:
+      72px;
+
+    background-size:
+      32px
+      32px;
+  }
+
+
+  .experience-copy p {
+    font-size:
+      clamp(34px, 10vw, 48px);
+  }
+
+
+  .tech-note {
+    width:
+      min(280px, 90%);
+
+    justify-self:
+      center;
+  }
+
+
+  .scroll-note {
+    font-size:
+      26px;
+  }
+
+
+  /* CALENDAR */
+
+  .calendar-section {
+    padding-left:
+      0;
+
+    padding-right:
+      0;
+  }
+
+
+  .calendar-topbar {
+    padding:
+      0
+      14px;
+  }
+
+
+  .calendar-brand {
+    gap:
+      8px;
+  }
+
+
+  .calendar-view-label {
+    display:
+      none;
+  }
+
+
+  .calendar-today-btn {
+    display:
+      none;
+  }
+
+
+  .week-header {
+    grid-template-columns:
+      46px
+      1fr;
+  }
+
+
+  .week-day {
+    min-height:
+      65px;
+  }
+
+
+  .week-day-name {
+    font-size:
+      8px;
+  }
+
+
+  .week-day-number {
+    width:
+      30px;
+
+    height:
+      30px;
+
+    font-size:
+      13px;
+  }
+
+
+  .calendar-body {
+    grid-template-columns:
+      46px
+      1fr;
+
+    min-height:
+      930px;
+  }
+
+
+  .calendar-times span {
+    font-size:
+      8px;
+
+    padding-right:
+      7px;
+  }
+
+
+  /*
+    Mobile uses wider event cards rather than
+    seven tiny columns. It keeps the calendar grid
+    visible while making the content readable.
+  */
+
+  .calendar-event {
+    left:
+      8px;
+
+    width:
+      calc(100% - 16px);
+
+    padding:
+      9px;
+  }
+
+
+  .calendar-event strong {
+    font-size:
+      15px;
+  }
+
+
+  .calendar-event small {
+    display:
+      block;
+
+    font-size:
+      9px;
+  }
+
+
+  /* FOOTER */
+
+  .footer-display {
+    min-height:
+      240px;
+  }
+
+
+  .footer-display h2 {
+    font-size:
+      90px;
+
+    white-space:
+      normal;
+  }
+
+
+  .footer-display p {
+    font-size:
+      92px;
+
+    top:
+      135px;
+  }
+
+
+  .footer-email {
+    font-size:
+      32px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  * {
+    scroll-behavior:
+      auto !important;
+  }
+
+
+  .reveal,
+  .reveal-event {
+    opacity:
+      1;
+
+    transform:
+      none;
+
+    transition:
+      none;
+  }
+
+}

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Pragathi Ilango | UI/UX Designer & Web Developer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;1,500&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ======================================================
+       HEADER
+       ====================================================== -->
+  <header class="site-header">
+
+    <a
+      class="site-logo-link"
+      href="#top"
+      aria-label="Pragathi Ilango home"
+    >
+      <img
+        class="site-logo"
+        src="assets/images/pi_logo.svg"
+        alt="Pragathi Ilango"
+      >
+    </a>
+
+    <nav
+      class="main-nav"
+      aria-label="Primary navigation"
+    >
+      <a href="#about">About</a>
+      <a href="#calendar">Playground</a>
+      <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
+
+    <button
+      class="menu-button"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </header>
+
+
+  <main id="top">
+
+    <!-- ======================================================
+         HERO
+         ====================================================== -->
+    <section
+      class="hero"
+      id="hero"
+    >
+
+        <div class="hero-stage">
+
+          <div
+            class="hero-title-art"
+            aria-label="UI UX Designer Web Developer"
+          >
+
+            <img
+              class="hero-title-svg hero-title-svg-top"
+              src="assets/images/ui.svg"
+              alt="UI UX Designer"
+            >
+
+            <img
+              class="hero-title-svg hero-title-svg-bottom"
+              src="assets/images/developer.svg"
+              alt="Web Developer"
+            >
+
+          </div>
+
+          <img
+            class="hero-portrait"
+            src="assets/images/pragathi-icon.png"
+            alt=""
+            aria-hidden="true"
+          >
+
+        </div>
+
+      <div
+        class="hero-name-row"
+        aria-label="Pragathi Ilango"
+      >
+        <span>Pragathi</span>
+        <span>Ilango</span>
+      </div>
+
+    </section>
+
+
+    <!-- ======================================================
+         ABOUT / TYPEWRITER SECTION
+         ====================================================== -->
+    <section
+      class="experience-section"
+      id="about"
+    >
+
+      <div class="experience-inner">
+
+        <div class="typewriter-block reveal">
+
+          <p class="typewriter-question">
+            How do I best describe myself?
+          </p>
+
+          <div class="typewriter-line">
+          <span class="typewriter-inline">
+            <span id="typewriterText"></span><span class="typewriter-cursor" aria-hidden="true"></span>
+          </span>
+        </div>
+
+        </div>
+
+
+        <div
+          class="stack-art reveal"
+          aria-label="Artwork placeholders"
+        >
+
+          <!--
+            Replace these placeholders later with your real images.
+
+            Example:
+            <img
+              class="stack-image stack-image-one"
+              src="assets/images/your-image-1.png"
+              alt=""
+            >
+          -->
+
+          <div class="stack-image stack-image-one">
+            <span>Image 1</span>
+          </div>
+
+          <div class="stack-image stack-image-two">
+            <span>Image 2</span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <a
+        class="scroll-note reveal"
+        href="#calendar"
+      >
+
+        <svg
+          class="scroll-circle"
+          viewBox="0 0 500 150"
+          aria-hidden="true"
+        >
+          <path
+            class="scroll-circle-path"
+            d="
+              M35,82
+              C55,22 184,9 308,25
+              C423,40 475,74 456,108
+              C433,145 286,145 151,132
+              C61,123 17,108 35,82Z
+            "
+          />
+        </svg>
+
+        <span>
+          keep scrolling,<br>
+          I promise I'm more organized
+        </span>
+
+      </a>
+
+    </section>
+
+
+    <!-- ======================================================
+         CALENDAR / MY DAY
+         ====================================================== -->
+    <section
+      class="calendar-section calendar-dark"
+      id="calendar"
+    >
+
+      <div class="calendar-topbar reveal">
+
+        <p class="calendar-kicker">
+          a loosely accurate day ✦
+        </p>
+
+        <button
+          class="theme-toggle"
+          id="calendarThemeToggle"
+          type="button"
+          aria-label="Switch calendar to light mode"
+        >
+          <span
+            class="theme-icon theme-icon-light"
+            aria-hidden="true"
+          >☀</span>
+
+          <span
+            class="theme-icon theme-icon-dark"
+            aria-hidden="true"
+          >☾</span>
+        </button>
+
+      </div>
+
+
+      <!-- DECORATIVE WEEK STRIP -->
+      <div class="week-header reveal">
+
+        <div class="week-header-spacer"></div>
+
+        <div
+          class="week-days"
+          id="weekDays"
+          aria-label="Current week"
+        >
+          <!-- JavaScript inserts the current week -->
+        </div>
+
+      </div>
+
+
+      <div class="day-calendar">
+
+        <!-- TIME GRID -->
+        <div
+          class="time-grid"
+          aria-hidden="true"
+        >
+          <div class="time-row"><span>8 AM</span><i></i></div>
+          <div class="time-row"><span>9 AM</span><i></i></div>
+          <div class="time-row"><span>10 AM</span><i></i></div>
+          <div class="time-row"><span>11 AM</span><i></i></div>
+          <div class="time-row"><span>12 PM</span><i></i></div>
+          <div class="time-row"><span>1 PM</span><i></i></div>
+          <div class="time-row"><span>2 PM</span><i></i></div>
+          <div class="time-row"><span>3 PM</span><i></i></div>
+          <div class="time-row"><span>4 PM</span><i></i></div>
+          <div class="time-row"><span>5 PM</span><i></i></div>
+          <div class="time-row"><span>6 PM</span><i></i></div>
+          <div class="time-row"><span>7 PM</span><i></i></div>
+          <div class="time-row"><span>8 PM</span><i></i></div>
+          <div class="time-row"><span>9 PM</span><i></i></div>
+          <div class="time-row"><span>10 PM</span><i></i></div>
+          <div class="time-row"><span>11 PM</span><i></i></div>
+        </div>
+
+
+        <!-- DECORATIVE SCRAPS -->
+        <div
+          class="calendar-scrap calendar-scrap-one reveal-calendar-deco"
+          aria-hidden="true"
+        >
+          <span>☕</span>
+          <small>fuel first</small>
+        </div>
+
+        <div
+          class="calendar-scrap calendar-scrap-two reveal-calendar-deco"
+          aria-hidden="true"
+        >
+          <span>✦</span>
+          <small>save this</small>
+        </div>
+
+        <div
+          class="calendar-photo-placeholder calendar-photo-one reveal-calendar-deco"
+          aria-hidden="true"
+        >
+          <span>image</span>
+        </div>
+
+
+        <!-- HANDWRITTEN NOTE -->
+        <div
+          class="back-to-work-note reveal-calendar-deco"
+          aria-hidden="true"
+        >
+          <span>okay... back to work</span>
+
+          <svg viewBox="0 0 180 70">
+            <path d="M8 12 C60 2, 105 10, 150 42" />
+            <path d="M142 34 L154 44 L139 50" />
+          </svg>
+        </div>
+
+
+        <!-- EVENTS -->
+        <div class="day-events">
+
+          <a
+            class="calendar-event work-event event-wide"
+            href="#"
+            style="--start: 1; --span: 3;"
+          >
+            <strong>Work mode: projects in motion 💻</strong>
+            <span class="event-time">9:00 AM – 12:00 PM</span>
+
+            <p>
+              The real work — UX, web, accessibility, redesigns,
+              and projects I’ve built over the years.
+            </p>
+
+            <span class="event-link">
+              See my work ↗
+            </span>
+          </a>
+
+
+          <a
+            class="calendar-event lunch-event event-medium event-offset-right"
+            href="#"
+            style="--start: 4.15; --span: 1.65;"
+          >
+            <strong>Lunch + inspiration scroll 🍜✨</strong>
+            <span class="event-time">12:10 PM – 1:50 PM</span>
+
+            <p>
+              Refuel, browse, save — designers, websites, type,
+              layouts, and visual rabbit holes worth keeping.
+            </p>
+
+            <span class="event-link">
+              See what inspires me ↗
+            </span>
+          </a>
+
+
+          <a
+            class="calendar-event play-event event-short"
+            href="#"
+            style="--start: 8; --span: 1.85;"
+          >
+            <strong>My time: make something weird 🎨</strong>
+            <span class="event-time">4:00 PM – 5:50 PM</span>
+
+            <p>
+              Posters, branding, typography, visual experiments,
+              and ideas with no client brief attached.
+            </p>
+
+            <span class="event-link">
+              Enter the playground ↗
+            </span>
+          </a>
+
+
+          <a
+            class="calendar-event life-event event-medium event-offset-right"
+            href="#"
+            style="--start: 10.15; --span: 1.7;"
+          >
+            <strong>Off the clock, mostly 🐾🎧</strong>
+            <span class="event-time">6:10 PM – 7:50 PM</span>
+
+            <p>
+              Prince walks, music, cooking, biking, and the parts
+              of life that happen away from a screen.
+            </p>
+
+            <span class="event-link">
+              A little more about me ↗
+            </span>
+          </a>
+
+
+          <a
+            class="calendar-event code-event event-wide-ish"
+            href="#"
+            style="--start: 12.1; --span: 1.75;"
+          >
+            <strong>One more build before bed 👩‍💻</strong>
+            <span class="event-time">8:05 PM – 9:50 PM</span>
+
+            <p>
+              GitHub, coding experiments, interactions, front-end
+              ideas, and whatever I suddenly decided I needed to learn.
+            </p>
+
+            <span class="event-link">
+              See my code ↗
+            </span>
+          </a>
+
+
+          <a
+            class="calendar-event night-event event-narrow event-offset-right"
+            href="#"
+            style="--start: 14.05; --span: .9;"
+          >
+            <strong>Almost snoozing, still curious 📚✍️</strong>
+            <span class="event-time">10:05 PM – 11:00 PM</span>
+
+            <p>
+              Books I’m reading, things I’m writing, notes,
+              goals, and ideas for tomorrow.
+            </p>
+
+            <span class="event-link">
+              Read, write & wander ↗
+            </span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ======================================================
+       FOOTER
+       ====================================================== -->
+  <footer class="site-footer">
+
+    <div class="footer-display">
+      <h2>THIS IS YOUR CUE,</h2>
+      <p>say hi</p>
+    </div>
+
+
+    <div class="footer-contact">
+
+      <div class="footer-socials">
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="Behance">Bē</a>
+        <a href="#" aria-label="Dribbble">◎</a>
+        <a href="resume.pdf" aria-label="Resume">▤</a>
+      </div>
+
+      <a
+        class="footer-email"
+        href="mailto:pragathi.ilango@gmail.com"
+      >
+        pragathi.ilango@gmail.com
+      </a>
+
+    </div>
+
+
+    <div class="footer-bottom">
+      <p>© Pragathi Ilango 2026</p>
+      <p>Made with love and a sugar rush 🍰</p>
+    </div>
+
+  </footer>
+
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>

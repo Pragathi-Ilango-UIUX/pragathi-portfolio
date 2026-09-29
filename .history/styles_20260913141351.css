@@ -1,0 +1,329 @@
+/* =========================================================
+   PRAGATHI — HEADER + HERO
+   Replace your existing header/hero styles with this block.
+   ========================================================= */
+
+:root {
+  --cream: #FFF7DE;
+  --orange: #FE943C;
+  --ink: #111111;
+  --page-pad: clamp(18px, 2.8vw, 48px);
+}
+
+/* Smooth Elegant:
+   Put YOUR legally obtained webfont at:
+   assets/fonts/SmoothElegant-Regular.woff2
+
+   If you only have a .ttf, change format("woff2") to format("truetype")
+   and update the filename.
+*/
+@font-face {
+  font-family: "Smooth Elegant";
+  src: url("assets/fonts/smooth-elegant/Smooth Elegant.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--cream);
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ---------------- HEADER ---------------- */
+
+.site-header {
+  position: relative; /* change to sticky later if you want */
+  z-index: 20;
+  width: 100%;
+  min-height: clamp(74px, 6.2vw, 100px);
+  padding: 0 var(--page-pad);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+
+  background: var(--cream);
+
+  /* IMPORTANT: no line under nav */
+  border: 0;
+  box-shadow: none;
+}
+
+.site-logo-link {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.site-logo {
+  display: block;
+  width: clamp(155px, 14vw, 225px);
+  height: auto;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(22px, 3vw, 48px);
+}
+
+.main-nav a {
+  color: var(--orange);
+  text-decoration: none;
+
+  /* This is intentionally a serif like your Wix nav. */
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(17px, 1.25vw, 22px);
+  font-weight: 400;
+
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.main-nav a:hover,
+.main-nav a:focus-visible {
+  opacity: 0.62;
+  transform: translateY(-1px);
+}
+
+/* ---------------- HERO ---------------- */
+
+.hero {
+  width: 100%;
+  background: var(--cream);
+
+  /* The Wix version feels like one large poster occupying the viewport. */
+  min-height: calc(100svh - clamp(74px, 6.2vw, 100px));
+
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-stage {
+  position: relative;
+  width: 100%;
+
+  /*
+    This creates the giant poster area.
+    It grows with the screen without becoming infinitely tall.
+  */
+  height: clamp(520px, 67vw, 760px);
+  overflow: hidden;
+}
+
+/* Giant text */
+.hero-title {
+  position: absolute;
+  inset: 0;
+
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: var(--orange);
+  font-family: "Smooth Elegant", "Arial Narrow", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+
+  /*
+    clamp = responsive typography.
+    The vw value is what lets it fill the width like your Wix layout.
+  */
+  font-size: clamp(132px, 20.4vw, 340px);
+  line-height: 0.79;
+  letter-spacing: -0.025em;
+}
+
+.hero-line {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+
+  /*
+    Slight negative translation intentionally lets the large type
+    touch/crop at the edges like the Wix design.
+  */
+  transform: translateX(-0.012em);
+  white-space: nowrap;
+}
+
+/* Portrait centered over the display type */
+.hero-portrait {
+  position: absolute;
+  z-index: 3;
+
+  left: 50%;
+  top: 50%;
+
+  width: clamp(260px, 30vw, 500px);
+  height: auto;
+  max-height: 66%;
+
+  object-fit: contain;
+
+  transform: translate(-50%, -47%);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Pragathi -------- Ilango */
+.hero-name-row {
+  width: 100%;
+  padding: clamp(12px, 1.8vw, 28px) var(--page-pad)
+           clamp(24px, 3vw, 44px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: #FFA60F;
+
+  /*
+    Your screenshot looks Didot/Bodoni-ish.
+    Playfair is a free fallback if you already load it;
+    Georgia will work immediately.
+  */
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: clamp(48px, 7vw, 110px);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+}
+
+/* ---------------- TABLET ---------------- */
+
+@media (max-width: 900px) {
+  .site-header {
+    min-height: 78px;
+  }
+
+  .site-logo {
+    width: clamp(140px, 22vw, 190px);
+  }
+
+  .main-nav {
+    gap: 22px;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .hero-stage {
+    height: clamp(440px, 72vw, 610px);
+  }
+
+  .hero-title {
+    font-size: clamp(105px, 20.8vw, 205px);
+  }
+
+  .hero-portrait {
+    width: clamp(230px, 34vw, 350px);
+  }
+
+  .hero-name-row {
+    font-size: clamp(48px, 8vw, 76px);
+  }
+}
+
+/* ---------------- MOBILE ---------------- */
+
+@media (max-width: 620px) {
+  :root {
+    --page-pad: 16px;
+  }
+
+  .site-header {
+    min-height: 66px;
+    gap: 14px;
+  }
+
+  .site-logo {
+    width: clamp(126px, 36vw, 165px);
+  }
+
+  .main-nav {
+    gap: 13px;
+  }
+
+  .main-nav a {
+    font-size: 14px;
+  }
+
+  /*
+    On a phone we should NOT simply shrink the desktop hero.
+    It remains poster-like, but proportions change so the text stays legible.
+  */
+  .hero-stage {
+    height: clamp(385px, 116vw, 540px);
+  }
+
+  .hero-title {
+    justify-content: center;
+    font-size: clamp(92px, 29vw, 158px);
+    line-height: 0.80;
+  }
+
+  .hero-line {
+    /*
+      Narrow phone screens cannot fit the whole desktop width.
+      Centering + slight crop preserves the intentional poster look.
+    */
+    min-width: auto;
+    width: max-content;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .hero-portrait {
+    width: clamp(205px, 58vw, 300px);
+    max-height: 59%;
+    transform: translate(-50%, -45%);
+  }
+
+  .hero-name-row {
+    padding-top: 12px;
+    font-size: clamp(38px, 13vw, 62px);
+  }
+}
+
+/* Very narrow phones */
+@media (max-width: 390px) {
+  .main-nav {
+    gap: 10px;
+  }
+
+  .main-nav a {
+    font-size: 13px;
+  }
+
+  .site-logo {
+    width: 118px;
+  }
+
+  .hero-name-row {
+    font-size: 40px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .main-nav a {
+    transition: none;
+  }
+}
