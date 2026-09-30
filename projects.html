@@ -4,143 +4,181 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Projects | Pragathi Ilango</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- shared first, page-specific overrides second -->
   <link rel="stylesheet" href="shared.css">
   <link rel="stylesheet" href="projects.css">
 </head>
+
 <body class="projects-page">
-  <header class="site-header projects-header">
-    <a class="site-logo-link" href="index.html" aria-label="Pragathi Ilango home">
-      <img class="site-logo" src="assets/images/pi_logo.svg" alt="Pragathi Ilango">
+  <header class="projects-header">
+    <a class="projects-logo-link" href="index.html" aria-label="Pragathi Ilango home">
+      <img class="projects-logo" src="assets/images/pi_logo.svg" alt="Pragathi Ilango">
     </a>
-    <nav class="main-nav" aria-label="Primary navigation">
+
+    <nav class="projects-nav" aria-label="Primary navigation">
       <a href="about.html">About</a>
       <a href="playground.html">Playground</a>
       <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
     </nav>
-    <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false">
+
+    <button class="projects-menu" type="button" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </header>
 
   <main>
-    <section class="project-story" aria-label="Projects through the years">
-      <div class="project-track" id="projectTrack" tabindex="0">
+    <section class="horizontal-shell" aria-label="Projects timeline">
+      <div class="horizontal-scroll" id="projectTimeline" tabindex="0">
+        <div class="horizontal-track">
 
-        <section class="story-panel chapter-panel" id="year-2022" data-year="2022">
-          <div class="chapter-kicker">CHAPTER III</div>
-          <div class="chapter-bottom">
-            <p class="chapter-label">WHAT I DO?</p>
-            <h1>Designing digital experiences with clarity, structure, and intention.</h1>
-            <p class="chapter-copy">A timeline of the work that shaped how I design, build, test, and think.</p>
-            <div class="year-jump" aria-label="Jump to project year">
-              <button type="button" data-target-year="2022">2022</button>
-              <button type="button" data-target-year="2023">2023</button>
-              <button type="button" data-target-year="2024">2024</button>
-              <button type="button" data-target-year="2025">2025</button>
-              <button type="button" data-target-year="2026">2026</button>
+          <!-- INTRO / 2022 -->
+          <section class="timeline-panel intro-panel year-start" id="year-2022" data-year="2022">
+            <div class="year-kicker">2022</div>
+
+            <div class="intro-bottom">
+              <p class="intro-copy">
+                A timeline of the work that shaped how I design, build, test, and think.
+              </p>
+
+              <div class="year-jump" aria-label="Jump to year">
+                <button type="button" data-target="year-2022" class="active">2022</button>
+                <button type="button" data-target="year-2023">2023</button>
+                <button type="button" data-target="year-2024">2024</button>
+                <button type="button" data-target="year-2025">2025</button>
+                <button type="button" data-target="year-2026">2026</button>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <article class="story-panel project-panel" data-year="2022">
-          <div class="panel-number">01</div>
-          <div class="project-visual"><div class="visual-placeholder">project image</div></div>
-          <div class="project-meta">
-            <h2>SNACK ON</h2>
-            <p>Early interface and visual design work exploring hierarchy, interaction, and presentation.</p>
-            <a class="project-link" href="#">View project <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
+          <!-- PROJECT 01 -->
+          <article class="timeline-panel project-panel">
+            <div class="project-number">01</div>
 
-        <article class="story-panel project-panel" data-year="2022">
-          <div class="panel-number">02</div>
-          <div class="project-visual"><div class="visual-placeholder">project image</div></div>
-          <div class="project-meta">
-            <h2>FRONT-END DESIGN</h2>
-            <p>Responsive implementation work translating visual direction into real interfaces.</p>
-            <a class="project-link" href="#">View project <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
+            <div class="project-preview" aria-hidden="true">
+              <div class="project-preview-placeholder">project image</div>
+            </div>
 
-        <div class="year-marker story-panel" id="year-2023" data-year="2023"><span>2023</span></div>
+            <div class="project-copy">
+              <h2>SNACK ON</h2>
+              <p>Early interface and visual design work exploring hierarchy, interaction, and presentation.</p>
+            </div>
+          </article>
 
-        <article class="story-panel project-panel" data-year="2023">
-          <div class="panel-number">03</div>
-          <div class="project-visual"><div class="visual-placeholder">project image</div></div>
-          <div class="project-meta">
-            <h2>RESEARCH WEB EXPERIENCE</h2>
-            <p>Information architecture and interface work for research-focused digital content.</p>
-            <a class="project-link" href="#">View project <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
+          <!-- PROJECT 02 -->
+          <article class="timeline-panel project-panel">
+            <div class="project-number">02</div>
 
-        <div class="year-marker story-panel" id="year-2024" data-year="2024"><span>2024</span></div>
+            <div class="project-preview" aria-hidden="true">
+              <div class="project-preview-placeholder">project image</div>
+            </div>
 
-        <article class="story-panel project-panel" data-year="2024">
-          <div class="panel-number">04</div>
-          <div class="project-visual"><div class="visual-placeholder">project image</div></div>
-          <div class="project-meta">
-            <h2>UNDERSTANDING PREJUDICE</h2>
-            <p>A large-scale redesign balancing accessibility, dense content, and a clearer visual system.</p>
-            <a class="project-link" href="#">View project <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
+            <div class="project-copy">
+              <h2>FRONT-END DESIGN &amp; DEVELOPMENT</h2>
+              <p>Responsive implementation work translating design direction into real interfaces.</p>
+            </div>
+          </article>
 
-        <div class="year-marker story-panel" id="year-2025" data-year="2025"><span>2025</span></div>
+          <!-- 2023 -->
+          <section class="timeline-panel year-marker" id="year-2023" data-year="2023">
+            <div class="year-kicker">2023</div>
+            <div class="year-note">More systems, more structure, more real-world constraints.</div>
+          </section>
 
-        <article class="story-panel project-panel" data-year="2025">
-          <div class="panel-number">05</div>
-          <div class="project-visual"><div class="visual-placeholder">project image</div></div>
-          <div class="project-meta">
-            <h2>ACCESSIBLE CONTENT SYSTEM</h2>
-            <p>Reusable editorial patterns for multilingual, accessibility-minded web content.</p>
-            <a class="project-link" href="#">View project <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
+          <article class="timeline-panel project-panel">
+            <div class="project-number">03</div>
+            <div class="project-preview" aria-hidden="true">
+              <div class="project-preview-placeholder">project image</div>
+            </div>
+            <div class="project-copy">
+              <h2>RESEARCH WEB EXPERIENCE</h2>
+              <p>Clearer information architecture and hierarchy for research-focused content.</p>
+            </div>
+          </article>
 
-        <div class="year-marker story-panel" id="year-2026" data-year="2026"><span>2026</span></div>
+          <!-- 2024 -->
+          <section class="timeline-panel year-marker" id="year-2024" data-year="2024">
+            <div class="year-kicker">2024</div>
+            <div class="year-note">Accessibility, content systems, and larger-scale web work.</div>
+          </section>
 
-        <article class="story-panel project-panel" data-year="2026">
-          <div class="panel-number">06</div>
-          <div class="project-visual"><div class="visual-placeholder">project image</div></div>
-          <div class="project-meta">
-            <h2>KLAY IDENTITY EXPLORATION</h2>
-            <p>Concept-led identity work exploring growth, transformation, and modular forms.</p>
-            <a class="project-link" href="#">View project <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
+          <article class="timeline-panel project-panel">
+            <div class="project-number">04</div>
+            <div class="project-preview" aria-hidden="true">
+              <div class="project-preview-placeholder">project image</div>
+            </div>
+            <div class="project-copy">
+              <h2>UNDERSTANDING PREJUDICE</h2>
+              <p>A large-scale redesign balancing accessibility, content density, and visual clarity.</p>
+            </div>
+          </article>
 
-        <article class="story-panel project-panel" data-year="2026">
-          <div class="panel-number">07</div>
-          <div class="project-visual"><div class="visual-placeholder">project image</div></div>
-          <div class="project-meta">
-            <h2>PORTFOLIO SYSTEM</h2>
-            <p>A playful front-end system combining visual storytelling, motion, and interaction.</p>
-            <a class="project-link" href="#">View project <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
+          <!-- 2025 -->
+          <section class="timeline-panel year-marker" id="year-2025" data-year="2025">
+            <div class="year-kicker">2025</div>
+            <div class="year-note">Reusable systems, multilingual content, and interaction polish.</div>
+          </section>
 
-        <section class="story-panel end-panel">
-          <div>
-            <p class="hand-note">still making things</p>
-            <h2>More soon.</h2>
-            <p>You made it to the end of the timeline. Keep scrolling down.</p>
-          </div>
-        </section>
+          <article class="timeline-panel project-panel">
+            <div class="project-number">05</div>
+            <div class="project-preview" aria-hidden="true">
+              <div class="project-preview-placeholder">project image</div>
+            </div>
+            <div class="project-copy">
+              <h2>ACCESSIBLE CONTENT SYSTEM</h2>
+              <p>Reusable patterns for complex editorial content and multilingual pages.</p>
+            </div>
+          </article>
 
+          <!-- 2026 -->
+          <section class="timeline-panel year-marker" id="year-2026" data-year="2026">
+            <div class="year-kicker">2026</div>
+            <div class="year-note">Brand systems, motion, experimentation, and this portfolio.</div>
+          </section>
+
+          <article class="timeline-panel project-panel">
+            <div class="project-number">06</div>
+            <div class="project-preview" aria-hidden="true">
+              <div class="project-preview-placeholder">project image</div>
+            </div>
+            <div class="project-copy">
+              <h2>KLAY IDENTITY EXPLORATION</h2>
+              <p>Concept-led identity work exploring growth, transformation, and modular forms.</p>
+            </div>
+          </article>
+
+          <article class="timeline-panel project-panel final-panel">
+            <div class="project-number">07</div>
+            <div class="project-preview" aria-hidden="true">
+              <div class="project-preview-placeholder">project image</div>
+            </div>
+            <div class="project-copy">
+              <h2>PORTFOLIO SYSTEM</h2>
+              <p>A playful but structured portfolio combining interaction, development, and visual storytelling.</p>
+            </div>
+          </article>
+
+        </div>
       </div>
-      <div class="horizontal-progress" aria-hidden="true"><span id="horizontalProgress"></span></div>
+
+      <div class="horizontal-progress" aria-hidden="true">
+        <span id="timelineProgress"></span>
+      </div>
     </section>
   </main>
 
-  <footer class="site-footer projects-footer">
+  <!-- Footer appears only after the horizontal timeline reaches the end
+       and the user continues scrolling down. -->
+  <footer class="site-footer">
     <div class="footer-display">
       <img class="footer-cue-svg" src="assets/images/This_is_your_cue.svg" alt="This is your cue">
       <p>say hi</p>
     </div>
+
     <div class="footer-contact">
       <div class="footer-socials">
         <a href="#" aria-label="LinkedIn"><img src="assets/images/linkedin.svg" alt=""></a>
@@ -150,6 +188,7 @@
       </div>
       <a class="footer-email" href="mailto:pragathi.ilango@gmail.com">pragathi.ilango@gmail.com</a>
     </div>
+
     <div class="footer-bottom">
       <p>© Pragathi Ilango 2026</p>
       <p>Made with love and a sugar rush 🍰</p>
