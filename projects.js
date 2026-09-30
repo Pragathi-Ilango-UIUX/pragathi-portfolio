@@ -3,12 +3,16 @@ const progress = document.getElementById("timelineProgress");
 const menu = document.querySelector(".projects-menu");
 const nav = document.querySelector(".projects-nav");
 const yearButtons = document.querySelectorAll(".year-jump button");
+const yearSections = [...document.querySelectorAll("[data-year]")];
+const projectPanels = [...document.querySelectorAll(".project-panel")];
 
 menu?.addEventListener("click", () => {
   const open = menu.getAttribute("aria-expanded") === "true";
   menu.setAttribute("aria-expanded", String(!open));
   nav?.classList.toggle("mobile-open", !open);
 });
+
+const isMobileLayout = () => window.matchMedia("(max-width: 700px)").matches;
 
 if (scroller) {
   let targetX = scroller.scrollLeft;
@@ -18,6 +22,7 @@ if (scroller) {
   const maxScroll = () => Math.max(0, scroller.scrollWidth - scroller.clientWidth);
 
   function updateProgress() {
+    if (isMobileLayout()) return;
     const max = maxScroll();
     const ratio = max > 0 ? scroller.scrollLeft / max : 0;
     if (progress) progress.style.width = `${ratio * 100}%`;
@@ -49,6 +54,8 @@ if (scroller) {
   scroller.addEventListener(
     "wheel",
     (event) => {
+      if (isMobileLayout()) return;
+
       const dominantDelta =
         Math.abs(event.deltaY) >= Math.abs(event.deltaX)
           ? event.deltaY
@@ -58,8 +65,6 @@ if (scroller) {
       const atStart = scroller.scrollLeft <= 1;
       const atEnd = scroller.scrollLeft >= max - 1;
 
-      // Once the timeline has reached either end, allow normal vertical
-      // page scrolling so the footer can be reached naturally.
       if ((dominantDelta < 0 && atStart) || (dominantDelta > 0 && atEnd)) {
         return;
       }
@@ -76,22 +81,21 @@ if (scroller) {
     { passive: false }
   );
 
-  // Native horizontal trackpad gestures / scrollbar changes still update UI.
   scroller.addEventListener("scroll", () => {
-    if (rafId === null) {
+    if (!isMobileLayout() && rafId === null) {
       targetX = scroller.scrollLeft;
       currentX = scroller.scrollLeft;
     }
     updateProgress();
+    syncYearButtons();
   });
 
-  // Mouse / pen drag.
   let dragging = false;
   let startX = 0;
   let startScroll = 0;
 
   scroller.addEventListener("pointerdown", (event) => {
-    if (event.pointerType === "touch") return;
+    if (isMobileLayout() || event.pointerType === "touch") return;
 
     dragging = true;
     startX = event.clientX;
@@ -132,8 +136,9 @@ if (scroller) {
   scroller.addEventListener("pointercancel", stopDragging);
   scroller.addEventListener("lostpointercapture", stopDragging);
 
-  // Keyboard accessibility.
   scroller.addEventListener("keydown", (event) => {
+    if (isMobileLayout()) return;
+
     const jump = Math.max(260, scroller.clientWidth * 0.55);
 
     if (event.key === "ArrowRight") {
@@ -147,30 +152,9 @@ if (scroller) {
     }
   });
 
-  // Year bubbles.
-  yearButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const target = document.getElementById(button.dataset.target);
-      if (!target) return;
+  function syncYearButtons() {
+    if (isMobileLayout()) return;
 
-      const left = target.offsetLeft;
-      targetX = left;
-      currentX = scroller.scrollLeft;
-
-      yearButtons.forEach((item) => item.classList.remove("active"));
-      button.classList.add("active");
-
-      scroller.scrollTo({
-        left,
-        behavior: "smooth"
-      });
-    });
-  });
-
-  // Keep selected year bubble in sync while scrolling.
-  const yearSections = [...document.querySelectorAll("[data-year]")];
-
-  function syncYearButton() {
     const center = scroller.scrollLeft + scroller.clientWidth * 0.35;
     let selected = yearSections[0];
 
@@ -188,8 +172,104 @@ if (scroller) {
     });
   }
 
-  scroller.addEventListener("scroll", syncYearButton);
+  yearButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const target = document.getElementById(button.dataset.target);
+      if (!target) return;
+
+      if (isMobileLayout()) {
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+        return;
+      }
+
+      // offsetLeft is relative to the horizontal track.
+      const left = target.offsetLeft;
+
+      targetX = left;
+      currentX = scroller.scrollLeft;
+
+      scroller.scrollTo({
+        left,
+        behavior: "smooth"
+      });
+
+      // Keep ALL repeated year controls in sync.
+      yearButtons.forEach((item) => {
+        item.classList.toggle(
+          "active",
+          item.dataset.target === button.dataset.target
+        );
+      });
+    });
+  });
 
   updateProgress();
-  syncYearButton();
+  syncYearButtons();
 }
+
+/* ---------------------------------------------------------
+   MOBILE LONG PRESS
+   A long press selects a project and animates its orange fill.
+   The preview image remains visible on mobile at all times.
+   --------------------------------------------------------- */
+let longPressTimer = null;
+let longPressPanel = null;
+let longPressStartX = 0;
+let longPressStartY = 0;
+
+projectPanels.forEach((panel) => {
+  panel.addEventListener("touchstart", (event) => {
+    if (!isMobileLayout()) return;
+
+    const touch = event.touches[0];
+    longPressStartX = touch.clientX;
+    longPressStartY = touch.clientY;
+    longPressPanel = panel;
+
+    clearTimeout(longPressTimer);
+
+    longPressTimer = setTimeout(() => {
+      projectPanels.forEach((item) => {
+        if (item !== panel) item.classList.remove("is-selected");
+      });
+
+      panel.classList.toggle("is-selected");
+      longPressTimer = null;
+    }, 460);
+  }, { passive: true });
+
+  panel.addEventListener("touchmove", (event) => {
+    if (!longPressTimer) return;
+
+    const touch = event.touches[0];
+    const moved =
+      Math.abs(touch.clientX - longPressStartX) > 10 ||
+      Math.abs(touch.clientY - longPressStartY) > 10;
+
+    if (moved) {
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+    }
+  }, { passive: true });
+
+  panel.addEventListener("touchend", () => {
+    clearTimeout(longPressTimer);
+    longPressTimer = null;
+    longPressPanel = null;
+  });
+
+  panel.addEventListener("touchcancel", () => {
+    clearTimeout(longPressTimer);
+    longPressTimer = null;
+    longPressPanel = null;
+  });
+});
+
+window.addEventListener("resize", () => {
+  if (!isMobileLayout()) {
+    projectPanels.forEach((panel) => panel.classList.remove("is-selected"));
+  }
+});
