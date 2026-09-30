@@ -2,75 +2,160 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Projects | Pragathi Ilango</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="projects.css">
   <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="projects.css">
 </head>
-<body>
-<header class="site-header">
-  <a class="site-logo-link" href="index.html" aria-label="Pragathi Ilango home"><img class="site-logo" src="assets/images/pi_logo.svg" alt="Pragathi Ilango"></a>
-  <nav class="main-nav" aria-label="Primary navigation"><a href="about.html">About</a><a href="playground.html">Playground</a><a href="resume.pdf" target="_blank" rel="noopener">Resume</a></nav>
-  <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
-</header>
-<main>
-  <section class="projects-intro">
-    <p class="hand-note">the work, in order-ish</p>
-    <h1>Projects through the years.</h1>
-    <p>Selected UX, web, accessibility, identity, and front-end work from 2022 to now. Scroll sideways to move through the timeline.</p>
-  </section>
+<body class="projects-page">
+  <header class="site-header projects-header">
+    <a class="site-logo-link" href="index.html" aria-label="Pragathi Ilango home">
+      <img class="site-logo" src="assets/images/pi_logo.svg" alt="Pragathi Ilango">
+    </a>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="about.html">About</a>
+      <a href="playground.html">Playground</a>
+      <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
+    <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
 
-  <section class="timeline-shell" aria-label="Project timeline from 2022 to 2026">
-    <div class="timeline-scroll" id="projectTimeline" tabindex="0">
-      <div class="timeline-canvas">
-        <div class="year-grid" aria-hidden="true">
-          <div class="year-column"><span>2022</span></div>
-          <div class="year-column"><span>2023</span></div>
-          <div class="year-column"><span>2024</span></div>
-          <div class="year-column"><span>2025</span></div>
-          <div class="year-column"><span>2026</span></div>
-        </div>
+  <main>
+    <section class="project-story" aria-label="Projects through the years">
+      <div class="project-track" id="projectTrack" tabindex="0">
 
-        <article class="timeline-card card-a" style="--year:0;--month:1;--lane:0">
-          <div class="project-thumb"><span>project image</span></div>
-          <div class="project-body"><div class="project-date">MAR 2022</div><h2>Snack On</h2><p>An early visual + interface project that marks the beginning of this timeline.</p><div class="project-tags"><span>UI</span><span>Visual Design</span><span>Prototype</span></div><a class="project-arrow" href="#" aria-label="Open Snack On project">↗</a></div>
+        <section class="story-panel chapter-panel" id="year-2022" data-year="2022">
+          <div class="chapter-kicker">CHAPTER III</div>
+          <div class="chapter-bottom">
+            <p class="chapter-label">WHAT I DO?</p>
+            <h1>Designing digital experiences with clarity, structure, and intention.</h1>
+            <p class="chapter-copy">A timeline of the work that shaped how I design, build, test, and think.</p>
+            <div class="year-jump" aria-label="Jump to project year">
+              <button type="button" data-target-year="2022">2022</button>
+              <button type="button" data-target-year="2023">2023</button>
+              <button type="button" data-target-year="2024">2024</button>
+              <button type="button" data-target-year="2025">2025</button>
+              <button type="button" data-target-year="2026">2026</button>
+            </div>
+          </div>
+        </section>
+
+        <article class="story-panel project-panel" data-year="2022">
+          <div class="panel-number">01</div>
+          <div class="project-visual"><div class="visual-placeholder">project image</div></div>
+          <div class="project-meta">
+            <h2>SNACK ON</h2>
+            <p>Early interface and visual design work exploring hierarchy, interaction, and presentation.</p>
+            <a class="project-link" href="#">View project <span aria-hidden="true">↗</span></a>
+          </div>
         </article>
-        <article class="timeline-card card-b" style="--year:0;--month:8;--lane:1">
-          <div class="project-thumb"><span>project image</span></div>
-          <div class="project-body"><div class="project-date">OCT 2022</div><h2>Client Front-End Build</h2><p>Responsive interface work translating visual direction into implementation-ready pages.</p><div class="project-tags"><span>Front-End</span><span>Responsive</span></div><a class="project-arrow" href="#" aria-label="Open project">↗</a></div>
+
+        <article class="story-panel project-panel" data-year="2022">
+          <div class="panel-number">02</div>
+          <div class="project-visual"><div class="visual-placeholder">project image</div></div>
+          <div class="project-meta">
+            <h2>FRONT-END DESIGN</h2>
+            <p>Responsive implementation work translating visual direction into real interfaces.</p>
+            <a class="project-link" href="#">View project <span aria-hidden="true">↗</span></a>
+          </div>
         </article>
-        <article class="timeline-card card-c" style="--year:1;--month:3;--lane:0">
-          <div class="project-thumb"><span>project image</span></div>
-          <div class="project-body"><div class="project-date">MAY 2023</div><h2>Research Web Experience</h2><p>Clearer information architecture and visual hierarchy for research-focused content.</p><div class="project-tags"><span>UX</span><span>Web</span><span>Accessibility</span></div><a class="project-arrow" href="#" aria-label="Open project">↗</a></div>
+
+        <div class="year-marker story-panel" id="year-2023" data-year="2023"><span>2023</span></div>
+
+        <article class="story-panel project-panel" data-year="2023">
+          <div class="panel-number">03</div>
+          <div class="project-visual"><div class="visual-placeholder">project image</div></div>
+          <div class="project-meta">
+            <h2>RESEARCH WEB EXPERIENCE</h2>
+            <p>Information architecture and interface work for research-focused digital content.</p>
+            <a class="project-link" href="#">View project <span aria-hidden="true">↗</span></a>
+          </div>
         </article>
-        <article class="timeline-card card-d" style="--year:2;--month:2;--lane:1">
-          <div class="project-thumb"><span>project image</span></div>
-          <div class="project-body"><div class="project-date">APR 2024</div><h2>Understanding Prejudice</h2><p>A large-scale redesign balancing accessibility, content density, and a clearer visual system.</p><div class="project-tags"><span>UX</span><span>WordPress</span><span>WCAG</span></div><a class="project-arrow" href="#" aria-label="Open project">↗</a></div>
+
+        <div class="year-marker story-panel" id="year-2024" data-year="2024"><span>2024</span></div>
+
+        <article class="story-panel project-panel" data-year="2024">
+          <div class="panel-number">04</div>
+          <div class="project-visual"><div class="visual-placeholder">project image</div></div>
+          <div class="project-meta">
+            <h2>UNDERSTANDING PREJUDICE</h2>
+            <p>A large-scale redesign balancing accessibility, dense content, and a clearer visual system.</p>
+            <a class="project-link" href="#">View project <span aria-hidden="true">↗</span></a>
+          </div>
         </article>
-        <article class="timeline-card card-e" style="--year:3;--month:4;--lane:0">
-          <div class="project-thumb"><span>project image</span></div>
-          <div class="project-body"><div class="project-date">JUN 2025</div><h2>Accessible Content System</h2><p>Reusable interface patterns for complex editorial content and multilingual pages.</p><div class="project-tags"><span>Design System</span><span>Accessibility</span></div><a class="project-arrow" href="#" aria-label="Open project">↗</a></div>
+
+        <div class="year-marker story-panel" id="year-2025" data-year="2025"><span>2025</span></div>
+
+        <article class="story-panel project-panel" data-year="2025">
+          <div class="panel-number">05</div>
+          <div class="project-visual"><div class="visual-placeholder">project image</div></div>
+          <div class="project-meta">
+            <h2>ACCESSIBLE CONTENT SYSTEM</h2>
+            <p>Reusable editorial patterns for multilingual, accessibility-minded web content.</p>
+            <a class="project-link" href="#">View project <span aria-hidden="true">↗</span></a>
+          </div>
         </article>
-        <article class="timeline-card card-f" style="--year:4;--month:1;--lane:1">
-          <div class="project-thumb"><span>project image</span></div>
-          <div class="project-body"><div class="project-date">MAR 2026</div><h2>KLAY Identity Exploration</h2><p>Concept-led visual identity work exploring growth, transformation, and modular forms.</p><div class="project-tags"><span>Branding</span><span>Identity</span></div><a class="project-arrow" href="#" aria-label="Open project">↗</a></div>
+
+        <div class="year-marker story-panel" id="year-2026" data-year="2026"><span>2026</span></div>
+
+        <article class="story-panel project-panel" data-year="2026">
+          <div class="panel-number">06</div>
+          <div class="project-visual"><div class="visual-placeholder">project image</div></div>
+          <div class="project-meta">
+            <h2>KLAY IDENTITY EXPLORATION</h2>
+            <p>Concept-led identity work exploring growth, transformation, and modular forms.</p>
+            <a class="project-link" href="#">View project <span aria-hidden="true">↗</span></a>
+          </div>
         </article>
-        <article class="timeline-card card-g" style="--year:4;--month:7;--lane:0">
-          <div class="project-thumb"><span>project image</span></div>
-          <div class="project-body"><div class="project-date">SEP 2026</div><h2>Portfolio System</h2><p>A playful but structured portfolio combining interaction, development, and visual storytelling.</p><div class="project-tags"><span>UI/UX</span><span>Front-End</span><span>Motion</span></div><a class="project-arrow" href="#" aria-label="Open project">↗</a></div>
+
+        <article class="story-panel project-panel" data-year="2026">
+          <div class="panel-number">07</div>
+          <div class="project-visual"><div class="visual-placeholder">project image</div></div>
+          <div class="project-meta">
+            <h2>PORTFOLIO SYSTEM</h2>
+            <p>A playful front-end system combining visual storytelling, motion, and interaction.</p>
+            <a class="project-link" href="#">View project <span aria-hidden="true">↗</span></a>
+          </div>
         </article>
+
+        <section class="story-panel end-panel">
+          <div>
+            <p class="hand-note">still making things</p>
+            <h2>More soon.</h2>
+            <p>You made it to the end of the timeline. Keep scrolling down.</p>
+          </div>
+        </section>
+
       </div>
+      <div class="horizontal-progress" aria-hidden="true"><span id="horizontalProgress"></span></div>
+    </section>
+  </main>
+
+  <footer class="site-footer projects-footer">
+    <div class="footer-display">
+      <img class="footer-cue-svg" src="assets/images/This_is_your_cue.svg" alt="This is your cue">
+      <p>say hi</p>
     </div>
-    <p class="scroll-hint">drag / scroll →</p>
-  </section>
-</main>
-<footer class="site-footer">
-  <div class="footer-display"><img class="footer-cue-svg" src="assets/images/This_is_your_cue.svg" alt="This is your cue"><p>say hi</p></div>
-  <div class="footer-contact"><div class="footer-socials"><a href="#" aria-label="LinkedIn"><img src="assets/images/linkedin.svg" alt=""></a><a href="#" aria-label="Behance"><img src="assets/images/behance.svg" alt=""></a><a href="#" aria-label="Dribbble"><img src="assets/images/dribbble.svg" alt=""></a><a href="resume.pdf" aria-label="Resume"><img src="assets/images/resume.svg" alt=""></a></div><a class="footer-email" href="mailto:pragathi.ilango@gmail.com">pragathi.ilango@gmail.com</a></div>
-  <div class="footer-bottom"><p>© Pragathi Ilango 2026</p><p>Made with love and a sugar rush 🍰</p></div>
-</footer>
-<script src="projects.js"></script>
-</body></html>
+    <div class="footer-contact">
+      <div class="footer-socials">
+        <a href="#" aria-label="LinkedIn"><img src="assets/images/linkedin.svg" alt=""></a>
+        <a href="#" aria-label="Behance"><img src="assets/images/behance.svg" alt=""></a>
+        <a href="#" aria-label="Dribbble"><img src="assets/images/dribbble.svg" alt=""></a>
+        <a href="resume.pdf" aria-label="Resume"><img src="assets/images/resume.svg" alt=""></a>
+      </div>
+      <a class="footer-email" href="mailto:pragathi.ilango@gmail.com">pragathi.ilango@gmail.com</a>
+    </div>
+    <div class="footer-bottom">
+      <p>© Pragathi Ilango 2026</p>
+      <p>Made with love and a sugar rush 🍰</p>
+    </div>
+  </footer>
+
+  <script src="projects.js"></script>
+</body>
+</html>
