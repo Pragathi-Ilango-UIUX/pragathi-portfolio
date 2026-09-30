@@ -11,6 +11,16 @@
 }
 
 .site-header{z-index:50;}
+.site-logo-link{display:inline-flex;align-items:center;}
+.site-logo{display:block;width:clamp(150px,13vw,220px);height:auto;}
+.main-nav{gap:clamp(22px,3vw,46px);}
+.main-nav a{position:relative;font-family:"Playfair Display",Georgia,serif;font-size:clamp(17px,1.25vw,21px);text-decoration:none;}
+.main-nav a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--nav-accent,var(--orange,var(--portfolio-orange)));transform:scaleX(0);transform-origin:left;transition:transform .25s ease;}
+.main-nav a:hover::after,.main-nav a:focus-visible::after,.main-nav a.active::after,.main-nav a[aria-current="page"]::after{transform:scaleX(1);}
+.main-nav a:focus-visible{outline:2px solid currentColor;outline-offset:9px;}
+@media(max-width:900px){.site-logo{width:clamp(140px,22vw,190px);}}
+@media(max-width:620px){.site-logo{width:122px;}}
+@media(prefers-reduced-motion:reduce){.main-nav a,.main-nav a::after{transition:none;}}
 .main-nav a{transition:opacity .2s ease, transform .2s ease;}
 .main-nav a:hover{opacity:.7;transform:translateY(-1px);}
 
