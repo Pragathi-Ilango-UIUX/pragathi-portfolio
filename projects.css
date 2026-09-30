@@ -20,68 +20,21 @@ body.projects-page {
 
 /* ---------- HEADER ---------- */
 
-.projects-header {
-  position: relative;
-  z-index: 50;
-  height: 76px;
-  width: 100%;
-  padding: 0 clamp(22px, 3vw, 48px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #050505;
-  border-bottom: 1px solid rgba(247, 241, 232, 0.15);
-}
 
-.projects-logo-link {
-  display: inline-flex;
-  align-items: center;
-}
 
-.projects-logo {
-  display: block;
-  width: clamp(145px, 11vw, 185px);
-  height: auto;
-}
 
-.projects-nav {
-  display: flex;
-  align-items: center;
-  gap: clamp(28px, 3vw, 52px);
-  margin-left: auto;
-}
 
-.projects-nav a {
-  position: relative;
-  color: #f7f1e8;
-  text-decoration: none;
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(18px, 1.35vw, 24px);
-  line-height: 1;
-  padding: 10px 0 11px;
-}
 
-.projects-nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 4px;
-  width: 100%;
-  height: 1px;
-  background: #ff9138;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .25s ease;
-}
 
-.projects-nav a:hover::after,
-.projects-nav a:focus-visible::after {
-  transform: scaleX(1);
-}
 
-.projects-menu {
-  display: none;
-}
+
+
+
+
+
+
+
+
 
 /* ---------- HORIZONTAL TIMELINE ---------- */
 
@@ -320,18 +273,14 @@ body.projects-page {
 /* ---------- RESPONSIVE ---------- */
 
 @media (max-width: 900px) {
-  .projects-header {
-    height: 70px;
-  }
+  
 
   .horizontal-scroll {
     height: calc(100svh - 70px);
     min-height: 590px;
   }
 
-  .projects-logo {
-    width: 145px;
-  }
+  
 
   .timeline-panel {
     flex-basis: 72vw;
@@ -350,50 +299,17 @@ body.projects-page {
 }
 
 @media (max-width: 700px) {
-  .projects-header {
-    height: 64px;
-    padding-inline: 18px;
-  }
+  
 
-  .projects-logo {
-    width: 126px;
-  }
+  
 
-  .projects-nav {
-    position: absolute;
-    top: 64px;
-    right: 0;
-    left: 0;
-    display: none;
-    padding: 22px;
-    background: #050505;
-    border-bottom: 1px solid rgba(247, 241, 232, .15);
-  }
+  
 
-  .projects-nav.mobile-open {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
+  
 
-  .projects-menu {
-    width: 34px;
-    height: 34px;
-    border: 0;
-    background: transparent;
-    display: grid;
-    align-content: center;
-    gap: 5px;
-    padding: 4px;
-    cursor: pointer;
-  }
+  
 
-  .projects-menu span {
-    display: block;
-    height: 1px;
-    width: 100%;
-    background: #f7f1e8;
-  }
+  
 
   .horizontal-scroll {
     height: calc(100svh - 64px);

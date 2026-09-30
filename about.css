@@ -66,69 +66,19 @@ button {
    HEADER
    ========================================================= */
 
-.site-header {
-  position: absolute;
-  inset: 0 0 auto 0;
-  z-index: 50;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 
-  padding:
-    clamp(18px, 2vw, 30px)
-    var(--page-pad);
-}
 
-.site-logo {
-  width: clamp(145px, 14vw, 220px);
-  height: auto;
-}
 
-.main-nav {
-  display: flex;
-  align-items: center;
-  gap: clamp(24px, 3.5vw, 54px);
 
-  color: var(--orange);
 
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(16px, 1.35vw, 22px);
-}
 
-.main-nav a {
-  transition:
-    opacity .22s ease,
-    transform .22s ease;
-}
 
-.main-nav a:hover,
-.main-nav a.active {
-  opacity: .72;
-  transform: translateY(-1px);
-}
 
-.menu-button {
-  display: none;
 
-  width: 44px;
-  height: 38px;
 
-  border: 0;
-  background: transparent;
-  padding: 0;
-}
 
-.menu-button span {
-  display: block;
 
-  width: 30px;
-  height: 2px;
-
-  margin: 6px auto;
-
-  background: var(--orange);
-}
 
 
 /* =========================================================
@@ -1052,31 +1002,11 @@ button {
 
 @media (max-width: 840px) {
 
-  .main-nav {
-    display: none;
-  }
+  
 
-  .main-nav.mobile-open {
-    position: absolute;
+  
 
-    top: 72px;
-    right: var(--page-pad);
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-
-    padding: 18px 20px;
-
-    background: var(--cream);
-
-    box-shadow:
-      0 12px 24px rgba(0, 0, 0, .12);
-  }
-
-  .menu-button {
-    display: block;
-  }
+  
 
 
   /* HERO */

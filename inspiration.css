@@ -9,19 +9,9 @@ body {
   color: #171717;
   font-family: Arial, Helvetica, sans-serif;
 }
-.inspiration-page .site-header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  min-height: clamp(72px, 5.7vw, 94px);
-  padding: 0 var(--page-pad);
-  background: transparent;
-  color: var(--nav-accent);
-}
-.inspiration-page .main-nav { display: flex; }
-.inspiration-page .menu-button { display: none; }
+
+
+
 .inspiration-hero {
   padding: clamp(48px, 5vw, 80px) var(--page-pad) clamp(64px, 7vw, 100px);
   color: #fff7de;
@@ -37,14 +27,14 @@ body {
 .hero-hand {
   grid-column: 1 / -1;
   margin: 0;
-  font-family: 'Caveat', cursive;
+  font-family: "Caveat", cursive;
   color: var(--nav-accent);
   font-size: clamp(27px, 2.7vw, 40px);
 }
 .hero-wrap h1 {
   margin: 0;
   max-width: 20ch;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: "Playfair Display", Georgia, serif;
   font-size: clamp(40px, 4.7vw, 70px);
   font-weight: 400;
   line-height: 1.08;
@@ -73,7 +63,7 @@ body {
 .inspo-grid h2 {
   margin: 0 0 18px;
   color: var(--nav-accent);
-  font: 400 clamp(24px, 2vw, 29px)/1.2 'Playfair Display', Georgia, serif;
+  font: 400 clamp(24px, 2vw, 29px)/1.2 "Playfair Display", Georgia, serif;
 }
 .inspo-grid ul { margin: 0; padding-left: 1.25em; font-size: 15px; line-height: 1.85; }
 .inspo-grid li { padding-left: .2em; }
@@ -93,7 +83,7 @@ body {
 .section-hand {
   margin: 0 0 28px;
   color: #b9530d;
-  font: 400 clamp(30px, 2.9vw, 42px)/1.2 'Caveat', cursive;
+  font: 400 clamp(30px, 2.9vw, 42px)/1.2 "Caveat", cursive;
 }
 .book-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .book-item {
@@ -113,7 +103,7 @@ body {
   height: 100%;
   border: 1px solid #d9cebc;
   color: #716557;
-  font: 26px 'Caveat', cursive;
+  font: 26px "Caveat", cursive;
 }
 .book-action { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 12px; font-size: 13px; }
 .book-arrow { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid #ff9138; border-radius: 50%; transition: background .25s ease; }
@@ -121,7 +111,7 @@ body {
 .book-item:hover .book-arrow, .book-item:focus-visible .book-arrow { background: #ff9138; }
 .writing-list { border-top: 1px solid #d9cebc; }
 .writing-list a { display: grid; grid-template-columns: minmax(0, 1fr) 24px; align-items: center; gap: 20px; padding: 28px 0; border-bottom: 1px solid #d9cebc; color: #171717; text-decoration: none; }
-.writing-list h3 { margin: 0 0 10px; font: 400 clamp(23px, 2vw, 29px)/1.25 'Playfair Display', Georgia, serif; }
+.writing-list h3 { margin: 0 0 10px; font: 400 clamp(23px, 2vw, 29px)/1.25 "Playfair Display", Georgia, serif; }
 .writing-list p { margin: 0; font-size: 15px; line-height: 1.6; color: #555; }
 .writing-list a > span { font-size: 24px; transition: transform .25s ease; }
 .writing-list a:hover > span, .writing-list a:focus-visible > span { transform: translate(3px, -3px); }
@@ -135,11 +125,11 @@ body {
   .book-grid { max-width: 520px; }
 }
 @media (max-width: 620px) {
-  .inspiration-page .site-header { min-height: 66px; flex-wrap: wrap; gap: 0 24px; }
-  .inspiration-page .main-nav { display: none; }
-  .inspiration-page .main-nav.mobile-open { display: flex; order: 3; flex-basis: 100%; flex-direction: column; align-items: flex-start; gap: 20px; padding: 14px 0 24px; }
-  .inspiration-page .menu-button { display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 44px; height: 44px; border: 0; background: transparent; padding: 8px; }
-  .inspiration-page .menu-button span { width: 100%; height: 2px; background: var(--nav-accent); }
+  
+  
+  
+  
+  
   .inspo-grid { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 480px) {
