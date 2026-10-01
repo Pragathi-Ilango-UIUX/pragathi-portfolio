@@ -9,35 +9,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- shared first, page-specific overrides second -->
-  <link rel="stylesheet" href="shared.css">
-  <link rel="stylesheet" href="projects.css">
+<link rel="stylesheet" href="projects.css">
+<link rel="stylesheet" href="shared.css">
 </head>
 
-<body class="projects-page">
-  <header class="site-header">
-  <a class="site-logo-link" href="index.html" aria-label="Pragathi Ilango home">
-    <span class="site-logo-mark" aria-hidden="true"></span>
-  </a>
-
-  <nav class="main-nav" aria-label="Primary navigation">
-    <a href="projects.html">Work</a>
-    <a href="about.html">About</a>
-    <a href="playground.html">Playground</a>
-    <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
-  </nav>
-
-  <button
-    class="menu-button"
-    type="button"
-    aria-label="Open menu"
-    aria-expanded="false"
-  >
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-</header>
+<body class="projects-page" data-header-theme="dark-cream" data-page="work">
+  <div data-shared-header></div>
 
   <main>
     <section class="horizontal-shell" aria-label="Projects timeline">
@@ -221,28 +198,9 @@
 
   <!-- Footer appears only after the horizontal timeline reaches the end
        and the user continues scrolling down. -->
-  <footer class="site-footer">
-    <div class="footer-display">
-      <img class="footer-cue-svg" src="assets/images/This_is_your_cue.svg" alt="This is your cue">
-      <p>say hi</p>
-    </div>
+  <div data-shared-footer></div>
 
-    <div class="footer-contact">
-      <div class="footer-socials">
-        <a href="#" aria-label="LinkedIn"><img src="assets/images/linkedin.svg" alt=""></a>
-        <a href="#" aria-label="Behance"><img src="assets/images/behance.svg" alt=""></a>
-        <a href="#" aria-label="Dribbble"><img src="assets/images/dribbble.svg" alt=""></a>
-        <a href="resume.pdf" aria-label="Resume"><img src="assets/images/resume.svg" alt=""></a>
-      </div>
-      <a class="footer-email" href="mailto:ilango.pragathi@gmail.com">pragathi.ilango@gmail.com</a>
-    </div>
-
-    <div class="footer-bottom">
-      <p>© Pragathi Ilango 2026</p>
-      <p>Made with love and a sugar rush 🍰</p>
-    </div>
-  </footer>
-
-  <script src="projects.js"></script>
+  <script src="shared.js"></script>
+<script src="projects.js"></script>
 </body>
 </html>

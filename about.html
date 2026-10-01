@@ -9,36 +9,15 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,500;1,500&amp;display=swap" rel="stylesheet"/>
 <link href="about.css" rel="stylesheet"/>
-<link href="shared.css" rel="stylesheet"/></head>
-<body>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body class="about-page" data-header-theme="dark-orange" data-page="about">
 <!-- =====================================================
 
        HEADER
 
        \===================================================== -->
-<header class="site-header">
-  <a class="site-logo-link" href="index.html" aria-label="Pragathi Ilango home">
-    <span class="site-logo-mark" aria-hidden="true"></span>
-  </a>
-
-  <nav class="main-nav" aria-label="Primary navigation">
-    <a href="projects.html">Work</a>
-    <a href="about.html">About</a>
-    <a href="playground.html">Playground</a>
-    <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
-  </nav>
-
-  <button
-    class="menu-button"
-    type="button"
-    aria-label="Open menu"
-    aria-expanded="false"
-  >
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-</header>
+<div data-shared-header></div>
 <main>
 <!-- =====================================================
 
@@ -389,41 +368,8 @@
        FOOTER — same asset structure as homepage
 
        \===================================================== -->
-<footer class="site-footer">
-<div class="footer-display">
-<img alt="This is your cue" class="footer-cue-svg" src="assets/images/This_is_your_cue.svg"/>
-<p>
-
-        say hi
-
-      </p>
-</div>
-<div class="footer-contact">
-<div class="footer-socials">
-<a aria-label="LinkedIn" href="#">
-<img alt="" src="assets/images/linkedin.svg"/>
-</a>
-<a aria-label="Behance" href="#">
-<img alt="" src="assets/images/behance.svg"/>
-</a>
-<a aria-label="Dribbble" href="#">
-<img alt="" src="assets/images/dribbble.svg"/>
-</a>
-<a aria-label="Resume" href="resume.pdf">
-<img alt="" src="assets/images/resume.svg"/>
-</a>
-</div>
-<a class="footer-email" href="mailto:ilango.pragathi@gmail.com">
-
-        pragathi.ilango@gmail.com
-
-      </a>
-</div>
-<div class="footer-bottom">
-<p>© Pragathi Ilango 2026</p>
-<p>Made with love and a sugar rush 🍰</p>
-</div>
-</footer>
+<div data-shared-footer></div>
+<script src="shared.js"></script>
 <script src="about.js"></script>
 </body>
 </html>
