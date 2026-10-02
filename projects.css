@@ -265,10 +265,7 @@ body.projects-page {
    These only prevent the page from inheriting a white background.
    ----------------------------------------------- */
 
-.projects-page .site-footer {
-  position: relative;
-  z-index: 5;
-}
+
 
 /* ---------- RESPONSIVE ---------- */
 

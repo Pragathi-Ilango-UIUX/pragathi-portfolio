@@ -3,7 +3,7 @@
 
   const CONFIG = {
     resumeUrl: "assets/files/Pragathi_Ilango_Resume.pdf",
-    email: "pragathi.ilango@gmail.com",
+    email: "ilango.praagthi@gmail.com",
     social: {
       linkedin: "#",
       behance: "#",
