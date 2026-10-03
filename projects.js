@@ -1,7 +1,7 @@
 const scroller = document.getElementById("projectTimeline");
 const progress = document.getElementById("timelineProgress");
 const yearButtons = [...document.querySelectorAll(".year-jump button")];
-const yearSections = [...document.querySelectorAll("[data-year]")];
+const yearSections = [...document.querySelectorAll(".timeline-panel[data-year]")];
 const projectPanels = [...document.querySelectorAll(".project-panel")];
 
 const isMobileLayout = () => window.matchMedia("(max-width: 700px)").matches;
@@ -16,6 +16,12 @@ function setActiveYear(year) {
     const selected = button.dataset.year === activeYear;
     button.classList.toggle("active", selected);
     button.setAttribute("aria-pressed", selected ? "true" : "false");
+
+    if (selected) {
+      button.setAttribute("aria-current", "true");
+    } else {
+      button.removeAttribute("aria-current");
+    }
   });
 }
 
@@ -36,22 +42,51 @@ function updateProgress() {
 }
 
 function syncYearButtons() {
-  if (!scroller || isMobileLayout() || pendingYear) return;
+  if (!scroller || pendingYear) return;
 
-  const probe = scroller.scrollLeft + scroller.clientWidth * 0.18;
-  let selected = yearSections[0];
+  // Mobile becomes a normal vertical timeline, so choose the latest
+  // year marker that has crossed the upper part of the viewport.
+  if (isMobileLayout()) {
+    const activationY = Math.min(window.innerHeight * 0.22, 150);
+    let selected = yearSections[0] || null;
+
+    for (const section of yearSections) {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= activationY) {
+        selected = section;
+      } else {
+        break;
+      }
+    }
+
+    if (selected?.dataset.year) setActiveYear(selected.dataset.year);
+    return;
+  }
+
+  // At the very end of the horizontal track, 2026 cannot always be
+  // physically aligned with the left edge because there is no more
+  // content after it. Treat the end of the track as the final year.
+  if (scroller.scrollLeft >= maxScroll() - 2) {
+    const lastSection = yearSections[yearSections.length - 1];
+    if (lastSection?.dataset.year) setActiveYear(lastSection.dataset.year);
+    return;
+  }
+
+  const scrollerRect = scroller.getBoundingClientRect();
+  const activationX = scrollerRect.left + Math.min(scroller.clientWidth * 0.22, 260);
+  let selected = yearSections[0] || null;
 
   for (const section of yearSections) {
-    if (section.offsetLeft <= probe) {
+    const rect = section.getBoundingClientRect();
+
+    if (rect.left <= activationX) {
       selected = section;
     } else {
       break;
     }
   }
 
-  if (selected?.dataset.year) {
-    setActiveYear(selected.dataset.year);
-  }
+  if (selected?.dataset.year) setActiveYear(selected.dataset.year);
 }
 
 function revealFooter() {
@@ -94,10 +129,9 @@ if (scroller) {
       updateProgress();
 
       if (pendingYear) {
-        const target = document.getElementById(`year-${pendingYear}`);
-        if (target && Math.abs(scroller.scrollLeft - target.offsetLeft) < 4) {
-          pendingYear = null;
-        }
+        const completedYear = pendingYear;
+        pendingYear = null;
+        setActiveYear(completedYear);
       }
 
       syncYearButtons();
@@ -156,13 +190,6 @@ if (scroller) {
     if (!isMobileLayout() && rafId === null) {
       targetX = scroller.scrollLeft;
       currentX = scroller.scrollLeft;
-    }
-
-    if (pendingYear) {
-      const target = document.getElementById(`year-${pendingYear}`);
-      if (target && Math.abs(scroller.scrollLeft - target.offsetLeft) < 4) {
-        pendingYear = null;
-      }
     }
 
     updateProgress();
@@ -253,14 +280,21 @@ if (scroller) {
       }
 
       pendingYear = year;
-      targetX = target.offsetLeft;
+      setActiveYear(year);
+
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+
+      targetX = Math.min(maxScroll(), Math.max(0, target.offsetLeft));
       currentX = scroller.scrollLeft;
       requestAnimation();
     });
   });
 
   updateProgress();
-  setActiveYear("2022");
+  pendingYear = null;
   syncYearButtons();
 }
 
@@ -321,7 +355,10 @@ projectPanels.forEach((panel) => {
   });
 });
 
-window.addEventListener("scroll", relockTimelineIfBackAtTop);
+window.addEventListener("scroll", () => {
+  relockTimelineIfBackAtTop();
+  if (isMobileLayout()) syncYearButtons();
+});
 
 window.addEventListener("resize", () => {
   if (!isMobileLayout()) {
