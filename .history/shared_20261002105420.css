@@ -354,7 +354,7 @@ body[data-header-theme="orange-cream"] .site-header{
 
 .site-footer.site-footer .footer-cue-svg {
   display: block;
-  width: min(84vw, 1500px);
+  width: min(78vw, 1420px);
   max-width: none;
   height: auto;
   object-fit: contain;
@@ -368,7 +368,7 @@ body[data-header-theme="orange-cream"] .site-header{
 
   color: #000;
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(135px, 16vw, 290px);
+  font-size: clamp(112px, 14.5vw, 248px);
   font-style: italic;
   font-weight: 500;
   line-height: .72;

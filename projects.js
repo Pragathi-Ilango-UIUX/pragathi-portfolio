@@ -1,32 +1,88 @@
 const scroller = document.getElementById("projectTimeline");
 const progress = document.getElementById("timelineProgress");
-const menu = document.querySelector(".projects-menu");
-const nav = document.querySelector(".projects-nav");
-const yearButtons = document.querySelectorAll(".year-jump button");
+const yearButtons = [...document.querySelectorAll(".year-jump button")];
 const yearSections = [...document.querySelectorAll("[data-year]")];
 const projectPanels = [...document.querySelectorAll(".project-panel")];
 
-menu?.addEventListener("click", () => {
-  const open = menu.getAttribute("aria-expanded") === "true";
-  menu.setAttribute("aria-expanded", String(!open));
-  nav?.classList.toggle("mobile-open", !open);
-});
-
 const isMobileLayout = () => window.matchMedia("(max-width: 700px)").matches;
+
+let activeYear = "2022";
+let pendingYear = null;
+
+function setActiveYear(year) {
+  activeYear = String(year);
+
+  yearButtons.forEach((button) => {
+    const selected = button.dataset.year === activeYear;
+    button.classList.toggle("active", selected);
+    button.setAttribute("aria-pressed", selected ? "true" : "false");
+  });
+}
+
+function maxScroll() {
+  if (!scroller) return 0;
+  return Math.max(0, scroller.scrollWidth - scroller.clientWidth);
+}
+
+function updateProgress() {
+  if (!scroller || isMobileLayout()) return;
+
+  const max = maxScroll();
+  const ratio = max > 0 ? scroller.scrollLeft / max : 0;
+
+  if (progress) {
+    progress.style.width = `${ratio * 100}%`;
+  }
+}
+
+function syncYearButtons() {
+  if (!scroller || isMobileLayout() || pendingYear) return;
+
+  const probe = scroller.scrollLeft + scroller.clientWidth * 0.18;
+  let selected = yearSections[0];
+
+  for (const section of yearSections) {
+    if (section.offsetLeft <= probe) {
+      selected = section;
+    } else {
+      break;
+    }
+  }
+
+  if (selected?.dataset.year) {
+    setActiveYear(selected.dataset.year);
+  }
+}
+
+function revealFooter() {
+  if (isMobileLayout()) return;
+
+  document.body.classList.add("footer-revealed");
+
+  requestAnimationFrame(() => {
+    const footer = document.querySelector(".site-footer");
+    footer?.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  });
+}
+
+function relockTimelineIfBackAtTop() {
+  if (isMobileLayout()) return;
+
+  if (
+    document.body.classList.contains("footer-revealed") &&
+    window.scrollY <= 2
+  ) {
+    document.body.classList.remove("footer-revealed");
+  }
+}
 
 if (scroller) {
   let targetX = scroller.scrollLeft;
   let currentX = scroller.scrollLeft;
   let rafId = null;
-
-  const maxScroll = () => Math.max(0, scroller.scrollWidth - scroller.clientWidth);
-
-  function updateProgress() {
-    if (isMobileLayout()) return;
-    const max = maxScroll();
-    const ratio = max > 0 ? scroller.scrollLeft / max : 0;
-    if (progress) progress.style.width = `${ratio * 100}%`;
-  }
 
   function animateToTarget() {
     currentX += (targetX - currentX) * 0.18;
@@ -36,6 +92,15 @@ if (scroller) {
       scroller.scrollLeft = currentX;
       rafId = null;
       updateProgress();
+
+      if (pendingYear) {
+        const target = document.getElementById(`year-${pendingYear}`);
+        if (target && Math.abs(scroller.scrollLeft - target.offsetLeft) < 4) {
+          pendingYear = null;
+        }
+      }
+
+      syncYearButtons();
       return;
     }
 
@@ -63,9 +128,15 @@ if (scroller) {
 
       const max = maxScroll();
       const atStart = scroller.scrollLeft <= 1;
-      const atEnd = scroller.scrollLeft >= max - 1;
+      const atEnd = scroller.scrollLeft >= max - 2;
 
-      if ((dominantDelta < 0 && atStart) || (dominantDelta > 0 && atEnd)) {
+      if (dominantDelta > 0 && atEnd) {
+        event.preventDefault();
+        revealFooter();
+        return;
+      }
+
+      if (dominantDelta < 0 && atStart) {
         return;
       }
 
@@ -86,6 +157,14 @@ if (scroller) {
       targetX = scroller.scrollLeft;
       currentX = scroller.scrollLeft;
     }
+
+    if (pendingYear) {
+      const target = document.getElementById(`year-${pendingYear}`);
+      if (target && Math.abs(scroller.scrollLeft - target.offsetLeft) < 4) {
+        pendingYear = null;
+      }
+    }
+
     updateProgress();
     syncYearButtons();
   });
@@ -114,6 +193,7 @@ if (scroller) {
 
   scroller.addEventListener("pointermove", (event) => {
     if (!dragging) return;
+
     const next = startScroll - (event.clientX - startX);
     scroller.scrollLeft = next;
     targetX = scroller.scrollLeft;
@@ -122,6 +202,7 @@ if (scroller) {
 
   function stopDragging(event) {
     if (!dragging) return;
+
     dragging = false;
     scroller.classList.remove("is-dragging");
 
@@ -143,39 +224,25 @@ if (scroller) {
 
     if (event.key === "ArrowRight") {
       event.preventDefault();
-      scroller.scrollBy({ left: jump, behavior: "smooth" });
+      targetX = Math.min(maxScroll(), targetX + jump);
+      requestAnimation();
     }
 
     if (event.key === "ArrowLeft") {
       event.preventDefault();
-      scroller.scrollBy({ left: -jump, behavior: "smooth" });
+      targetX = Math.max(0, targetX - jump);
+      requestAnimation();
     }
   });
 
-  function syncYearButtons() {
-    if (isMobileLayout()) return;
-
-    const center = scroller.scrollLeft + scroller.clientWidth * 0.35;
-    let selected = yearSections[0];
-
-    for (const section of yearSections) {
-      if (section.offsetLeft <= center) selected = section;
-    }
-
-    if (!selected) return;
-
-    yearButtons.forEach((button) => {
-      button.classList.toggle(
-        "active",
-        button.dataset.target === selected.id
-      );
-    });
-  }
-
   yearButtons.forEach((button) => {
     button.addEventListener("click", () => {
+      const year = button.dataset.year;
       const target = document.getElementById(button.dataset.target);
-      if (!target) return;
+
+      if (!year || !target) return;
+
+      setActiveYear(year);
 
       if (isMobileLayout()) {
         target.scrollIntoView({
@@ -185,91 +252,86 @@ if (scroller) {
         return;
       }
 
-      // offsetLeft is relative to the horizontal track.
-      const left = target.offsetLeft;
-
-      targetX = left;
+      pendingYear = year;
+      targetX = target.offsetLeft;
       currentX = scroller.scrollLeft;
-
-      scroller.scrollTo({
-        left,
-        behavior: "smooth"
-      });
-
-      // Keep ALL repeated year controls in sync.
-      yearButtons.forEach((item) => {
-        item.classList.toggle(
-          "active",
-          item.dataset.target === button.dataset.target
-        );
-      });
+      requestAnimation();
     });
   });
 
   updateProgress();
+  setActiveYear("2022");
   syncYearButtons();
 }
 
-/* ---------------------------------------------------------
-   MOBILE LONG PRESS
-   A long press selects a project and animates its orange fill.
-   The preview image remains visible on mobile at all times.
-   --------------------------------------------------------- */
 let longPressTimer = null;
-let longPressPanel = null;
 let longPressStartX = 0;
 let longPressStartY = 0;
 
 projectPanels.forEach((panel) => {
-  panel.addEventListener("touchstart", (event) => {
-    if (!isMobileLayout()) return;
+  panel.addEventListener(
+    "touchstart",
+    (event) => {
+      if (!isMobileLayout()) return;
 
-    const touch = event.touches[0];
-    longPressStartX = touch.clientX;
-    longPressStartY = touch.clientY;
-    longPressPanel = panel;
+      const touch = event.touches[0];
+      longPressStartX = touch.clientX;
+      longPressStartY = touch.clientY;
 
-    clearTimeout(longPressTimer);
-
-    longPressTimer = setTimeout(() => {
-      projectPanels.forEach((item) => {
-        if (item !== panel) item.classList.remove("is-selected");
-      });
-
-      panel.classList.toggle("is-selected");
-      longPressTimer = null;
-    }, 460);
-  }, { passive: true });
-
-  panel.addEventListener("touchmove", (event) => {
-    if (!longPressTimer) return;
-
-    const touch = event.touches[0];
-    const moved =
-      Math.abs(touch.clientX - longPressStartX) > 10 ||
-      Math.abs(touch.clientY - longPressStartY) > 10;
-
-    if (moved) {
       clearTimeout(longPressTimer);
-      longPressTimer = null;
-    }
-  }, { passive: true });
+
+      longPressTimer = setTimeout(() => {
+        projectPanels.forEach((item) => {
+          if (item !== panel) item.classList.remove("is-selected");
+        });
+
+        panel.classList.toggle("is-selected");
+        longPressTimer = null;
+      }, 460);
+    },
+    { passive: true }
+  );
+
+  panel.addEventListener(
+    "touchmove",
+    (event) => {
+      if (!longPressTimer) return;
+
+      const touch = event.touches[0];
+      const moved =
+        Math.abs(touch.clientX - longPressStartX) > 10 ||
+        Math.abs(touch.clientY - longPressStartY) > 10;
+
+      if (moved) {
+        clearTimeout(longPressTimer);
+        longPressTimer = null;
+      }
+    },
+    { passive: true }
+  );
 
   panel.addEventListener("touchend", () => {
     clearTimeout(longPressTimer);
     longPressTimer = null;
-    longPressPanel = null;
   });
 
   panel.addEventListener("touchcancel", () => {
     clearTimeout(longPressTimer);
     longPressTimer = null;
-    longPressPanel = null;
   });
 });
+
+window.addEventListener("scroll", relockTimelineIfBackAtTop);
 
 window.addEventListener("resize", () => {
   if (!isMobileLayout()) {
     projectPanels.forEach((panel) => panel.classList.remove("is-selected"));
+  } else {
+    document.body.classList.remove("footer-revealed");
+  }
+
+  if (scroller) {
+    updateProgress();
+    syncYearButtons();
   }
 });
