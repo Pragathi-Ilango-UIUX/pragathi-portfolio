@@ -1,477 +1,112 @@
-/* =========================================================
-   ABOUT PAGE
-   ========================================================= */
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const reduceMotion =
-  window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
-
-
-/* =========================================================
-   HERO TYPEWRITER
-   ========================================================= */
-
-const aboutHeadline =
-  document.getElementById(
-    "aboutHeadline"
-  );
-
-const headlineText =
-  "Because great ideas deserve to be built just as beautifully as they’re imagined.";
-
-let headlineStarted =
-  false;
-
+/* ---------------- HERO TYPEWRITER ---------------- */
+const headlineTarget = document.getElementById("aboutHeadlineText");
+const headlineCursor = document.querySelector(".type-cursor");
+const headlineText = "Because great ideas deserve to be built just as beautifully as they’re imagined.";
+let headlineStarted = false;
 
 function typeHeadline() {
-
-  if (
-    !aboutHeadline
-    ||
-    headlineStarted
-  ) {
-    return;
-  }
-
-
-  headlineStarted =
-    true;
-
-
-  if (
-    reduceMotion
-  ) {
-
-    aboutHeadline.textContent =
-      headlineText;
-
-    return;
-
-  }
-
-
-  let index =
-    0;
-
-
-  const typeNext =
-    () => {
-
-      index++;
-
-
-      aboutHeadline.textContent =
-        headlineText.slice(
-          0,
-          index
-        );
-
-
-      if (
-        index
-        <
-        headlineText.length
-      ) {
-
-        /*
-          Slightly varied typing speed so it feels less mechanical.
-        */
-
-        const current =
-          headlineText[index - 1];
-
-
-        const delay =
-          current === "," || current === "."
-            ? 135
-            : current === " "
-              ? 34
-              : 52;
-
-
-        window.setTimeout(
-          typeNext,
-          delay
-        );
-
-      }
-
-    };
-
-
-  window.setTimeout(
-    typeNext,
-    280
-  );
-
-}
-
-
-/* headline starts once the hero is actually visible */
-
-if (aboutHeadline) {
+  if (!headlineTarget || headlineStarted) return;
+  headlineStarted = true;
 
   if (reduceMotion) {
+    headlineTarget.textContent = headlineText;
+    headlineCursor?.classList.add("is-done");
+    return;
+  }
 
+  const msPerCharacter = 31;
+  const startDelay = 180;
+  let startTime = null;
+
+  function frame(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const elapsed = Math.max(0, timestamp - startTime - startDelay);
+    const count = Math.min(headlineText.length, Math.floor(elapsed / msPerCharacter));
+
+    headlineTarget.textContent = headlineText.slice(0, count);
+
+    if (count < headlineText.length) {
+      requestAnimationFrame(frame);
+    } else {
+      headlineCursor?.classList.add("is-done");
+    }
+  }
+
+  requestAnimationFrame(frame);
+}
+
+if (headlineTarget) {
+  if (reduceMotion) {
     typeHeadline();
+  } else {
+    const headlineObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        typeHeadline();
+        headlineObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.2 });
 
+    headlineObserver.observe(headlineTarget.closest(".about-headline-stage") || headlineTarget);
   }
-  else {
-
-    const headlineObserver =
-      new IntersectionObserver(
-
-        entries => {
-
-          entries.forEach(
-            entry => {
-
-              if (
-                !entry.isIntersecting
-              ) {
-                return;
-              }
-
-
-              typeHeadline();
-
-
-              headlineObserver.unobserve(
-                entry.target
-              );
-
-            }
-          );
-
-        },
-
-        {
-          threshold: .35
-        }
-
-      );
-
-
-    headlineObserver.observe(
-      aboutHeadline
-    );
-
-  }
-
 }
 
+/* ---------------- GENERIC REVEALS ---------------- */
+const revealItems = document.querySelectorAll(".reveal, .reveal-card");
 
-/* =========================================================
-   GENERIC REVEALS
-   ========================================================= */
+if (reduceMotion) {
+  revealItems.forEach(item => item.classList.add("is-visible"));
+} else {
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      revealObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -7% 0px" });
 
-const revealItems =
-  document.querySelectorAll(
-    ".reveal, .reveal-card"
-  );
-
-
-if (
-  reduceMotion
-) {
-
-  revealItems.forEach(
-    item => {
-
-      item.classList.add(
-        "is-visible"
-      );
-
-    }
-  );
-
-}
-else {
-
-  const revealObserver =
-    new IntersectionObserver(
-
-      entries => {
-
-        entries.forEach(
-          entry => {
-
-            if (
-              !entry.isIntersecting
-            ) {
-              return;
-            }
-
-
-            entry.target.classList.add(
-              "is-visible"
-            );
-
-
-            revealObserver.unobserve(
-              entry.target
-            );
-
-          }
-        );
-
-      },
-
-      {
-        threshold: .14,
-        rootMargin: "0px 0px -8% 0px"
-      }
-
-    );
-
-
-  revealItems.forEach(
-    item => {
-
-      revealObserver.observe(
-        item
-      );
-
-    }
-  );
-
+  revealItems.forEach(item => revealObserver.observe(item));
 }
 
+/* ---------------- SKILLS STAGGER ---------------- */
+const skillCards = [...document.querySelectorAll(".stagger-card")];
+const skillsGrid = document.querySelector(".skills-grid");
 
-/* =========================================================
-   SKILLS — ORDERED TOP-LEFT → BOTTOM-RIGHT
-   ========================================================= */
+if (skillCards.length) {
+  if (reduceMotion) {
+    skillCards.forEach(card => card.classList.add("is-visible"));
+  } else if (skillsGrid) {
+    const skillsObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        skillCards.forEach((card, index) => {
+          window.setTimeout(() => card.classList.add("is-visible"), index * 105);
+        });
+        skillsObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
 
-const skillCards =
-  document.querySelectorAll(
-    ".stagger-card"
-  );
-
-
-if (
-  reduceMotion
-) {
-
-  skillCards.forEach(
-    card => {
-
-      card.classList.add(
-        "is-visible"
-      );
-
-    }
-  );
-
-}
-else {
-
-  const skillsGrid =
-    document.querySelector(
-      ".skills-grid"
-    );
-
-
-  if (
-    skillsGrid
-    &&
-    skillCards.length
-  ) {
-
-    const skillsObserver =
-      new IntersectionObserver(
-
-        entries => {
-
-          entries.forEach(
-            entry => {
-
-              if (
-                !entry.isIntersecting
-              ) {
-                return;
-              }
-
-
-              skillCards.forEach(
-                (card, index) => {
-
-                  window.setTimeout(
-                    () => {
-
-                      card.classList.add(
-                        "is-visible"
-                      );
-
-                    },
-
-                    index * 145
-                  );
-
-                }
-              );
-
-
-              skillsObserver.unobserve(
-                entry.target
-              );
-
-            }
-          );
-
-        },
-
-        {
-          threshold: .18,
-          rootMargin: "0px 0px -10% 0px"
-        }
-
-      );
-
-
-    skillsObserver.observe(
-      skillsGrid
-    );
-
+    skillsObserver.observe(skillsGrid);
   }
-
 }
 
+/* ---------------- INTRO HANDWRITTEN NOTE ---------------- */
+const signature = document.getElementById("aboutSignature");
 
-/* =========================================================
-   SIGNATURE WRITE-ON
-   ========================================================= */
+if (signature) {
+  if (reduceMotion) {
+    signature.classList.add("write-on");
+  } else {
+    const signatureObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("write-on");
+        signatureObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.35 });
 
-const aboutSignature =
-  document.getElementById(
-    "aboutSignature"
-  );
-
-
-if (
-  aboutSignature
-) {
-
-  if (
-    reduceMotion
-  ) {
-
-    aboutSignature.classList.add(
-      "write-on"
-    );
-
+    signatureObserver.observe(signature);
   }
-  else {
-
-    const signatureObserver =
-      new IntersectionObserver(
-
-        entries => {
-
-          entries.forEach(
-            entry => {
-
-              if (
-                !entry.isIntersecting
-              ) {
-                return;
-              }
-
-
-              entry.target.classList.add(
-                "write-on"
-              );
-
-
-              signatureObserver.unobserve(
-                entry.target
-              );
-
-            }
-          );
-
-        },
-
-        {
-          threshold: .45
-        }
-
-      );
-
-
-    signatureObserver.observe(
-      aboutSignature
-    );
-
-  }
-
 }
-
-
-/* =========================================================
-   MOBILE MENU
-   ========================================================= */
-
-const menuButton =
-  document.querySelector(
-    ".menu-button"
-  );
-
-const mainNav =
-  document.querySelector(
-    ".main-nav"
-  );
-
-
-menuButton?.addEventListener(
-  "click",
-  () => {
-
-    const expanded =
-      menuButton.getAttribute(
-        "aria-expanded"
-      )
-      ===
-      "true";
-
-
-    menuButton.setAttribute(
-      "aria-expanded",
-      String(
-        !expanded
-      )
-    );
-
-
-    mainNav?.classList.toggle(
-      "mobile-open"
-    );
-
-  }
-);
-
-
-mainNav
-  ?.querySelectorAll("a")
-  .forEach(
-    link => {
-
-      link.addEventListener(
-        "click",
-        () => {
-
-          mainNav.classList.remove(
-            "mobile-open"
-          );
-
-
-          menuButton?.setAttribute(
-            "aria-expanded",
-            "false"
-          );
-
-        }
-      );
-
-    }
-  );
