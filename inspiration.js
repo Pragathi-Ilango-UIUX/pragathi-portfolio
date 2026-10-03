@@ -1,22 +1,30 @@
-const menuButton = document.querySelector('.menu-button');
-const navigation = document.querySelector('.main-nav');
+/* =========================================================
+   INSPIRATION PAGE
+   ========================================================= */
 
-function setMenuOpen(open) {
-  menuButton?.setAttribute('aria-expanded', String(open));
-  menuButton?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-  navigation?.classList.toggle('mobile-open', open);
+const reduceMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+const stepCards = document.querySelectorAll(".reveal-step");
+
+if (reduceMotion) {
+  stepCards.forEach(card => card.classList.add("is-visible"));
+} else {
+  const stepObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+
+        entry.target.classList.add("is-visible");
+        stepObserver.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.18,
+      rootMargin: "0px 0px -8% 0px"
+    }
+  );
+
+  stepCards.forEach(card => stepObserver.observe(card));
 }
-
-menuButton?.addEventListener('click', () => {
-  setMenuOpen(menuButton.getAttribute('aria-expanded') !== 'true');
-});
-navigation?.addEventListener('click', (event) => {
-  if (event.target.closest('a')) setMenuOpen(false);
-});
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && menuButton?.getAttribute('aria-expanded') === 'true') {
-    setMenuOpen(false);
-    menuButton.focus();
-  }
-});
-window.matchMedia('(max-width: 620px)').addEventListener('change', () => setMenuOpen(false));
