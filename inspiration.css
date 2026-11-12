@@ -23,6 +23,13 @@ body.inspiration-page {
 
 .inspiration-main { background: var(--page-bg); }
 
+/* top nav stays visible while the cards stack */
+body.inspiration-page .site-header {
+  position: sticky;
+  top: 0;
+  background: var(--page-bg);
+}
+
 .inspiration-process {
   position: relative;
   padding: clamp(18px, 3vw, 48px) var(--page-pad) clamp(90px, 9vw, 150px);
@@ -113,8 +120,9 @@ body.inspiration-page {
 .step-card::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -9px;   /* dashes sit just outside the card edge */
   pointer-events: none;
+  opacity: var(--dash, 1);
   background:
     linear-gradient(90deg, var(--yellow) 58%, transparent 0) 0 0 / 26px 2px repeat-x,
     linear-gradient(90deg, var(--yellow) 58%, transparent 0) 0 100% / 26px 2px repeat-x,

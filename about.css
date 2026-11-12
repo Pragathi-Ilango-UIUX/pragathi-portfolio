@@ -76,7 +76,7 @@ button { font: inherit; }
 /* every character exists from the start (so lines never reflow);
    typing only fades them in */
 .about-headline .w { display: inline-block; white-space: nowrap; }
-.about-headline .ch { opacity: 0; transition: opacity .22s ease; }
+.about-headline .ch { opacity: 0; transition: opacity .12s ease; }
 .about-headline .ch.on { opacity: 1; }
 
 .type-cursor {
@@ -348,6 +348,14 @@ button { font: inherit; }
   font-size: clamp(14px,.98vw,17px);
 }
 
+.experience-desc {
+  max-width: 54ch;
+  margin: 14px 0 0;
+  color: rgba(255,255,255,.86);
+  font-size: clamp(15px, 1.1vw, 18px);
+  line-height: 1.65;
+}
+
 .experience-block.reveal-card {
   opacity: 0;
   transform: translateX(46px);
@@ -440,74 +448,97 @@ button { font: inherit; }
 .after-hours-section {
   position: relative;
   overflow: hidden;
-  padding: clamp(84px,8vw,126px) var(--page-pad) clamp(94px,8vw,132px);
+  padding: clamp(48px,4.4vw,72px) var(--page-pad) clamp(70px,6vw,100px);
 }
 
+/* the sticky note */
 .after-hours-note {
   position: relative;
   z-index: 4;
-  width: min(360px, 64vw);
-  min-height: 210px;
-  margin: 0 auto clamp(58px,6vw,92px);
+  width: min(430px, 76vw);
+  min-height: clamp(210px, 17vw, 250px);
+  margin: 0 auto clamp(26px,3vw,44px);
   display: grid;
   place-items: center;
-  padding: 34px 26px;
-  background: #f7dfa0;
+  padding: 38px 30px 52px;
+  background:
+    linear-gradient(165deg, rgba(255,255,255,.35) 0%, rgba(255,255,255,0) 45%),
+    linear-gradient(180deg, #fbe8a8 0%, #f4d680 100%);
   color: #171717;
-  box-shadow: 0 18px 34px rgba(0,0,0,.14);
-  transform: rotate(-2.2deg);
+  box-shadow:
+    0 1px 1px rgba(0,0,0,.08),
+    0 4px 8px rgba(120,80,0,.1),
+    0 26px 38px -12px rgba(120,80,0,.4);
+  transform: rotate(-2.4deg);
   font-family: "Caveat", cursive;
-  font-size: clamp(38px,4vw,64px);
+  font-size: clamp(42px,4.4vw,70px);
   font-weight: 600;
-  line-height: .92;
+  line-height: .94;
   text-align: center;
 }
 
-.after-hours-note::before {
+.after-hours-note::before,
+.after-hours-note::after {
   content: "";
   position: absolute;
-  top: -16px;
-  left: 50%;
-  width: 108px;
-  height: 32px;
-  transform: translateX(-50%) rotate(2deg);
-  background: rgba(255,255,255,.6);
+  top: -15px;
+  width: 96px;
+  height: 30px;
+  background: rgba(255,255,255,.62);
   border: 1px solid rgba(0,0,0,.05);
+  box-shadow: 0 2px 4px rgba(0,0,0,.08);
 }
 
-/* polaroid carousel */
+.after-hours-note::before { left: 14%; transform: rotate(-7deg); }
+.after-hours-note::after { right: 14%; transform: rotate(6deg); }
+
+.note-squiggle {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  width: min(190px, 46%);
+  transform: translateX(-50%);
+  overflow: visible;
+}
+
+.note-squiggle path {
+  fill: none;
+  stroke: #e0891c;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+/* polaroid carousel: endless, self-running loop */
 .polaroid-carousel {
-  width: min(100%, 1660px);
-  margin: 0 auto;
+  margin: 0 calc(var(--page-pad) * -1);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
 }
 
 .polaroid-track {
+  --gap: clamp(18px, 2.2vw, 36px);
   display: flex;
-  gap: clamp(18px, 2.2vw, 36px);
-  padding: 34px var(--page-pad) 46px;
-  margin: 0 calc(var(--page-pad) * -1);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--page-pad);
-  scrollbar-width: none;
-  cursor: grab;
-  outline-offset: -4px;
+  width: max-content;
+  padding: 30px 0 44px;
+  animation: polaroidLoop var(--loop, 60s) linear infinite;
 }
 
-.polaroid-track::-webkit-scrollbar { display: none; }
-.polaroid-track.is-dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
-.polaroid-track.is-dragging * { pointer-events: none; }
+.polaroid-carousel:hover .polaroid-track { animation-play-state: paused; }
+
+@keyframes polaroidLoop {
+  to { transform: translateX(-50%); }
+}
 
 .polaroid {
   --r: 0deg;
   flex: 0 0 clamp(220px, 21vw, 330px);
-  margin: 0;
+  margin: 0 var(--gap) 0 0;
   padding: clamp(10px, .9vw, 15px) clamp(10px, .9vw, 15px) 0;
   background: #fbfaf6;
   box-shadow: 0 14px 30px rgba(0,0,0,.14);
   transform: rotate(var(--r));
   transition: transform .3s ease, box-shadow .3s ease;
-  scroll-snap-align: start;
   user-select: none;
 }
 
@@ -548,27 +579,10 @@ button { font: inherit; }
   text-align: center;
 }
 
-.polaroid-controls {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
+@media (prefers-reduced-motion: reduce) {
+  .polaroid-carousel { overflow-x: auto; }
+  .polaroid-track { animation: none; }
 }
-
-.polaroid-btn {
-  width: 52px;
-  height: 52px;
-  border: 1px solid var(--ink);
-  border-radius: 50%;
-  background: transparent;
-  color: var(--ink);
-  font-size: 22px;
-  line-height: 1;
-  cursor: pointer;
-  transition: background .2s ease, color .2s ease, transform .2s ease;
-}
-
-.polaroid-btn:hover,
-.polaroid-btn:focus-visible { background: var(--ink); color: #fff; transform: translateY(-2px); }
 
 /* ============================= REVEALS ============================= */
 .reveal,
@@ -706,7 +720,7 @@ button { font: inherit; }
 
   .after-hours-section { padding-left: 18px; padding-right: 18px; }
   .after-hours-note { width: min(300px, 80vw); min-height: 180px; }
-  .polaroid { flex-basis: 70vw; }
+  .polaroid { flex-basis: 66vw; }
 }
 
 @media (prefers-reduced-motion: reduce) {

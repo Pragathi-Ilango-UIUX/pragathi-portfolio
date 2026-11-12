@@ -96,6 +96,8 @@
         for (let j = i + 1; j < N; j++) covered += q[j];
         c.style.setProperty("--ty", ((1 - q[i]) * (stageH - i * step + 24)).toFixed(1) + "px");
         c.style.setProperty("--scale", (1 - 0.022 * covered).toFixed(4));
+        /* outer dashes belong to the top card only, so covered cards drop theirs */
+        c.style.setProperty("--dash", Math.max(0, 1 - covered * 3).toFixed(3));
         if (i === 0 || q[i] > 0.7) show(i);
       });
     });

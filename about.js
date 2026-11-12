@@ -41,8 +41,8 @@ function typeHeadline() {
     return;
   }
 
-  const msPerCharacter = 42;
-  const startDelay = 300;
+  const msPerCharacter = 75;
+  const startDelay = 500;
   let startTime = null;
   let shown = 0;
 
@@ -167,6 +167,7 @@ const POLAROIDS = [
   POLAROIDS.forEach((item, i) => {
     const fig = document.createElement("figure");
     fig.className = "polaroid";
+    fig.style.setProperty("--r", ["-2.4deg", "1.8deg", "-1deg", "2.6deg"][i % 4]);
     const photo = document.createElement("div");
     photo.className = "polaroid-photo";
     if (item.src) {
@@ -185,34 +186,19 @@ const POLAROIDS = [
     track.appendChild(fig);
   });
 
-  const stepBy = () => {
-    const first = track.querySelector(".polaroid");
-    return first ? first.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 24) : 300;
+  /* second copy makes the CSS loop seamless (it slides exactly half the track) */
+  [...track.children].forEach(node => {
+    const clone = node.cloneNode(true);
+    clone.setAttribute("aria-hidden", "true");
+    track.appendChild(clone);
+  });
+
+  /* constant speed regardless of how many photos there are */
+  const setSpeed = () => {
+    const half = track.scrollWidth / 2;
+    track.style.setProperty("--loop", Math.max(20, half / 55) + "s");
   };
-  const go = dir => track.scrollBy({ left: dir * stepBy() * 2, behavior: reduceMotion ? "auto" : "smooth" });
-
-  document.getElementById("polaroidPrev")?.addEventListener("click", () => go(-1));
-  document.getElementById("polaroidNext")?.addEventListener("click", () => go(1));
-  track.addEventListener("keydown", e => {
-    if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
-    if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
-  });
-
-  /* mouse drag (touch uses native scrolling) */
-  let down = false, startX = 0, startLeft = 0, moved = false;
-  track.addEventListener("pointerdown", e => {
-    if (e.pointerType !== "mouse") return;
-    down = true; moved = false; startX = e.clientX; startLeft = track.scrollLeft;
-  });
-  window.addEventListener("pointermove", e => {
-    if (!down) return;
-    const dx = e.clientX - startX;
-    if (!moved && Math.abs(dx) > 4) { moved = true; track.classList.add("is-dragging"); }
-    if (moved) track.scrollLeft = startLeft - dx;
-  });
-  window.addEventListener("pointerup", () => {
-    if (!down) return;
-    down = false;
-    track.classList.remove("is-dragging");
-  });
+  setSpeed();
+  window.addEventListener("resize", setSpeed);
+  window.addEventListener("load", setSpeed);
 })();
