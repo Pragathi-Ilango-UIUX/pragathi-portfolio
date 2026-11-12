@@ -328,7 +328,7 @@ body[data-header-theme="orange-cream"] .site-header{
      constrained content wrapper. */
   width: 100vw;
   max-width: 100vw;
-  min-height: 100svh;
+  min-height: 0;
   height: auto;
   margin: 0 0 0 calc(50% - 50vw);
   padding:
@@ -448,8 +448,8 @@ body[data-header-theme="orange-cream"] .site-header{
 /* Copyright stays at the bottom of a full-height footer.
    The padding creates intentional breathing room below email. */
 .site-footer.site-footer .footer-bottom {
-  margin-top: auto;
-  padding-top: clamp(48px, 5vw, 78px);
+  margin-top: 0;
+  padding-top: clamp(40px, 5vw, 78px);
 
   display: flex;
   flex-direction: column;
@@ -489,7 +489,7 @@ body[data-header-theme="orange-cream"] .site-header{
 
 @media (max-width: 620px) {
   .site-footer.site-footer {
-    min-height: 100svh;
+    min-height: 0;
     padding:
       28px
       18px
@@ -528,7 +528,7 @@ body[data-header-theme="orange-cream"] .site-header{
   }
 
   .site-footer.site-footer .footer-bottom {
-    padding-top: 42px;
+    padding-top: 36px;
     font-size: 11px;
   }
 }

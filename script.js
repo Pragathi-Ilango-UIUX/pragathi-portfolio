@@ -10,54 +10,84 @@ const reduceMotion =
    HERO SCROLL MOTION
    ========================================================= */
 
-let heroTicking = false;
+const portrait = document.querySelector(".hero-portrait");
+const heroStage = document.querySelector(".hero-stage");
+const heroNameRow = document.querySelector(".hero-name-row");
 
-function updateHeroAnimation() {
-  heroTicking = false;
+let heroTarget = 0;   // where scroll says we should be (0..1)
+let heroCurrent = 0;  // eased value actually drawn
+let heroRunning = false;
 
-  if (!hero || reduceMotion) {
-    root.style.setProperty("--hero-left", "0px");
-    root.style.setProperty("--hero-right", "0px");
-    root.style.setProperty("--portrait-drop", "0px");
-    return;
+const clamp01 = value => Math.min(1, Math.max(0, value));
+const smooth = t => t * t * (3 - 2 * t);
+
+/* Layout-only measurements (unaffected by our own transforms). */
+function measureHero() {
+  const stageRect = heroStage.getBoundingClientRect();
+  const nameRect = heroNameRow.getBoundingClientRect();
+  const spans = heroNameRow.querySelectorAll("span");
+
+  const stageCenterY = stageRect.top + stageRect.height / 2;
+  const firstName = heroNameRow.querySelector("span").getBoundingClientRect();
+  const nameCenterY = firstName.top + firstName.height / 2;
+
+  const gap =
+    spans.length > 1
+      ? spans[1].getBoundingClientRect().left -
+        spans[0].getBoundingClientRect().right
+      : nameRect.width * 0.4;
+
+  // portrait's un-scaled rendered width (offsetWidth ignores transforms)
+  const baseWidth = portrait.offsetWidth || 1;
+  const wanted = Math.min(gap * 0.82, nameRect.height * 3.4);
+
+  return {
+    drop: nameCenterY - stageCenterY,
+    scale: Math.min(1, Math.max(0.2, wanted / baseWidth))
+  };
+}
+
+function drawHero() {
+  const { drop, scale } = measureHero();
+  const p = smooth(heroCurrent);
+
+  const drift = Math.min(window.innerWidth * 0.03, 44);
+
+  root.style.setProperty("--hero-left", `${-p * drift}px`);
+  root.style.setProperty("--hero-right", `${p * drift}px`);
+
+  portrait.style.transform =
+    `translate(-50%, calc(-50% + ${p * drop}px)) scale(${1 - p * (1 - scale)})`;
+}
+
+function heroFrame() {
+  heroCurrent += (heroTarget - heroCurrent) * 0.14;
+
+  if (Math.abs(heroTarget - heroCurrent) < 0.0005) {
+    heroCurrent = heroTarget;
+    heroRunning = false;
   }
 
-  const rect = hero.getBoundingClientRect();
-  const height = Math.max(hero.offsetHeight, 1);
+  drawHero();
 
-  const progress =
-    Math.min(
-      1,
-      Math.max(0, -rect.top / height)
-    );
+  if (heroRunning) requestAnimationFrame(heroFrame);
+}
 
-  const horizontalTravel =
-    Math.min(window.innerWidth * 0.075, 115);
+function updateHeroAnimation() {
+  if (!hero || !portrait || reduceMotion) return;
 
-  const portraitTravel =
-    Math.min(window.innerWidth * 0.045, 65);
+  // Lands between the two name halves once ~65% of the hero has scrolled by.
+  const distance = Math.max(hero.offsetHeight * 0.65, 1);
+  heroTarget = clamp01(window.scrollY / distance);
 
-  root.style.setProperty(
-    "--hero-left",
-    `${-(progress * horizontalTravel)}px`
-  );
-
-  root.style.setProperty(
-    "--hero-right",
-    `${progress * horizontalTravel}px`
-  );
-
-  root.style.setProperty(
-    "--portrait-drop",
-    `${progress * portraitTravel}px`
-  );
+  if (!heroRunning) {
+    heroRunning = true;
+    requestAnimationFrame(heroFrame);
+  }
 }
 
 function requestHeroAnimation() {
-  if (heroTicking) return;
-
-  heroTicking = true;
-  requestAnimationFrame(updateHeroAnimation);
+  updateHeroAnimation();
 }
 
 
@@ -397,20 +427,132 @@ document.querySelectorAll(".stack-image")
 
 
 /* =========================================================
+   PIN BOARD — drag the cards anywhere inside the section.
+   Offsets are stored as a fraction of the board size so the
+   arrangement scales when the window is resized.
+   ========================================================= */
+
+(function initPinBoard() {
+  const board = document.getElementById("pinBoard");
+  if (!board) return;
+
+  const section = board.closest(".experience-section");
+  const cards = board.querySelectorAll(".stack-image");
+  const offsets = new Map();   // card -> { fx, fy }
+  let zTop = 40;
+  let drag = null;
+
+  function apply(card) {
+    const o = offsets.get(card);
+    const rect = board.getBoundingClientRect();
+    card.style.setProperty("--dx", `${o.fx * rect.width}px`);
+    card.style.setProperty("--dy", `${o.fy * rect.height}px`);
+  }
+
+  cards.forEach(card => {
+    offsets.set(card, { fx: 0, fy: 0 });
+
+    card.addEventListener("pointerdown", event => {
+      if (event.button !== undefined && event.button !== 0) return;
+
+      const cardRect = card.getBoundingClientRect();
+      const o = offsets.get(card);
+      const boardRect = board.getBoundingClientRect();
+      const bounds = section.getBoundingClientRect();
+
+      drag = {
+        card,
+        id: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        baseX: o.fx * boardRect.width,
+        baseY: o.fy * boardRect.height,
+        // how far the card may travel and still stay inside the section
+        minX: bounds.left - (cardRect.left - o.fx * boardRect.width),
+        maxX: bounds.right - (cardRect.right - o.fx * boardRect.width),
+        minY: bounds.top - (cardRect.top - o.fy * boardRect.height),
+        maxY: bounds.bottom - (cardRect.bottom - o.fy * boardRect.height),
+        armed: event.pointerType !== "touch",
+        timer: null
+      };
+
+      if (!drag.armed) {
+        // touch: press-and-hold so normal page scrolling still works
+        drag.timer = setTimeout(() => {
+          if (drag) { drag.armed = true; card.classList.add("is-dragging"); }
+        }, 220);
+      } else {
+        card.classList.add("is-dragging");
+      }
+
+      zTop += 1;
+      card.style.zIndex = zTop;
+      card.setPointerCapture?.(event.pointerId);
+      if (drag.armed) event.preventDefault();
+    });
+
+    card.addEventListener("pointermove", event => {
+      if (!drag || drag.card !== card || event.pointerId !== drag.id) return;
+
+      const moveX = event.clientX - drag.startX;
+      const moveY = event.clientY - drag.startY;
+
+      if (!drag.armed) {
+        // finger moved before the hold finished: it's a scroll, not a drag
+        if (Math.hypot(moveX, moveY) > 8) {
+          clearTimeout(drag.timer);
+          drag = null;
+        }
+        return;
+      }
+
+      const boardRect = board.getBoundingClientRect();
+      const x = Math.min(drag.maxX, Math.max(drag.minX, drag.baseX + moveX));
+      const y = Math.min(drag.maxY, Math.max(drag.minY, drag.baseY + moveY));
+
+      offsets.set(card, { fx: x / boardRect.width, fy: y / boardRect.height });
+      apply(card);
+    });
+
+    const end = event => {
+      if (!drag || drag.card !== card) return;
+      clearTimeout(drag.timer);
+      card.classList.remove("is-dragging");
+      card.releasePointerCapture?.(drag.id);
+      drag = null;
+    };
+
+    card.addEventListener("pointerup", end);
+    card.addEventListener("pointercancel", end);
+    card.addEventListener("dragstart", event => event.preventDefault());
+  });
+
+  // stop the page scrolling while a touch drag is active
+  board.addEventListener(
+    "touchmove",
+    event => { if (drag && drag.armed) event.preventDefault(); },
+    { passive: false }
+  );
+
+  window.addEventListener("resize", () => cards.forEach(apply));
+})();
+
+
+/* =========================================================
    PAGE EVENTS
    ========================================================= */
 
+drawHero();
 updateHeroAnimation();
 
-window.addEventListener(
-  "scroll",
-  requestHeroAnimation,
-  {
-    passive: true
-  }
-);
+window.addEventListener("scroll", requestHeroAnimation, { passive: true });
 
-window.addEventListener(
-  "resize",
-  requestHeroAnimation
-);
+window.addEventListener("resize", () => {
+  updateHeroAnimation();
+  drawHero();
+});
+
+window.addEventListener("load", () => {
+  updateHeroAnimation();
+  drawHero();
+});

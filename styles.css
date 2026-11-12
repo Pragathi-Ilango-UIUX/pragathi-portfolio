@@ -2041,3 +2041,129 @@ a {
 
   
 }
+
+
+/* =========================================================
+   RESPONSIVE FIXES — fluid hero, pin board, calendar images
+   (Placed last so these win over the older breakpoint rules.)
+   ========================================================= */
+
+/* ---------- HERO: one fluid formula, no breakpoint jumps ---------- */
+
+.hero {
+  height: calc(100svh - var(--header-h));
+  min-height: 460px;
+  max-height: 1000px;
+}
+
+.hero-stage {
+  container-type: size;      /* lets children size from the stage, in cqw / cqh */
+  overflow-x: clip;
+  overflow-y: visible;       /* portrait may travel down into the name row */
+}
+
+/* Both title lines together are ~0.41 x their width tall, so cap the width
+   by the available height too. The title therefore always fits, uncropped. */
+.hero-title-art,
+.hero-title-art:is(*) {
+  width: min(96cqw, calc((100cqh - 16px) / .45), 1650px);
+  gap: clamp(6px, 1.5cqw, 26px);
+}
+
+.hero-portrait {
+  width: min(calc(30cqw + 140px), 80cqh, 760px);
+  max-height: none;
+}
+
+.hero-name-row {
+  font-size: clamp(30px, 6vw, 96px);
+  padding-bottom: clamp(8px, 1.2vw, 18px);
+}
+
+
+/* ---------- PIN BOARD: drag cards anywhere ---------- */
+
+.stack-art {
+  padding-block: clamp(16px, 3vw, 44px);
+  touch-action: pan-y;
+}
+
+.stack-image {
+  --rot: 0deg;
+  --lift: 0px;
+  --scale: 1;
+  --dx: 0px;
+  --dy: 0px;
+
+  transform:
+    translate(var(--dx), var(--dy))
+    rotate(var(--rot))
+    translateY(var(--lift))
+    scale(var(--scale));
+
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* images dropped into a card just fill it */
+.stack-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.stack-image-one   { --rot: -4.2deg; --lift: 2px; }
+.stack-image-two   { --rot: 1.5deg;  --lift: -12px; }
+.stack-image-three { --rot: -2.4deg; --lift: 5px; }
+.stack-image-four  { --rot: 2.7deg;  --lift: -8px; }
+.stack-image-five  { --rot: -1.6deg; --lift: 2px; }
+
+.stack-image-one:hover,   .stack-image-one.is-hovered   { --lift: -12px; --scale: 1.04; transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) translateY(var(--lift)) scale(var(--scale)); }
+.stack-image-two:hover,   .stack-image-two.is-hovered   { --lift: -26px; --scale: 1.04; transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) translateY(var(--lift)) scale(var(--scale)); }
+.stack-image-three:hover, .stack-image-three.is-hovered { --lift: -14px; --scale: 1.04; transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) translateY(var(--lift)) scale(var(--scale)); }
+.stack-image-four:hover,  .stack-image-four.is-hovered  { --lift: -18px; --scale: 1.04; transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) translateY(var(--lift)) scale(var(--scale)); }
+.stack-image-five:hover,  .stack-image-five.is-hovered  { --lift: -16px; --scale: 1.04; transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) translateY(var(--lift)) scale(var(--scale)); }
+
+/* while dragging: follow the pointer instantly, lifted off the board */
+.stack-image.is-dragging,
+.stack-image.is-dragging:hover {
+  --scale: 1.06;
+  cursor: grabbing;
+  transition: box-shadow .2s ease, border-color .2s ease;
+  box-shadow: 0 34px 60px rgba(0,0,0,.22);
+  border-color: rgba(17,17,17,.45);
+}
+
+
+/* ---------- CALENDAR: keep images off the card text ---------- */
+
+/* Image 1 sits in the empty lower half of the Work card, below its text. */
+.calendar-image-one {
+  top: calc(var(--hour-height) * 4.3);
+}
+
+@media (min-width: 1201px) {
+  .calendar-image-one {
+    top: calc(var(--hour-height) * 3.4);
+  }
+}
+
+/* Image 2 hangs off the bottom-left of the night card, below its text. */
+.calendar-image-two {
+  top: calc(var(--hour-height) * 18.25);
+  left: 4%;
+}
+
+@media (min-width: 901px) {
+  .calendar-image-two {
+    top: calc(var(--hour-height) * 15.85);
+    left: 5.25%;
+  }
+}
