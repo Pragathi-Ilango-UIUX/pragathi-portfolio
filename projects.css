@@ -17,13 +17,8 @@ body.projects-page{
   --bar-h:64px;
 }
 
-/* header stays put while the timeline slides */
-.projects-page .site-header{
-  position:sticky;
-  top:0;
-  background:#050505;
-  border-bottom:1px solid rgba(255,244,220,.18)!important;
-}
+/* Work page only: thin line under the shared header. */
+.projects-page .site-header{border-bottom:1px solid rgba(255,244,220,.18)!important}
 
 /* =========================================================
    HORIZONTAL TIMELINE, DRIVEN BY VERTICAL SCROLL
@@ -35,8 +30,10 @@ body.projects-page{
 
 .work-stage{
   position:sticky;
-  top:var(--header-h);
-  height:calc(100svh - var(--header-h));
+  top:0;
+  /* fills the screen under the header; grows as the header scrolls away
+     so the pinned stage is always exactly full-screen */
+  height:calc(100svh - var(--header-h) + var(--hdr-gone, 0px));
   min-height:480px;
   display:flex;
   flex-direction:column;
@@ -101,7 +98,7 @@ body.projects-page{
   padding:12px clamp(18px,3vw,48px);
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  justify-content:flex-start;
   gap:16px;
   background:#050505;
   border-top:1px solid rgba(255,244,220,.18);
@@ -152,12 +149,6 @@ body.projects-page{
   color:var(--work-black);
 }
 
-.year-hint{
-  font-family:"Caveat",cursive;
-  font-size:22px;
-  color:rgba(255,244,220,.55);
-  white-space:nowrap;
-}
 
 /* =========================================================
    PROJECT PANELS
@@ -226,14 +217,14 @@ body.projects-page{
   line-height:1.04;
   letter-spacing:-.035em;
   color:var(--work-cream);
-  overflow-wrap:break-word;
-  hyphens:auto;
+  white-space:nowrap;
 }
 .project-copy p{
   margin:0;
   max-width:470px;
   font-size:clamp(13px,1.05vw,18px);
   line-height:1.45;
+  min-height:4.35em;          /* three lines: every title starts at the same height */
   color:var(--work-cream);
 }
 
@@ -310,8 +301,8 @@ body.projects-page{
     margin:26px 0 30px;
     opacity:1;transform:none;
   }
-  .project-copy h2{font-size:clamp(30px,9vw,48px);overflow-wrap:normal;hyphens:none}
-  .project-copy p{max-width:100%;font-size:16px}
+  .project-copy h2{font-size:clamp(30px,9vw,48px);white-space:normal}
+  .project-copy p{max-width:100%;min-height:0;font-size:16px}
   .project-number{font-size:clamp(64px,20vw,110px)}
 
   /* pills pinned to the bottom of the screen */
@@ -326,10 +317,10 @@ body.projects-page{
     backdrop-filter:blur(10px);
   }
   .year-bar.is-hidden{transform:translateY(100%)}
-  .year-hint{display:none}
   .year-jump button{padding:9px 13px}
 
-  main{padding-bottom:var(--bar-h)}
+  /* leave room for the pinned pills under the last project only */
+  .final-panel{padding-bottom:calc(38px + var(--bar-h))}
 }
 
 @media (prefers-reduced-motion:reduce){

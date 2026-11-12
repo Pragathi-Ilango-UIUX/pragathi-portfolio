@@ -20,6 +20,7 @@ const stackedQuery = window.matchMedia("(max-width: 700px), (max-height: 600px)"
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const isStacked = () => stackedQuery.matches;
 
+let headerH = 0;
 let travel = 0;        // how far the track can slide (px)
 let runwayTop = 0;     // page Y where the sticky stage starts moving
 let target = 0;        // scroll progress 0..1
@@ -33,6 +34,7 @@ let jumpTimer = null;
 
 function measure() {
   if (isStacked()) {
+    document.documentElement.style.removeProperty("--hdr-gone");
     runway.style.height = "";
     track.style.transform = "";
     travel = 0;
@@ -40,11 +42,13 @@ function measure() {
   }
 
   travel = Math.max(0, track.scrollWidth - stage.clientWidth);
-  runway.style.height = `${travel + stage.clientHeight}px`;
+  // The stage is exactly one screen tall once pinned.
+  runway.style.height = `${travel + window.innerHeight}px`;
 
-  // The stage starts pinned right where the runway begins on the page.
-  runwayTop = runway.getBoundingClientRect().top + window.scrollY -
-    parseFloat(getComputedStyle(stage).top || 0);
+  // Pinning starts when the stage reaches the top of the screen,
+  // i.e. once the (non-sticky) header has scrolled away.
+  runwayTop = runway.getBoundingClientRect().top + window.scrollY;
+  headerH = document.querySelector(".site-header")?.offsetHeight || 0;
 }
 
 function pageYForX(x) {
@@ -134,6 +138,8 @@ function update() {
     if (!jump) setActiveYear(yearAtScroll());
     return;
   }
+
+  document.documentElement.style.setProperty("--hdr-gone", `${Math.min(Math.max(window.scrollY, 0), headerH)}px`);
 
   target = travel > 0 ? Math.min(1, Math.max(0, (window.scrollY - runwayTop) / travel)) : 0;
   if (!running) {
