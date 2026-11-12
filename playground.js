@@ -34,25 +34,6 @@ const sectionFor = key => workSections.find(s => s.dataset.sectionCategory === k
 let current = "branding";
 let swapTimer = null;
 
-/* Keep the right-hand column as tall as the tallest category, so switching
-   never changes the page height (nothing above or below jumps). */
-function lockHeight() {
-  if (!browserContent) return;
-  browserContent.style.minHeight = "";
-  let tallest = 0;
-  workSections.forEach(section => {
-    const wasHidden = section.classList.contains("is-filtered-out");
-    section.classList.remove("is-filtered-out");
-    section.hidden = false;
-    tallest = Math.max(tallest, section.offsetHeight);
-    if (wasHidden) {
-      section.classList.add("is-filtered-out");
-      section.hidden = true;
-    }
-  });
-  browserContent.style.minHeight = tallest + "px";
-}
-
 function markButtons(filter) {
   filterButtons.forEach(button => {
     const selected = button.dataset.filter === filter;
@@ -120,42 +101,5 @@ workSections.forEach(s => {
   s.classList.toggle("is-filtered-out", !on);
 });
 markButtons(current);
-lockHeight();
-window.addEventListener("resize", lockHeight);
-window.addEventListener("load", lockHeight);
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockHeight);
-
-/* ---------- chip row arrow (small screens) ---------- */
-const filterRow = document.querySelector(".filter-row");
-const railNext = document.querySelector(".rail-next");
-
-function updateRail() {
-  if (!filterRow || !railNext) return;
-  const overflow = filterRow.scrollWidth - filterRow.clientWidth > 4;
-  railNext.hidden = !overflow || window.innerWidth > 900;
-  const atEnd = filterRow.scrollLeft + filterRow.clientWidth >= filterRow.scrollWidth - 4;
-  railNext.classList.toggle("is-back", atEnd);
-  railNext.setAttribute("aria-label", atEnd ? "Back to first categories" : "Show more categories");
-}
-
-railNext?.addEventListener("click", () => {
-  const atEnd = filterRow.scrollLeft + filterRow.clientWidth >= filterRow.scrollWidth - 4;
-  filterRow.scrollTo({
-    left: atEnd ? 0 : filterRow.scrollLeft + filterRow.clientWidth * 0.7,
-    behavior: reduceMotion ? "auto" : "smooth"
-  });
-});
-
-filterRow?.addEventListener("scroll", updateRail, { passive: true });
-window.addEventListener("resize", updateRail);
-window.addEventListener("load", updateRail);
-updateRail();
-
-/* keep the active chip in view in the scrolling row, without moving the page */
-filterButtons.forEach(b => b.addEventListener("click", () => {
-  if (window.innerWidth > 900 || !filterRow) return;
-  const left = b.offsetLeft - (filterRow.clientWidth - b.offsetWidth) / 2;
-  filterRow.scrollTo({ left, behavior: reduceMotion ? "auto" : "smooth" });
-}));
 
 document.querySelector(".hero-media video")?.play().catch(() => {});

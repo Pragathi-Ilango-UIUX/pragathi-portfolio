@@ -81,8 +81,8 @@ button {
 /* All sizes are in container units, so the headline, "sleeping" and their
    overlap scale together and stay identical at every width. */
 .hero-copy h1 {
-  --fs: 7.3cqw;           /* one line */
-  --rows: 1;
+  --fs: min(12.6cqw, 172px);   /* two lines, never wraps differently */
+  --rows: 2;
   margin: 0;
   padding-bottom: calc(var(--fs) * 1.05);
   color: var(--cream);
@@ -93,9 +93,12 @@ button {
   white-space: nowrap;
 }
 
+.hero-copy h1 .l1,
+.hero-copy h1 .l2 { display: block; }
+
 .sleeping-word {
-  --fs: 7.3cqw;
-  --rows: 1;
+  --fs: min(12.6cqw, 172px);
+  --rows: 2;
   position: absolute;
   right: 0.5cqw;
   /* sits just under the last line, tucked up into the end of "Be" */
@@ -103,7 +106,7 @@ button {
   margin: 0;
   color: #111;
   font-family: "Caveat", cursive;
-  font-size: calc(var(--fs) * 1.35);
+  font-size: calc(var(--fs) * 1.1);
   font-weight: 600;
   line-height: 0.72;
   letter-spacing: -0.035em;
@@ -164,7 +167,6 @@ button {
 /* PLAYGROUND BROWSER */
 .playground-browser {
   position: relative;
-  min-height: 100svh;
 }
 
 .browser-shell {
@@ -203,6 +205,9 @@ button {
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
+.filter-chip:focus { outline: none; }
+.filter-chip:focus-visible { outline: 2px solid #111; outline-offset: 3px; }
+
 .filter-chip:hover {
   transform: translateX(4px);
   border-color: var(--orange);
@@ -228,16 +233,17 @@ button {
 
 .work-heading {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(230px, 0.48fr);
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.62fr);
   gap: clamp(30px, 4vw, 70px);
   align-items: end;
+  align-items: last baseline;   /* description sits level with the title */
   margin-bottom: clamp(36px, 4vw, 58px);
 }
 
 .work-heading h2 {
   margin: 0;
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(36px, 3.9vw, 64px);
+  font-size: clamp(44px, 4.9vw, 82px);
   font-weight: 400;
   line-height: 1;
   letter-spacing: -0.035em;
@@ -270,6 +276,9 @@ button {
 
 .poster-tile {
   display: block;
+  outline: 2px solid transparent;
+  outline-offset: 0;
+  transition: transform 0.24s ease, outline-color 0.24s ease, box-shadow 0.24s ease;
   aspect-ratio: 0.78 / 1;
   overflow: hidden;
   background: #fff;
@@ -292,7 +301,8 @@ button {
 
 .project-card:hover {
   transform: translateY(-7px);
-  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.11);
+  border-color: var(--orange);
+  box-shadow: 0 0 0 1px var(--orange), 0 18px 30px rgba(0, 0, 0, 0.11);
 }
 
 .project-image {
@@ -325,7 +335,8 @@ button {
 
 .ui-card:hover {
   transform: translateY(-7px);
-  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.09);
+  border-color: var(--orange);
+  box-shadow: 0 0 0 1px var(--orange), 0 18px 30px rgba(0, 0, 0, 0.09);
 }
 
 .ui-device {
@@ -370,17 +381,30 @@ button {
   transition: transform 0.24s ease;
 }
 
+.type-tile {
+  outline: 2px solid transparent;
+  outline-offset: 0;
+}
+
 .type-tile:hover {
   transform: scale(1.015);
+  outline-color: var(--orange);
 }
 
 .type-tile-wide {
   grid-column: span 2;
 }
 
+.poster-tile:hover { transform: translateY(-6px); outline-color: var(--orange); }
+
 .motion-card {
   display: block;
+  outline: 2px solid transparent;
+  outline-offset: 8px;
+  transition: transform 0.24s ease, outline-color 0.24s ease;
 }
+
+.motion-card:hover { transform: translateY(-5px); outline-color: var(--orange); }
 
 .motion-card .image-placeholder {
   aspect-ratio: 1.35 / 0.9;
@@ -394,11 +418,14 @@ button {
 }
 
 .personal-card {
-  transition: transform 0.24s ease;
+  outline: 2px solid transparent;
+  outline-offset: 8px;
+  transition: transform 0.24s ease, outline-color 0.24s ease;
 }
 
 .personal-card:hover {
   transform: translateY(-5px);
+  outline-color: var(--orange);
 }
 
 .personal-card .image-placeholder {
@@ -430,41 +457,6 @@ button {
 .work-section { transition: opacity 0.22s ease, transform 0.22s ease; }
 .work-section.is-leaving { opacity: 0; transform: translateY(-10px); }
 
-/* the arrow-in-a-circle that hints there are more categories (small screens) */
-.rail-next {
-  display: none;
-  position: absolute;
-  top: 50%;
-  right: var(--page-pad);
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  transform: translateY(-50%);
-  border: 1px solid #a9a9a9;
-  border-radius: 50%;
-  background: #fff;
-  color: #111;
-  cursor: pointer;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-
-.rail-next svg {
-  width: 20px;
-  height: 20px;
-  margin: auto;
-  display: block;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: transform 0.3s ease;
-}
-
-.rail-next:hover { background: var(--orange); border-color: var(--orange); color: #fff; }
-.rail-next.is-back svg { transform: rotate(180deg); }
-
 /* RESPONSIVE */
 @media (max-width: 1180px) {
   .hero-inner { min-height: auto; }
@@ -483,56 +475,40 @@ button {
   .work-heading > p { max-width: 620px; }
 }
 
-/* headline drops to two lines (still one scaling unit with "sleeping");
-   the video moves to the centre above the description */
+/* the video moves to the centre; the description drops below it, to the right */
 @media (max-width: 900px) {
   .hero-inner { padding-top: 92px; gap: 46px; }
 
-  .hero-copy h1,
-  .sleeping-word { --fs: 12.8cqw; --rows: 2; }
-
-  .hero-copy h1 .l1,
-  .hero-copy h1 .l2 { display: block; }
-
-  .sleeping-word { font-size: calc(var(--fs) * 1.25); }
-
   .hero-lower {
     grid-template-columns: 1fr;
-    row-gap: 40px;
+    row-gap: 56px;
     justify-items: center;
   }
 
   .hero-media { width: min(100%, 640px); justify-self: center; }
-  .hero-description { width: min(100%, 640px); justify-self: center; }
+
+  .hero-description {
+    width: min(100%, 440px);
+    justify-self: end;
+    margin-top: 6px;
+  }
 
   .browser-shell { display: block; padding-top: 44px; }
 
-  /* category chips: a plain scrolling row, no backing panel */
+  /* category chips simply wrap onto the next line */
   .category-rail {
-    position: sticky;
-    top: 14px;
-    z-index: 8;
-    margin: 0 calc(var(--page-pad) * -1) 36px;
-    padding: 6px var(--page-pad);
-    background: none;
+    position: static;
+    margin: 0 0 36px;
   }
 
   .filter-row {
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 9px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    padding: 2px 64px 2px 0;
+    gap: 10px;
   }
 
-  .filter-row::-webkit-scrollbar { display: none; }
-
-  .filter-chip { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); }
   .filter-chip:hover { transform: translateY(-2px); }
-
-  .rail-next { display: block; }
-  .rail-next[hidden] { display: none; }
 
   .poster-grid,
   .project-card-grid,
@@ -547,12 +523,11 @@ button {
 @media (max-width: 680px) {
   .hero-inner { padding: 86px 18px 44px; gap: 32px; }
 
-  .hero-description { font-size: 16px; }
+  .hero-description { font-size: 16px; width: min(100%, 420px); }
 
   .browser-shell { padding: 34px 18px 72px; }
 
-  .category-rail { margin: 0 -18px 28px; padding: 6px 18px; }
-  .rail-next { right: 18px; }
+  .category-rail { margin: 0 0 28px; }
 
   .filter-chip { padding: 9px 14px; font-size: 14px; }
 
