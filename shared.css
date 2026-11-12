@@ -78,7 +78,7 @@ body[data-header-theme="dark-orange"] .site-header{
 body[data-header-theme="light-yellow"] .site-header{
   --header-nav-color:#ffae14;
   --header-logo-color:#ffae14;
-  --header-menu-bg:#fff;
+  --header-menu-bg:#0b0b0b;
 }
 
 /* Orange background + cream nav */
