@@ -62,13 +62,12 @@ button {
 
 .hero-inner {
   width: min(100%, 1780px);
-  min-height: 100svh;
   margin: 0 auto;
-  padding: clamp(92px, 7vw, 118px) var(--page-pad) clamp(54px, 5vw, 82px);
+  padding: clamp(92px, 7vw, 118px) var(--page-pad) clamp(64px, 6vw, 100px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: clamp(52px, 6vw, 96px);
+  justify-content: flex-start;
+  gap: clamp(14px, 1.6vw, 28px);
 }
 
 .hero-copy {
@@ -84,7 +83,7 @@ button {
   --fs: min(12.6cqw, 172px);   /* two lines, never wraps differently */
   --rows: 2;
   margin: 0;
-  padding-bottom: calc(var(--fs) * 1.05);
+  padding-bottom: calc(var(--fs) * 0.78);
   color: var(--cream);
   font-size: var(--fs);
   line-height: 0.9;
@@ -481,11 +480,11 @@ button {
 
   .hero-lower {
     grid-template-columns: 1fr;
-    row-gap: 56px;
+    row-gap: 44px;
     justify-items: center;
   }
 
-  .hero-media { width: min(100%, 640px); justify-self: center; }
+  .hero-media { width: min(84%, 520px); justify-self: center; }
 
   .hero-description {
     width: min(100%, 440px);
