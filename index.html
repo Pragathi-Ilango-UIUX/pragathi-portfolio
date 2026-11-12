@@ -54,44 +54,7 @@
 <span class="typewriter-text" id="typewriterText"></span>
 </div>
 </div>
-<div aria-label="Pin board of things I like. Drag the cards around." class="stack-art reveal" id="pinBoard">
-<!--
-
-            Replace these five placeholders later with your real images.
-
-            Keep the same classes so the overlapping layout still works.
-
-
-
-            Example:
-
-            <img
-
-              class="stack-image stack-image-one"
-
-              src="assets/images/your-image-1.png"
-
-              alt=""
-
-            >
-
-          \-->
-<div class="stack-image stack-image-one">
-<span>1</span>
-</div>
-<div class="stack-image stack-image-two">
-<span>2</span>
-</div>
-<div class="stack-image stack-image-three">
-<span>3</span>
-</div>
-<div class="stack-image stack-image-four">
-<span>4</span>
-</div>
-<div class="stack-image stack-image-five">
-<span>5</span>
-</div>
-</div>
+<div aria-label="My bulletin board of things I like" class="pin-board reveal" id="pinBoard"></div>
 </div>
 </section>
 <!-- ======================================================
@@ -160,9 +123,15 @@
                   alt="">
 
         \-->
-<div aria-label="Calendar image placeholder" class="calendar-image-slot calendar-image-one calendar-scroll-reveal">
-<span>image</span>
-</div>
+<!-- INTRO VIDEO
+             Add your video: put the file in assets/video/ and set
+             data-src="assets/video/intro.mp4" (and optionally data-poster="...").
+             Until then it shows a play-button placeholder. -->
+<figure class="calendar-image-slot calendar-image-one calendar-video calendar-scroll-reveal" data-poster="" data-src="">
+<video loop="" muted="" playsinline="" preload="none"></video>
+<button aria-label="Play intro video" class="video-play" type="button"><span aria-hidden="true">▶</span></button>
+<figcaption>intro video</figcaption>
+</figure>
 <!-- BACK TO WORK NOTE -->
 <div aria-hidden="true" class="back-to-work-note calendar-scroll-reveal">
 <span>okay... back to work</span>

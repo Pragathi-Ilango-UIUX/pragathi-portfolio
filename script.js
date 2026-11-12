@@ -39,7 +39,7 @@ function measureHero() {
 
   // portrait's un-scaled rendered width (offsetWidth ignores transforms)
   const baseWidth = portrait.offsetWidth || 1;
-  const wanted = Math.min(gap * 0.82, nameRect.height * 3.4);
+  const wanted = Math.min(gap * 0.9, nameRect.height * 4.6);
 
   return {
     drop: nameCenterY - stageCenterY,
@@ -427,114 +427,130 @@ document.querySelectorAll(".stack-image")
 
 
 /* =========================================================
-   PIN BOARD — drag the cards anywhere inside the section.
-   Offsets are stored as a fraction of the board size so the
-   arrangement scales when the window is resized.
+   BULLETIN BOARD
+   Edit this list to change what is pinned up.
+
+   type:  "photo" | "note" | "word" | "stamp" | "sticker"
+   src:   path to an image (leave "" to show a placeholder)
+          e.g. src: "assets/images/board/flower.png"
+   text:  words for notes + the big "word" card
+   color: note / word card color (any CSS color)
+
+   Desktop layout:  x, y = position (% of the board),
+                    w = width (% of the board), r = tilt (deg)
+   Narrow layout:   mx, my, mw, mr  (same idea, taller board)
    ========================================================= */
 
-(function initPinBoard() {
+// Positions are in "board width" units (the board is 100 wide).
+// x, y = top-left corner, w = width, r = tilt in degrees.
+// `m: [x, y, w, r]` is the arrangement on narrow/phone screens;
+// leave `m` out to hide that item on narrow screens.
+const BOARD_ITEMS = [
+  { type: "photo",   label: "photo",   x: 3,  y: 3,  w: 15, r: -4, m: [4, 4, 42, -4] },
+  { type: "note",    text: "ideas worth chasing", color: "#fff1a8", x: 19, y: 2,  w: 11, r: 3,  m: [52, 5, 30, 4] },
+  { type: "word",    text: "make it feel like something.", color: "#ffe1d0", x: 32, y: 4,  w: 21, r: -2, m: [10, 50, 62, -2] },
+  { type: "stamp",   label: "stamp",   x: 56, y: 3,  w: 8,  r: 7,  m: [72, 28, 19, 7] },
+  { type: "sticker", label: "flower",  x: 68, y: 1,  w: 13, r: 5,  m: [62, 56, 34, 5] },
+  { type: "photo",   label: "photo",   x: 84, y: 4,  w: 13, r: 3 },
+
+  { type: "note",    text: "buy more plants", color: "#ffd0dc", x: 6,  y: 25, w: 11, r: 5,  m: [4, 92, 30, 5] },
+  { type: "photo",   label: "photo",   x: 19, y: 21, w: 19, r: 2,  m: [36, 88, 44, 3] },
+  { type: "stamp",   label: "stamp",   x: 41, y: 24, w: 8,  r: -6, m: [82, 100, 15, -6] },
+  { type: "photo",   label: "photo",   x: 52, y: 20, w: 17, r: -3, m: [6, 122, 40, -3] },
+  { type: "word",    text: "hello!", color: "#d7e6ff", x: 72, y: 25, w: 14, r: 3,  m: [60, 150, 32, 3] },
+  { type: "note",    text: "to do:\nmake cool stuff", color: "#cdeccf", x: 87, y: 25, w: 11, r: -4, m: [52, 132, 36, -4] },
+
+  { type: "sticker", label: "sticker", x: 4,  y: 44, w: 11, r: -8 },
+  { type: "word",    text: "less noise, more soul.", color: "#f6e6a8", x: 24, y: 44, w: 24, r: 2 },
+  { type: "note",    text: "call mom", color: "#ffc99a", x: 54, y: 44, w: 11, r: -3 },
+  { type: "photo",   label: "photo",   x: 68, y: 40, w: 16, r: 3 },
+  { type: "stamp",   label: "stamp",   x: 87, y: 44, w: 7,  r: 6 }
+];
+
+(function renderBoard() {
   const board = document.getElementById("pinBoard");
   if (!board) return;
 
-  const section = board.closest(".experience-section");
-  const cards = board.querySelectorAll(".stack-image");
-  const offsets = new Map();   // card -> { fx, fy }
-  let zTop = 40;
-  let drag = null;
+  const surface = document.createElement("div");
+  surface.className = "pin-surface";
+  board.appendChild(surface);
 
-  function apply(card) {
-    const o = offsets.get(card);
-    const rect = board.getBoundingClientRect();
-    card.style.setProperty("--dx", `${o.fx * rect.width}px`);
-    card.style.setProperty("--dy", `${o.fy * rect.height}px`);
-  }
+  BOARD_ITEMS.forEach((item, index) => {
+    const el = document.createElement("div");
+    el.className = `pin-item pin-${item.type}`;
+    // desktop board is 100 x 62.5 units, so y converts to % of height
+    el.style.setProperty("--x", item.x);
+    el.style.setProperty("--y", item.y * 1.6);
+    el.style.setProperty("--w", item.w);
+    el.style.setProperty("--r", `${item.r}deg`);
 
-  cards.forEach(card => {
-    offsets.set(card, { fx: 0, fy: 0 });
+    if (item.m) {
+      const [mx, my, mw, mr] = item.m;
+      el.style.setProperty("--mx", mx);
+      el.style.setProperty("--my", my);
+      el.style.setProperty("--mw", mw);
+      el.style.setProperty("--mr", `${mr}deg`);
+    } else {
+      el.classList.add("is-hidden-narrow");
+      el.style.setProperty("--mx", 0);
+      el.style.setProperty("--my", 0);
+      el.style.setProperty("--mw", item.w);
+      el.style.setProperty("--mr", "0deg");
+    }
+    el.style.setProperty("--z", index + 1);
+    if (item.color) el.style.setProperty("--paper", item.color);
 
-    card.addEventListener("pointerdown", event => {
-      if (event.button !== undefined && event.button !== 0) return;
+    if (item.type === "note" || item.type === "word") {
+      const text = document.createElement("p");
+      text.textContent = item.text || "";
+      el.appendChild(text);
+    } else if (item.src) {
+      const img = document.createElement("img");
+      img.src = item.src;
+      img.alt = item.alt || "";
+      img.draggable = false;
+      el.appendChild(img);
+    } else {
+      const span = document.createElement("span");
+      span.textContent = item.label || "image";
+      el.appendChild(span);
+    }
 
-      const cardRect = card.getBoundingClientRect();
-      const o = offsets.get(card);
-      const boardRect = board.getBoundingClientRect();
-      const bounds = section.getBoundingClientRect();
-
-      drag = {
-        card,
-        id: event.pointerId,
-        startX: event.clientX,
-        startY: event.clientY,
-        baseX: o.fx * boardRect.width,
-        baseY: o.fy * boardRect.height,
-        // how far the card may travel and still stay inside the section
-        minX: bounds.left - (cardRect.left - o.fx * boardRect.width),
-        maxX: bounds.right - (cardRect.right - o.fx * boardRect.width),
-        minY: bounds.top - (cardRect.top - o.fy * boardRect.height),
-        maxY: bounds.bottom - (cardRect.bottom - o.fy * boardRect.height),
-        armed: event.pointerType !== "touch",
-        timer: null
-      };
-
-      if (!drag.armed) {
-        // touch: press-and-hold so normal page scrolling still works
-        drag.timer = setTimeout(() => {
-          if (drag) { drag.armed = true; card.classList.add("is-dragging"); }
-        }, 220);
-      } else {
-        card.classList.add("is-dragging");
-      }
-
-      zTop += 1;
-      card.style.zIndex = zTop;
-      card.setPointerCapture?.(event.pointerId);
-      if (drag.armed) event.preventDefault();
-    });
-
-    card.addEventListener("pointermove", event => {
-      if (!drag || drag.card !== card || event.pointerId !== drag.id) return;
-
-      const moveX = event.clientX - drag.startX;
-      const moveY = event.clientY - drag.startY;
-
-      if (!drag.armed) {
-        // finger moved before the hold finished: it's a scroll, not a drag
-        if (Math.hypot(moveX, moveY) > 8) {
-          clearTimeout(drag.timer);
-          drag = null;
-        }
-        return;
-      }
-
-      const boardRect = board.getBoundingClientRect();
-      const x = Math.min(drag.maxX, Math.max(drag.minX, drag.baseX + moveX));
-      const y = Math.min(drag.maxY, Math.max(drag.minY, drag.baseY + moveY));
-
-      offsets.set(card, { fx: x / boardRect.width, fy: y / boardRect.height });
-      apply(card);
-    });
-
-    const end = event => {
-      if (!drag || drag.card !== card) return;
-      clearTimeout(drag.timer);
-      card.classList.remove("is-dragging");
-      card.releasePointerCapture?.(drag.id);
-      drag = null;
-    };
-
-    card.addEventListener("pointerup", end);
-    card.addEventListener("pointercancel", end);
-    card.addEventListener("dragstart", event => event.preventDefault());
+    surface.appendChild(el);
   });
+})();
 
-  // stop the page scrolling while a touch drag is active
-  board.addEventListener(
-    "touchmove",
-    event => { if (drag && drag.armed) event.preventDefault(); },
-    { passive: false }
-  );
 
-  window.addEventListener("resize", () => cards.forEach(apply));
+/* =========================================================
+   INTRO VIDEO (calendar)
+   ========================================================= */
+
+(function initIntroVideo() {
+  const card = document.querySelector(".calendar-video");
+  if (!card) return;
+
+  const video = card.querySelector("video");
+  const button = card.querySelector(".video-play");
+  const src = card.dataset.src;
+
+  if (card.dataset.poster) video.poster = card.dataset.poster;
+  if (!src) return;                       // placeholder until a video is set
+
+  video.src = src;
+  card.classList.add("has-video");
+
+  button.addEventListener("click", () => {
+    if (video.paused) {
+      video.muted = false;
+      video.play();
+      card.classList.add("is-playing");
+      button.setAttribute("aria-label", "Pause intro video");
+    } else {
+      video.pause();
+      card.classList.remove("is-playing");
+      button.setAttribute("aria-label", "Play intro video");
+    }
+  });
 })();
 
 
