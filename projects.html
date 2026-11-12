@@ -17,9 +17,12 @@
   <div data-shared-header></div>
 
   <main>
-    <section class="horizontal-shell" aria-label="Projects timeline">
-      <div class="horizontal-scroll" id="projectTimeline" tabindex="0">
-        <div class="horizontal-track">
+    <!-- Tall "scroll runway": vertical scrolling slides the timeline sideways
+         (sticky stage). Normal page scroll, so the footer is always reachable. -->
+    <section class="work-scroll" id="workScroll" aria-label="Projects timeline">
+      <div class="work-stage" id="workStage">
+        <div class="work-track-wrap">
+        <div class="work-track" id="workTrack">
 
           <!-- 2022 -->
           <section class="timeline-panel intro-panel year-start" id="year-2022" data-year="2022">
@@ -27,14 +30,6 @@
 
             <div class="intro-bottom">
               <p class="intro-copy">A timeline of the work that shaped how I design, build, test, and think.</p>
-
-              <div class="year-jump" aria-label="Jump to year">
-                <button type="button" data-target="year-2022" data-year="2022">2022</button>
-                <button type="button" data-target="year-2023" data-year="2023">2023</button>
-                <button type="button" data-target="year-2024" data-year="2024">2024</button>
-                <button type="button" data-target="year-2025" data-year="2025">2025</button>
-                <button type="button" data-target="year-2026" data-year="2026">2026</button>
-              </div>
             </div>
           </section>
 
@@ -92,13 +87,6 @@
 
             <div class="year-marker-bottom">
               <div class="year-note">More systems, more structure, and more real-world constraints.</div>
-              <div class="year-jump" aria-label="Jump to year">
-                <button type="button" data-target="year-2022" data-year="2022">2022</button>
-                <button type="button" data-target="year-2023" data-year="2023">2023</button>
-                <button type="button" data-target="year-2024" data-year="2024">2024</button>
-                <button type="button" data-target="year-2025" data-year="2025">2025</button>
-                <button type="button" data-target="year-2026" data-year="2026">2026</button>
-              </div>
             </div>
           </section>
 
@@ -130,13 +118,6 @@
 
             <div class="year-marker-bottom">
               <div class="year-note">Identity work, web redesigns, and more polished visual systems.</div>
-              <div class="year-jump" aria-label="Jump to year">
-                <button type="button" data-target="year-2022" data-year="2022">2022</button>
-                <button type="button" data-target="year-2023" data-year="2023">2023</button>
-                <button type="button" data-target="year-2024" data-year="2024">2024</button>
-                <button type="button" data-target="year-2025" data-year="2025">2025</button>
-                <button type="button" data-target="year-2026" data-year="2026">2026</button>
-              </div>
             </div>
           </section>
 
@@ -183,13 +164,6 @@
 
             <div class="year-marker-bottom">
               <div class="year-note">Deeper product thinking, accessibility, prototyping, and brand exploration.</div>
-              <div class="year-jump" aria-label="Jump to year">
-                <button type="button" data-target="year-2022" data-year="2022">2022</button>
-                <button type="button" data-target="year-2023" data-year="2023">2023</button>
-                <button type="button" data-target="year-2024" data-year="2024">2024</button>
-                <button type="button" data-target="year-2025" data-year="2025">2025</button>
-                <button type="button" data-target="year-2026" data-year="2026">2026</button>
-              </div>
             </div>
           </section>
 
@@ -238,13 +212,6 @@
 
             <div class="year-marker-bottom">
               <div class="year-note">More confident systems, stronger storytelling, and work that brings design and development together.</div>
-              <div class="year-jump" aria-label="Jump to year">
-                <button type="button" data-target="year-2022" data-year="2022">2022</button>
-                <button type="button" data-target="year-2023" data-year="2023">2023</button>
-                <button type="button" data-target="year-2024" data-year="2024">2024</button>
-                <button type="button" data-target="year-2025" data-year="2025">2025</button>
-                <button type="button" data-target="year-2026" data-year="2026">2026</button>
-              </div>
             </div>
           </section>
 
@@ -264,8 +231,17 @@
         </div>
       </div>
 
-      <div class="horizontal-progress" aria-hidden="true">
-        <span id="timelineProgress"></span>
+        <nav class="year-bar" id="yearBar" aria-label="Jump to year">
+          <span class="year-progress" aria-hidden="true"><i id="yearProgress"></i></span>
+          <div class="year-jump">
+            <button type="button" data-target="year-2022" data-year="2022">2022</button>
+            <button type="button" data-target="year-2023" data-year="2023">2023</button>
+            <button type="button" data-target="year-2024" data-year="2024">2024</button>
+            <button type="button" data-target="year-2025" data-year="2025">2025</button>
+            <button type="button" data-target="year-2026" data-year="2026">2026</button>
+          </div>
+          <span class="year-hint" aria-hidden="true">scroll ↓</span>
+        </nav>
       </div>
     </section>
   </main>
