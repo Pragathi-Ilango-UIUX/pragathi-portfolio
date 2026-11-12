@@ -74,6 +74,13 @@ body[data-header-theme="dark-orange"] .site-header{
   --header-menu-bg:#111;
 }
 
+/* White background + yellow logo and nav (inspiration page) */
+body[data-header-theme="light-yellow"] .site-header{
+  --header-nav-color:#ffae14;
+  --header-logo-color:#ffae14;
+  --header-menu-bg:#fff;
+}
+
 /* Orange background + cream nav */
 body[data-header-theme="orange-cream"] .site-header{
   --header-nav-color:var(--portfolio-cream);
