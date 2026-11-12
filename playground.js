@@ -1,85 +1,161 @@
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const revealItems = document.querySelectorAll(".reveal, .reveal-card");
 
+/* ---------- reveal (staggered, so things settle into place one by one) ---------- */
 let revealObserver = null;
 
+function settle(item, delay) {
+  item.style.transitionDelay = delay + "ms";
+  item.classList.add("is-visible");
+  window.setTimeout(() => { item.style.transitionDelay = ""; }, delay + 1000);
+}
+
 if (reduceMotion) {
-  revealItems.forEach(item => item.classList.add("is-visible"));
+  document.querySelectorAll(".reveal, .reveal-card").forEach(i => i.classList.add("is-visible"));
 } else {
   revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-visible");
-      revealObserver.unobserve(entry.target);
-    });
+    entries
+      .filter(e => e.isIntersecting)
+      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left)
+      .forEach((entry, i) => {
+        settle(entry.target, Math.min(i, 8) * 90);
+        revealObserver.unobserve(entry.target);
+      });
   }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
 
-  revealItems.forEach(item => revealObserver.observe(item));
+  document.querySelectorAll(".reveal, .reveal-card").forEach(i => revealObserver.observe(i));
 }
 
+/* ---------- category switching ---------- */
 const filterButtons = [...document.querySelectorAll(".filter-chip")];
 const workSections = [...document.querySelectorAll(".work-section[data-section-category]")];
-const browserSection = document.querySelector(".playground-browser");
+const browserContent = document.querySelector(".browser-content");
+const sectionFor = key => workSections.find(s => s.dataset.sectionCategory === key);
 
-function revealActiveSection(section) {
-  section.querySelectorAll(".reveal, .reveal-card").forEach(item => {
-    if (reduceMotion) {
-      item.classList.add("is-visible");
-    } else if (!item.classList.contains("is-visible")) {
-      revealObserver?.observe(item);
+let current = "branding";
+let swapTimer = null;
+
+/* Keep the right-hand column as tall as the tallest category, so switching
+   never changes the page height (nothing above or below jumps). */
+function lockHeight() {
+  if (!browserContent) return;
+  browserContent.style.minHeight = "";
+  let tallest = 0;
+  workSections.forEach(section => {
+    const wasHidden = section.classList.contains("is-filtered-out");
+    section.classList.remove("is-filtered-out");
+    section.hidden = false;
+    tallest = Math.max(tallest, section.offsetHeight);
+    if (wasHidden) {
+      section.classList.add("is-filtered-out");
+      section.hidden = true;
     }
   });
+  browserContent.style.minHeight = tallest + "px";
 }
 
-function showCategory(filter, shouldScroll = false) {
+function markButtons(filter) {
   filterButtons.forEach(button => {
     const selected = button.dataset.filter === filter;
     button.classList.toggle("active", selected);
     button.setAttribute("aria-selected", String(selected));
     button.tabIndex = selected ? 0 : -1;
   });
+}
 
-  let selectedSection = null;
+function showSection(section) {
+  section.hidden = false;
+  section.classList.remove("is-filtered-out", "is-leaving");
+  const items = [...section.querySelectorAll(".reveal, .reveal-card")];
+  items.forEach(i => {
+    i.classList.remove("is-visible");
+    i.style.transitionDelay = "";
+  });
+  void section.offsetWidth;
+  items.forEach(i => (reduceMotion ? i.classList.add("is-visible") : revealObserver.observe(i)));
+}
 
-  workSections.forEach(section => {
-    const selected = section.dataset.sectionCategory === filter;
-    section.classList.toggle("is-filtered-out", !selected);
-    section.hidden = !selected;
+function switchTo(filter) {
+  if (filter === current) return;
+  const outgoing = sectionFor(current);
+  const incoming = sectionFor(filter);
+  current = filter;
+  markButtons(filter);
+  window.clearTimeout(swapTimer);
 
-    if (selected) {
-      selectedSection = section;
-      revealActiveSection(section);
-    }
+  workSections.forEach(s => {
+    if (s !== incoming && s !== outgoing) { s.hidden = true; s.classList.add("is-filtered-out"); }
   });
 
-  if (shouldScroll && browserSection) {
-    const top = browserSection.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({
-      top,
-      behavior: reduceMotion ? "auto" : "smooth"
-    });
+  const finish = () => {
+    if (outgoing) { outgoing.hidden = true; outgoing.classList.add("is-filtered-out"); outgoing.classList.remove("is-leaving"); }
+    showSection(incoming);
+  };
+
+  if (reduceMotion || !outgoing) {
+    finish();
+  } else {
+    outgoing.classList.add("is-leaving");
+    swapTimer = window.setTimeout(finish, 230);
   }
 }
 
 filterButtons.forEach(button => {
-  button.addEventListener("click", () => showCategory(button.dataset.filter, true));
+  button.addEventListener("click", () => switchTo(button.dataset.filter));
 
   button.addEventListener("keydown", event => {
     if (!["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft"].includes(event.key)) return;
-
     event.preventDefault();
-    const currentIndex = filterButtons.indexOf(button);
+    const i = filterButtons.indexOf(button);
     const step = ["ArrowDown", "ArrowRight"].includes(event.key) ? 1 : -1;
-    const nextIndex = (currentIndex + step + filterButtons.length) % filterButtons.length;
-    const nextButton = filterButtons[nextIndex];
-
-    nextButton.focus();
-    showCategory(nextButton.dataset.filter, false);
+    const next = filterButtons[(i + step + filterButtons.length) % filterButtons.length];
+    next.focus();
+    switchTo(next.dataset.filter);
   });
 });
 
-// Playground intentionally opens on Branding rather than showing every category at once.
-showCategory("branding");
+/* open on Branding */
+workSections.forEach(s => {
+  const on = s.dataset.sectionCategory === current;
+  s.hidden = !on;
+  s.classList.toggle("is-filtered-out", !on);
+});
+markButtons(current);
+lockHeight();
+window.addEventListener("resize", lockHeight);
+window.addEventListener("load", lockHeight);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockHeight);
 
-const playgroundVideo = document.querySelector(".hero-media video");
-playgroundVideo?.play().catch(() => {});
+/* ---------- chip row arrow (small screens) ---------- */
+const filterRow = document.querySelector(".filter-row");
+const railNext = document.querySelector(".rail-next");
+
+function updateRail() {
+  if (!filterRow || !railNext) return;
+  const overflow = filterRow.scrollWidth - filterRow.clientWidth > 4;
+  railNext.hidden = !overflow || window.innerWidth > 900;
+  const atEnd = filterRow.scrollLeft + filterRow.clientWidth >= filterRow.scrollWidth - 4;
+  railNext.classList.toggle("is-back", atEnd);
+  railNext.setAttribute("aria-label", atEnd ? "Back to first categories" : "Show more categories");
+}
+
+railNext?.addEventListener("click", () => {
+  const atEnd = filterRow.scrollLeft + filterRow.clientWidth >= filterRow.scrollWidth - 4;
+  filterRow.scrollTo({
+    left: atEnd ? 0 : filterRow.scrollLeft + filterRow.clientWidth * 0.7,
+    behavior: reduceMotion ? "auto" : "smooth"
+  });
+});
+
+filterRow?.addEventListener("scroll", updateRail, { passive: true });
+window.addEventListener("resize", updateRail);
+window.addEventListener("load", updateRail);
+updateRail();
+
+/* keep the active chip in view in the scrolling row, without moving the page */
+filterButtons.forEach(b => b.addEventListener("click", () => {
+  if (window.innerWidth > 900 || !filterRow) return;
+  const left = b.offsetLeft - (filterRow.clientWidth - b.offsetWidth) / 2;
+  filterRow.scrollTo({ left, behavior: reduceMotion ? "auto" : "smooth" });
+}));
+
+document.querySelector(".hero-media video")?.play().catch(() => {});

@@ -66,7 +66,7 @@ button { font: inherit; }
   margin: 0;
   color: var(--ink);
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(68px, 6.55vw, 126px);
+  font-size: clamp(40px, 6.1vw, 118px);
   font-weight: 400;
   line-height: 1.03;
   letter-spacing: .002em;
@@ -113,6 +113,7 @@ button { font: inherit; }
 .about-media-column { min-width: 0; }
 
 .media-pinboard {
+  margin-bottom: clamp(56px, 8vw, 90px);
   position: relative;
   width: min(100%, 720px);
   min-height: clamp(540px, 45vw, 720px);
@@ -196,7 +197,7 @@ button { font: inherit; }
   gap: .12em;
   color: var(--ink);
   font-family: "Caveat", cursive;
-  font-size: clamp(32px, 3vw, 54px);
+  font-size: clamp(22px, 2.6vw, 50px);
   font-weight: 600;
   line-height: .92;
   transform: rotate(-2deg);
@@ -254,13 +255,18 @@ button { font: inherit; }
   object-fit: contain;
 }
 
-.section-art-skills img {
-  width: clamp(250px, 38vw, 640px);
+/* Skills, Experience and Certifications titles share one height
+   (the SVGs are all 150 units tall; width = height x aspect ratio) */
+.section-art img,
+.experience-title-svg {
+  --h: clamp(56px, 7.4vw, 108px);
+  height: var(--h);
+  max-width: 100%;
 }
 
-.section-art-certifications img {
-  width: clamp(250px, 44vw, 760px);
-}
+.section-art-skills img { width: calc(var(--h) * 2.193); }
+.experience-title-svg { width: calc(var(--h) * 3.4); }
+.section-art-certifications img { width: calc(var(--h) * 5.293); }
 
 /* ============================= SKILLS ============================= */
 
@@ -296,7 +302,7 @@ button { font: inherit; }
 }
 
 /* ============================= EXPERIENCE ============================= */
-.experience-section { background: var(--black); color: #fff; }
+.experience-section { background: var(--black); color: #fff; overflow-x: clip; }
 
 /* the layout has no vertical padding so the centre line runs the full height */
 .experience-layout {
@@ -316,10 +322,6 @@ button { font: inherit; }
   top: clamp(24px, 6vh, 64px);
 }
 
-.experience-title-svg {
-  width: min(100%, 360px);
-  height: auto;
-}
 
 .experience-content {
   min-width: 0;
@@ -638,7 +640,7 @@ button { font: inherit; }
 /* ============================= RESPONSIVE ============================= */
 @media (max-width: 1180px) {
   .about-headline,
-  .about-headline-ghost { font-size: clamp(64px, 7vw, 106px); }
+  .about-headline-ghost { font-size: clamp(40px, 6.6vw, 96px); }
 
   .about-intro {
     grid-template-columns: minmax(340px,.95fr) minmax(380px,.9fr);
@@ -656,7 +658,7 @@ button { font: inherit; }
 
   .about-headline,
   .about-headline-ghost {
-    font-size: clamp(54px, 10.4vw, 86px);
+    font-size: clamp(36px, 8vw, 68px);
     line-height: 1.02;
   }
 
@@ -664,17 +666,14 @@ button { font: inherit; }
   .media-pinboard { min-height: 610px; max-width: 690px; }
   .about-copy { width: min(100%, 680px); justify-self: center; }
 
-  .section-art-skills img { width: min(64vw, 460px); }
-  .section-art-certifications img { width: min(80vw, 600px); }
 
   .experience-layout { grid-template-columns: 1fr; }
   .experience-layout { padding-top: 0; }
   .experience-title-column { padding: 72px 0 28px; }
   .experience-sticky { position: static; }
-  .experience-title-svg { width: min(60vw, 340px); }
   .experience-content {
-    border-left: 1px solid var(--gold-line);
-    padding: 20px 0 72px 32px;
+    border-left: 0;
+    padding: 20px 0 72px 0;
     min-height: auto;
   }
 
@@ -689,7 +688,7 @@ button { font: inherit; }
 
   .about-headline,
   .about-headline-ghost {
-    font-size: clamp(47px, 14.2vw, 70px);
+    font-size: clamp(32px, 9.6vw, 50px);
     letter-spacing: 0;
   }
 
@@ -702,7 +701,7 @@ button { font: inherit; }
     top: 10%;
     left: 53%;
     max-width: 46%;
-    font-size: clamp(26px, 7.4vw, 40px);
+    font-size: clamp(20px, 5.6vw, 30px);
   }
 
   .note-text { white-space: normal; }
@@ -713,7 +712,7 @@ button { font: inherit; }
   .skills-grid { grid-template-columns: 1fr; }
 
   .experience-layout { padding-left: 18px; padding-right: 18px; }
-  .experience-content { padding-left: 22px; gap: 54px; }
+  .experience-content { padding-left: 0; gap: 54px; }
 
   .certifications-inner { padding-left: 18px; padding-right: 18px; }
   .certification-stack { grid-template-columns: 1fr; gap: 16px; }
