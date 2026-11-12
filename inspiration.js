@@ -42,6 +42,13 @@
     cards.forEach(c => { c.style.height = "auto"; });
 
     const vh = window.innerHeight;
+    /* desktop: pin exactly where the content already sits at load, so
+       nothing shifts when scrolling starts (only the cards move) */
+    document.body.style.removeProperty("--stick");
+    if (window.innerWidth > 820) {
+      const docTop = steps.getBoundingClientRect().top + window.scrollY;
+      if (docTop < vh * 0.4) document.body.style.setProperty("--stick", Math.round(docTop) + "px");
+    }
     stick = parseFloat(getComputedStyle(stage).top) || 0;
     step = parseFloat(getComputedStyle(document.body).getPropertyValue("--stack-step")) || 16;
     stageH = Math.max(vh - stick, 300);

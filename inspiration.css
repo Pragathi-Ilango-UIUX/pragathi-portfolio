@@ -41,7 +41,7 @@ body.inspiration-page {
    LEFT / STICKY INTRO
    ========================================================= */
 
-.inspiration-intro { min-width: 0; }
+.inspiration-intro { min-width: 0; align-self: stretch; }
 
 .inspiration-sticky {
   position: sticky;
@@ -86,7 +86,7 @@ body.inspiration-page {
   margin-bottom: 40px;
   background: #fff;
   color: var(--ink);
-  border: 1px dotted var(--yellow);
+  border: 0;
   box-shadow: 0 -8px 22px rgba(0, 0, 0, .28);
 }
 
@@ -107,6 +107,19 @@ body.inspiration-page {
   transform: translate3d(0, var(--ty), 0) scale(var(--scale));
   transform-origin: 50% 0;
   will-change: transform;
+}
+
+/* dashed border: longer dashes, wider gaps */
+.step-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, var(--yellow) 58%, transparent 0) 0 0 / 26px 2px repeat-x,
+    linear-gradient(90deg, var(--yellow) 58%, transparent 0) 0 100% / 26px 2px repeat-x,
+    linear-gradient(0deg, var(--yellow) 58%, transparent 0) 0 0 / 2px 26px repeat-y,
+    linear-gradient(0deg, var(--yellow) 58%, transparent 0) 100% 0 / 2px 26px repeat-y;
 }
 
 .step-card:nth-child(1) { --n: 0; }
@@ -277,6 +290,7 @@ body.inspiration-page {
     gap: 34px;
   }
 
+  .inspiration-intro { align-self: start; }
   .inspiration-sticky { position: static; }
 
   .inspiration-title-svg { width: min(100%, 420px, 60vw); min-width: 220px; }
