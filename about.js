@@ -1,41 +1,67 @@
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/* ---------------- HERO TYPEWRITER ---------------- */
+/* ---------------- HERO TYPEWRITER ----------------
+   Every character is in the page from the start (hidden), so the
+   lines never re-wrap while typing. Typing only fades letters in. */
 const headlineTarget = document.getElementById("aboutHeadlineText");
-const headlineCursor = document.querySelector(".type-cursor");
 const headlineText = "Because great ideas deserve to be built just as beautifully as they’re imagined.";
-let headlineStarted = false;
+let headlineChars = [];
+let headlineCursor = null;
 
+function buildHeadline() {
+  if (!headlineTarget) return;
+  headlineCursor = document.createElement("span");
+  headlineCursor.className = "type-cursor";
+  headlineCursor.setAttribute("aria-hidden", "true");
+
+  headlineText.split(" ").forEach((word, wi, words) => {
+    const w = document.createElement("span");
+    w.className = "w";
+    [...word].forEach(ch => {
+      const c = document.createElement("span");
+      c.className = "ch";
+      c.textContent = ch;
+      w.appendChild(c);
+      headlineChars.push(c);
+    });
+    headlineTarget.appendChild(w);
+    if (wi < words.length - 1) headlineTarget.appendChild(document.createTextNode(" "));
+  });
+  headlineChars[0].parentNode.insertBefore(headlineCursor, headlineChars[0]);
+}
+
+let headlineStarted = false;
 function typeHeadline() {
   if (!headlineTarget || headlineStarted) return;
   headlineStarted = true;
 
   if (reduceMotion) {
-    headlineTarget.textContent = headlineText;
-    headlineCursor?.classList.add("is-done");
+    headlineChars.forEach(c => c.classList.add("on"));
+    headlineChars[headlineChars.length - 1].after(headlineCursor);
     return;
   }
 
-  const msPerCharacter = 31;
-  const startDelay = 180;
+  const msPerCharacter = 42;
+  const startDelay = 300;
   let startTime = null;
+  let shown = 0;
 
   function frame(timestamp) {
     if (!startTime) startTime = timestamp;
     const elapsed = Math.max(0, timestamp - startTime - startDelay);
-    const count = Math.min(headlineText.length, Math.floor(elapsed / msPerCharacter));
+    const count = Math.min(headlineChars.length, Math.floor(elapsed / msPerCharacter));
 
-    headlineTarget.textContent = headlineText.slice(0, count);
-
-    if (count < headlineText.length) {
-      requestAnimationFrame(frame);
-    } else {
-      headlineCursor?.classList.add("is-done");
+    if (count !== shown) {
+      for (let i = shown; i < count; i++) headlineChars[i].classList.add("on");
+      headlineChars[count - 1].after(headlineCursor);
+      shown = count;
     }
+    if (count < headlineChars.length) requestAnimationFrame(frame);
   }
-
   requestAnimationFrame(frame);
 }
+
+buildHeadline();
 
 if (headlineTarget) {
   if (reduceMotion) {
@@ -70,25 +96,32 @@ if (reduceMotion) {
   revealItems.forEach(item => revealObserver.observe(item));
 }
 
-/* ---------------- SKILLS STAGGER ---------------- */
+/* ---------------- SKILLS STAGGER ----------------
+   Each card animates as it scrolls into view; the delay follows
+   its column so a row ripples left to right. */
 const skillCards = [...document.querySelectorAll(".stagger-card")];
 const skillsGrid = document.querySelector(".skills-grid");
 
 if (skillCards.length) {
+  skillCards.forEach(card =>
+    card.querySelectorAll("li").forEach((li, i) => li.style.setProperty("--li", i))
+  );
+
   if (reduceMotion) {
     skillCards.forEach(card => card.classList.add("is-visible"));
-  } else if (skillsGrid) {
+  } else {
     const skillsObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
-        skillCards.forEach((card, index) => {
-          window.setTimeout(() => card.classList.add("is-visible"), index * 105);
-        });
+        const cols = getComputedStyle(skillsGrid).gridTemplateColumns.split(" ").length || 1;
+        const idx = skillCards.indexOf(entry.target);
+        entry.target.style.setProperty("--delay", (idx % cols) * 140 + "ms");
+        entry.target.classList.add("is-visible");
         skillsObserver.unobserve(entry.target);
       });
-    }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
+    }, { threshold: 0.2, rootMargin: "0px 0px -6% 0px" });
 
-    skillsObserver.observe(skillsGrid);
+    skillCards.forEach(card => skillsObserver.observe(card));
   }
 }
 
@@ -110,3 +143,76 @@ if (signature) {
     signatureObserver.observe(signature);
   }
 }
+
+/* ---------------- 5–9 POLAROID CAROUSEL ----------------
+   Fill this list to populate the carousel. Leave `src` empty to show
+   an empty polaroid; add as many items as you like. */
+const POLAROIDS = [
+  { src: "", caption: "hiking" },
+  { src: "", caption: "travel" },
+  { src: "", caption: "cooking" },
+  { src: "", caption: "photography" },
+  { src: "", caption: "prince walks" },
+  { src: "", caption: "biking" },
+  { src: "", caption: "music" },
+  { src: "", caption: "friends" },
+  { src: "", caption: "weekend" },
+  { src: "", caption: "somewhere new" }
+];
+
+(function () {
+  const track = document.getElementById("polaroidTrack");
+  if (!track) return;
+
+  POLAROIDS.forEach((item, i) => {
+    const fig = document.createElement("figure");
+    fig.className = "polaroid";
+    const photo = document.createElement("div");
+    photo.className = "polaroid-photo";
+    if (item.src) {
+      const img = document.createElement("img");
+      img.src = item.src;
+      img.alt = item.alt || item.caption || "";
+      img.loading = "lazy";
+      img.draggable = false;
+      photo.appendChild(img);
+    } else {
+      photo.textContent = String(i + 1).padStart(2, "0");
+    }
+    const cap = document.createElement("figcaption");
+    cap.textContent = item.caption || "";
+    fig.append(photo, cap);
+    track.appendChild(fig);
+  });
+
+  const stepBy = () => {
+    const first = track.querySelector(".polaroid");
+    return first ? first.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 24) : 300;
+  };
+  const go = dir => track.scrollBy({ left: dir * stepBy() * 2, behavior: reduceMotion ? "auto" : "smooth" });
+
+  document.getElementById("polaroidPrev")?.addEventListener("click", () => go(-1));
+  document.getElementById("polaroidNext")?.addEventListener("click", () => go(1));
+  track.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
+  });
+
+  /* mouse drag (touch uses native scrolling) */
+  let down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener("pointerdown", e => {
+    if (e.pointerType !== "mouse") return;
+    down = true; moved = false; startX = e.clientX; startLeft = track.scrollLeft;
+  });
+  window.addEventListener("pointermove", e => {
+    if (!down) return;
+    const dx = e.clientX - startX;
+    if (!moved && Math.abs(dx) > 4) { moved = true; track.classList.add("is-dragging"); }
+    if (moved) track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener("pointerup", () => {
+    if (!down) return;
+    down = false;
+    track.classList.remove("is-dragging");
+  });
+})();

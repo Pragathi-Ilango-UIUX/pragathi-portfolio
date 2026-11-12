@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="about.css" />
   <link rel="stylesheet" href="shared.css" />
 </head>
-<body class="about-page" data-header-theme="dark-orange" data-page="about">
+<body class="about-page" data-header-theme="gold-ink" data-page="about">
   <div data-shared-header></div>
 
   <main>
@@ -20,11 +20,8 @@
     <section class="about-hero">
       <div class="about-hero-inner">
         <div class="about-headline-stage reveal">
-          <h1 class="about-headline-ghost" aria-hidden="true">
-            Because great ideas deserve to be built just as beautifully as they’re imagined.
-          </h1>
           <h1 class="about-headline" aria-label="Because great ideas deserve to be built just as beautifully as they’re imagined.">
-            <span id="aboutHeadlineText"></span><span class="type-cursor" aria-hidden="true"></span>
+            <span id="aboutHeadlineText" aria-hidden="true"></span>
           </h1>
         </div>
 
@@ -36,8 +33,8 @@
               </figure>
 
               <div class="about-photo-note" id="aboutSignature" aria-label="Hi, I’m Pragathi Ilango">
-                <span class="note-arrow" aria-hidden="true">↙</span>
-                <span>Hi, I’m Pragathi Ilango</span>
+                <svg class="note-arrow" viewBox="0 0 120 84" aria-hidden="true"><path d="M104 10 C62 0, 24 22, 14 62"></path><path d="M3 50 L13 68 L29 56"></path></svg>
+                <span class="note-text">Hi, I’m<br>Pragathi Ilango</span>
               </div>
 
               <figure class="media-piece media-piece-two">
@@ -185,11 +182,26 @@
         </div>
 
         <div class="certification-stack" aria-label="Professional certifications">
-          <div class="cert-circle reveal-card"><img alt="HFI Certified Usability Analyst" src="assets/images/hfi.png" /></div>
-          <div class="cert-circle reveal-card"><img alt="Interaction Design Foundation" src="assets/images/idf.png" /></div>
-          <div class="cert-circle reveal-card"><img alt="PMI CAPM" src="assets/images/pmi.png" /></div>
-          <div class="cert-circle reveal-card"><img alt="Google UX Design certificate" src="assets/images/google.png" /></div>
-          <div class="cert-circle reveal-card"><img alt="freeCodeCamp" src="assets/images/FreeCodeCamp_logo 1.svg" /></div>
+          <article class="cert-card reveal-card">
+            <div class="cert-logo"><img alt="" src="assets/images/hfi.png" /></div>
+            <h3>Certified Usability Analyst</h3>
+            <p>HFI’s certification in usability analysis and user-centered design.</p>
+          </article>
+          <article class="cert-card reveal-card">
+            <div class="cert-logo"><img alt="" src="assets/images/idf.png" /></div>
+            <h3>Interaction Design Foundation</h3>
+            <p>Ongoing coursework in UX, interaction design, and design thinking.</p>
+          </article>
+          <article class="cert-card reveal-card">
+            <div class="cert-logo"><img alt="" src="assets/images/pmi.png" /></div>
+            <h3>CAPM®</h3>
+            <p>Project Management Institute’s Certified Associate in Project Management.</p>
+          </article>
+          <article class="cert-card reveal-card">
+            <div class="cert-logo"><img alt="" src="assets/images/google.png" /></div>
+            <h3>Google UX Design Certificate</h3>
+            <p>Research, wireframing, prototyping, and testing, through Coursera.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -200,21 +212,11 @@
         <span>My 5–9<br />after my 9–5</span>
       </div>
 
-      <div class="scrapbook-wrap">
-        <div class="scrapbook-row scrapbook-row-top">
-          <div class="scrap-card card-1"><span>1</span><span class="scrap-label label-right">↗ Hiking</span></div>
-          <div class="scrap-card card-2"><span>2</span></div>
-          <div class="scrap-card card-3"><span>3</span><span class="scrap-label label-left">Photography ↙</span></div>
-          <div class="scrap-card card-4"><span>4</span></div>
-          <div class="scrap-card card-5"><span>5</span><span class="scrap-label label-right">↗ Travel</span></div>
-        </div>
-
-        <div class="scrapbook-row scrapbook-row-bottom">
-          <div class="scrap-card card-6"><span>6</span></div>
-          <div class="scrap-card card-7"><span>7</span><span class="scrap-label label-left">Cooking ↘</span></div>
-          <div class="scrap-card card-8"><span>8</span></div>
-          <div class="scrap-card card-9"><span>9</span></div>
-          <div class="scrap-card card-10"><span>10</span></div>
+      <div class="polaroid-carousel" aria-roledescription="carousel" aria-label="Photos from my 5–9">
+        <div class="polaroid-track" id="polaroidTrack" tabindex="0"></div>
+        <div class="polaroid-controls">
+          <button type="button" class="polaroid-btn" id="polaroidPrev" aria-label="Previous photos">←</button>
+          <button type="button" class="polaroid-btn" id="polaroidNext" aria-label="Next photos">→</button>
         </div>
       </div>
     </section>
