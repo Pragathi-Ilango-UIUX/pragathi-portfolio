@@ -460,20 +460,20 @@ const BOARD_ITEMS = [
 
   // --- gap between the canyon polaroid and the dream catcher
   { type: "sticker", src: "assets/images/juice-cup.png", alt: "Juice cup", ar: .55, x: 35.5, y: 29, w: 10.5, r: -8, m: [76, 150, 18, -8] },
-  { type: "sticker", src: "assets/images/nyc-pizza-slice.png", alt: "NYC pizza slice", ar: .824, x: 45.5, y: 33, w: 9, r: 8, m: [60, 190, 20, 8] },
+  { type: "sticker", src: "assets/images/nyc-pizza-slice.png", alt: "NYC pizza slice", ar: .824, x: 44, y: 28.5, w: 11, r: 8, m: [60, 190, 20, 8] },
 
   // --- top: sun + to-do note next to the boarding pass
   { type: "sticker", src: "assets/images/sun.png", alt: "Sun", ar: 1, x: 42.5, y: 0.5, w: 13, r: -6, m: [76, 56, 20, 0] },
   { type: "note",    text: "to do:\nmake cool stuff", color: "#cdeccf", x: 47, y: 12.5, w: 8.5, r: -5, m: [68, 274, 28, -4] },
 
   // --- right side
-  { type: "loose",   src: "assets/images/Scrabble-Style HUSTLE Tiles.png", alt: "HUSTLE", shadow: true, x: 60.5, y: 1, w: 38.5, r: 0, m: [28, 36, 70, 0] },
+  { type: "loose",   src: "assets/images/Scrabble-Style HUSTLE Tiles.png", alt: "HUSTLE", shadow: true, x: 60.5, y: -2, w: 38.5, r: 0, m: [28, 36, 70, 0] },
   { type: "photo",   src: "assets/images/hike.jpeg", alt: "On a hike", x: 77, y: 17, w: 21, r: -3, m: [3, 222, 40, -3] },
-  { type: "photo",   src: "assets/images/central park.jpeg", alt: "Central Park", x: 69, y: 15, w: 12.5, r: -4, m: [6, 316, 38, 2] },
+  { type: "photo",   src: "assets/images/central park.jpeg", alt: "Central Park", x: 69, y: 12.5, w: 12.5, r: -4, m: [6, 316, 38, 2] },
   { type: "photo",   src: "assets/images/prince1.jpeg", alt: "Prince", x: 74, y: 37.5, w: 21, r: 3, m: [46, 224, 40, 3] },
-  { type: "sticker", src: "assets/images/purple-verbena.png", alt: "Purple verbena", ar: 1, x: 67.5, y: 35, w: 8.5, r: 6 },
-  { type: "sticker", src: "assets/images/hedgehog-sticker.png", alt: "Hedgehog", ar: 1.41, x: 71, y: 30, w: 15, r: -3 },
-  { type: "sticker", src: "assets/images/wesleyan-sticker-cropped.png", alt: "Wesleyan University", ar: 1.615, x: 66.5, y: 54.5, w: 12, r: -4, m: [36, 255, 22, -4] },
+  { type: "sticker", src: "assets/images/purple-verbena.png", alt: "Purple verbena", ar: 1, x: 89, y: 11, w: 11, r: 8 },
+  { type: "sticker", src: "assets/images/hedgehog-sticker.png", alt: "Hedgehog", ar: 1.41, x: 66, y: 27.5, w: 22, r: -3 },
+  { type: "sticker", src: "assets/images/wesleyan-sticker-cropped.png", alt: "Wesleyan University", ar: 1.615, x: 61, y: 54.5, w: 12, r: -9, m: [36, 255, 22, -4] },
   { type: "sticker", src: "assets/images/utd.svg", alt: "UT Dallas", ar: 1, x: 87, y: 49, w: 12, r: 5, m: [62, 118, 22, 5] },
 
   // --- notes along the bottom
