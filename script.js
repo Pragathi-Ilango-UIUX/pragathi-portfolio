@@ -446,24 +446,49 @@ document.querySelectorAll(".stack-image")
 // `m: [x, y, w, r]` is the arrangement on narrow/phone screens;
 // leave `m` out to hide that item on narrow screens.
 const BOARD_ITEMS = [
-  { type: "photo",   src: "assets/images/baby.jpeg",   alt: "Baby photo",           x: 3,  y: 3,  w: 15, r: -4, m: [3, 3, 40, -4] },
-  { type: "sticker", src: "assets/images/utd-stickers.png", alt: "UT Dallas stickers", ar: 1, x: 19, y: 2,  w: 13, r: 3,  m: [50, 3, 34, 3] },
-  { type: "pass",    src: "assets/images/boarding-pass-nyc-la.png", alt: "Boarding pass, NYC to LA", x: 32, y: 6,  w: 24, r: -2, m: [8, 52, 60, -2] },
-  { type: "stamp",   src: "assets/images/beach.jpeg",  alt: "Beach at sunset",      x: 58, y: 3,  w: 8,  r: 7,  m: [80, 38, 16, 7] },
-  { type: "sticker", src: "assets/images/petunia.png", alt: "Petunia",              ar: 1.1, x: 68, y: 1,  w: 13, r: 5,  m: [66, 58, 30, 5] },
-  { type: "photo",   src: "assets/images/hike.jpeg",   alt: "On a hike",            x: 84, y: 4,  w: 13, r: 3,  m: [4, 82, 38, -3] },
+  // --- left column
+  { type: "dream",   src: "assets/images/dream.png", alt: "Dream catcher", x: 1, y: 1, w: 21, r: 0, m: [2, 2, 24, 0] },
+  { type: "sticker", slot: true, label: "embellished P", ar: 1, x: 3, y: 47, w: 15, r: -3, m: [2, 53, 25, -3] },
 
-  { type: "dream",   src: "assets/images/dream.png",   alt: "Dream catcher",        x: 5,  y: 23, w: 9,  r: 0,  m: [46, 82, 12, 0] },
-  { type: "photo",   src: "assets/images/nyc.jpeg",    alt: "Statue of Liberty",    x: 20, y: 22, w: 16, r: 2,  m: [6, 130, 38, 2] },
-  { type: "stamp",   src: "assets/images/canyon.jpeg", alt: "Canyon",               x: 40, y: 25, w: 8,  r: -6, m: [46, 128, 16, -6] },
-  { type: "photo",   src: "assets/images/prince1.jpeg", alt: "Prince",              x: 51, y: 20, w: 17, r: -3, m: [58, 98, 38, 3] },
-  { type: "sticker", src: "assets/images/western-sticker.svg", alt: "Western University", ar: 1, x: 72, y: 24, w: 13, r: 3,  m: [62, 150, 32, 3] },
-  { type: "note",    text: "to do:\nmake cool stuff", color: "#cdeccf", x: 87, y: 25, w: 11, r: -4, m: [8, 168, 28, -4] },
+  // --- top middle
+  { type: "pass",    src: "assets/images/boarding-pass-nyc-la.png", alt: "Boarding pass, NYC to LA", x: 23, y: 2, w: 27, r: -2, m: [28, 3, 70, -2] },
+  { type: "pic",     slot: true, label: "wooden board image", ar: 1.5, x: 51, y: 1, w: 15, r: 1, m: [29, 54, 44, 1] },
+  { type: "sticker", src: "assets/images/star.svg", alt: "Star", ar: 1, x: 67, y: 1.5, w: 5.5, r: 8, m: [79, 34, 15, 8] },
 
-  { type: "sticker", src: "assets/images/juice-cup.png", alt: "Juice cup",          ar: 0.55, x: 4,  y: 43, w: 9,  r: -8, m: [48, 160, 14, -8] },
-  { type: "word",    hand: true, text: "work until you don’t have to introduce yourself.", color: "#f6e6a8", ar: 1.7, x: 19, y: 43, w: 27, r: 2, m: [6, 198, 58, 2] },
-  { type: "note",    text: "call mom back!!!", color: "#ffc99a", x: 50, y: 47, w: 12, r: -3, m: [64, 186, 30, -3] },
-  { type: "photo",   src: "assets/images/on.gif",      alt: "Bring it on",          x: 67, y: 42, w: 16, r: 3,  m: [50, 228, 40, 3] }
+  // --- top right: three flower spaces, then two plain photos
+  { type: "sticker", slot: true, label: "flower", ar: 1, x: 73,   y: 1, w: 8, r: -4, m: [29, 35, 15, -4] },
+  { type: "sticker", slot: true, label: "flower", ar: 1, x: 81.5, y: 2, w: 8, r: 3,  m: [45, 37, 15, 3] },
+  { type: "sticker", slot: true, label: "flower", ar: 1, x: 90,   y: 1, w: 8, r: -2, m: [61, 35, 15, -2] },
+  { type: "pic",     src: "assets/images/baby.jpeg", alt: "Baby photo", ar: .85, x: 72, y: 12, w: 12, r: -3, m: [3, 81, 30, -3] },
+  { type: "pic",     slot: true, label: "photo", ar: .85, x: 86, y: 12, w: 11, r: 3, m: [36, 86, 28, 3] },
+
+  // --- nyc + canyon polaroids, juice beside them
+  { type: "photo",   src: "assets/images/nyc.jpeg", alt: "Statue of Liberty", x: 28, y: 15, w: 15, r: -3, m: [3, 120, 40, -3] },
+  { type: "photo",   src: "assets/images/canyon.jpeg", alt: "Canyon", x: 40, y: 18, w: 15, r: 4, m: [34, 128, 38, 4] },
+  { type: "sticker", src: "assets/images/juice-cup.png", alt: "Juice cup", ar: .55, x: 22, y: 22, w: 7, r: -8, m: [76, 150, 18, -8] },
+  { type: "sticker", src: "assets/images/utd-stickers.png", alt: "UT Dallas stickers", ar: 1, x: 35, y: 10, w: 10, r: 5, m: [62, 118, 22, 5] },
+
+  // --- stamps, sun, gif
+  { type: "stamp",   src: "assets/images/beach.jpeg", alt: "Beach at sunset", x: 29, y: 38, w: 7, r: 5, m: [4, 172, 20, 5] },
+  { type: "stamp",   slot: true, label: "stamp", x: 38, y: 39, w: 7, r: -5, m: [26, 176, 20, -5] },
+  { type: "sticker", src: "assets/images/sun.png", alt: "Sun", ar: 1, x: 45, y: 37, w: 8, r: 0, m: [76, 56, 20, 0] },
+  { type: "loose",   src: "assets/images/on.gif", alt: "Bring it on", x: 21, y: 45, w: 19.5, r: -2, m: [48, 178, 48, 0] },
+
+  // --- middle right: flower, hike + prince polaroids, room for more
+  { type: "sticker", src: "assets/images/petunia.png", alt: "Petunia", ar: 1.1, x: 53, y: 36, w: 9, r: 5, m: [4, 196, 30, 5] },
+  { type: "photo",   src: "assets/images/hike.jpeg", alt: "On a hike", x: 62, y: 28, w: 15, r: -3, m: [3, 222, 40, -3] },
+  { type: "photo",   src: "assets/images/prince1.jpeg", alt: "Prince", x: 79, y: 29, w: 15, r: 3, m: [46, 224, 40, 3] },
+  { type: "sticker", src: "assets/images/western-sticker.svg", alt: "Western University", ar: 1, x: 56, y: 30, w: 9, r: -4, m: [36, 255, 22, -4] },
+  { type: "photo",   slot: true, label: "photo", x: 73, y: 47, w: 10.5, r: 2,  m: [6, 316, 38, 2] },
+  { type: "photo",   slot: true, label: "photo", x: 85, y: 48, w: 10.5, r: -3, m: [50, 330, 38, -3] },
+
+  // --- notes in a slightly overlapping series
+  { type: "word",    hand: true, text: "work until you don’t have to introduce yourself.", color: "#f6e6a8", ar: 1.7, x: 42, y: 46, w: 19, r: -2, m: [4, 276, 58, -2] },
+  { type: "note",    text: "call mom back!!!", color: "#ffc99a", x: 60, y: 52, w: 9, r: 3, m: [52, 296, 30, 3] },
+  { type: "note",    text: "to do:\nmake cool stuff", color: "#cdeccf", x: 64, y: 43.5, w: 8, r: -4, m: [68, 274, 28, -4] },
+
+  // --- sticker hanging off the bottom edge
+  { type: "sticker", slot: true, label: "sticker", ar: 1, x: 40, y: 59, w: 7, r: 6, m: [38, 372, 22, 6] }
 ];
 
 (function renderBoard() {
@@ -499,17 +524,14 @@ const BOARD_ITEMS = [
     el.style.setProperty("--z", index + 1);
     if (item.ar) el.style.setProperty("--ar", item.ar);
     if (item.hand) el.classList.add("pin-hand");
-    // each pin is viewed from a slightly different angle so it looks natural
-    const PIN_ANGLES = [-16, 11, -5, 19, -12, 7, 15, -9];
-    el.style.setProperty("--pn", PIN_ANGLES[index % PIN_ANGLES.length]);
-    el.style.setProperty("--ps", (0.86 + ((index * 37) % 14) / 100).toFixed(2));
+    if (item.slot) el.classList.add("pin-slot");
     if (item.color) el.style.setProperty("--paper", item.color);
 
     if (item.type === "note" || item.type === "word") {
       const text = document.createElement("p");
       text.textContent = item.text || "";
       el.appendChild(text);
-    } else if (item.src) {
+    } else if (item.src && !item.slot) {
       const img = document.createElement("img");
       img.src = item.src;
       img.alt = item.alt || "";
