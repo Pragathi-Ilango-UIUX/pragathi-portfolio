@@ -2479,7 +2479,7 @@ a {
   font-family: "Caveat", cursive;
   font-style: normal;
   font-weight: 600;
-  font-size: calc(var(--size) * .115);
+  font-size: calc(var(--size) * .135);
   line-height: 1;
   letter-spacing: 0;
   color: #3a3226;
