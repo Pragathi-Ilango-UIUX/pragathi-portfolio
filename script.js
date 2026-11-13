@@ -446,35 +446,42 @@ document.querySelectorAll(".stack-image")
 // `m: [x, y, w, r]` is the arrangement on narrow/phone screens;
 // leave `m` out to hide that item on narrow screens.
 const BOARD_ITEMS = [
-  // --- centre: dream catcher
-  { type: "dream",   src: "assets/images/dream.png", alt: "Dream catcher", x: 47, y: 0.5, w: 28, r: 0, m: [2, 2, 24, 0] },
-
   // --- left side
   { type: "pass",    src: "assets/images/boarding-pass-nyc-la.png", alt: "Boarding pass, NYC to LA", x: 1, y: 2, w: 43, r: -4, m: [28, 3, 70, -4] },
   { type: "photo",   src: "assets/images/new york.jpeg", alt: "New York", x: 2, y: 18, w: 21, r: -3, m: [3, 120, 40, -3] },
   { type: "photo",   src: "assets/images/canyon.jpeg", alt: "Canyon", x: 16, y: 21, w: 21, r: 4, m: [34, 128, 38, 4] },
-  { type: "sticker", src: "assets/images/sun.png", alt: "Sun", ar: 1, x: 45.5, y: 1, w: 8.5, r: -6, m: [76, 56, 20, 0] },
   { type: "loose",   src: "assets/images/on.gif", alt: "Bring it on", x: 16, y: 43, w: 21, r: -2, m: [48, 178, 48, 0] },
-  { type: "sticker", src: "assets/images/varsity-p-cropped.png", alt: "Brown varsity P sticker", ar: 1.06, x: 3, y: 42, w: 20, r: -4, m: [2, 53, 25, -4] },
-  { type: "sticker", src: "assets/images/petunia.png", alt: "Petunia", ar: 1.1, x: 0.5, y: 35, w: 12, r: 5, m: [4, 196, 30, 5] },
+  { type: "sticker", src: "assets/images/petunia.png", alt: "Petunia", ar: 1.1, x: 0, y: 37, w: 13.5, r: 5, m: [4, 196, 30, 5] },
+  { type: "sticker", src: "assets/images/varsity-p-cropped.png", alt: "Brown varsity P sticker", ar: 1.06, x: 3, y: 44.5, w: 20, r: -4, m: [2, 53, 25, -4] },
 
   // --- stamps overlapping the boarding pass
   { type: "stamp",   src: "assets/images/beach.jpeg", alt: "Beach at sunset", x: 35, y: 15, w: 9.5, r: 6, m: [4, 172, 20, 5] },
   { type: "stamp",   src: "assets/images/nyc.jpeg", alt: "Statue of Liberty", x: 42, y: 18, w: 9.5, r: -5, m: [26, 176, 20, -5] },
-  { type: "sticker", src: "assets/images/juice-cup.png", alt: "Juice cup", ar: .55, x: 34, y: 9, w: 9, r: -8, m: [76, 150, 18, -8] },
+
+  // --- gap between the canyon polaroid and the dream catcher
+  { type: "sticker", src: "assets/images/juice-cup.png", alt: "Juice cup", ar: .55, x: 35.5, y: 29, w: 10.5, r: -8, m: [76, 150, 18, -8] },
+  { type: "sticker", src: "assets/images/nyc-pizza-slice.png", alt: "NYC pizza slice", ar: .824, x: 45.5, y: 33, w: 9, r: 8, m: [60, 190, 20, 8] },
+
+  // --- top: sun + to-do note next to the boarding pass
+  { type: "sticker", src: "assets/images/sun.png", alt: "Sun", ar: 1, x: 42.5, y: 0.5, w: 13, r: -6, m: [76, 56, 20, 0] },
+  { type: "note",    text: "to do:\nmake cool stuff", color: "#cdeccf", x: 47, y: 12.5, w: 8.5, r: -5, m: [68, 274, 28, -4] },
 
   // --- right side
-  { type: "loose",   src: "assets/images/HUSTLE Wooden Letter Tiles.png", alt: "HUSTLE", shadow: true, x: 66.5, y: 1, w: 32, r: -2, m: [28, 36, 70, -2] },
-  { type: "photo",   src: "assets/images/hike.jpeg", alt: "On a hike", x: 77, y: 13, w: 21, r: -3, m: [3, 222, 40, -3] },
-  { type: "photo",   src: "assets/images/prince1.jpeg", alt: "Prince", x: 74, y: 36, w: 21, r: 3, m: [46, 224, 40, 3] },
-  { type: "photo",   src: "assets/images/central park.jpeg", alt: "Central Park", x: 70, y: 11, w: 15.5, r: -4, m: [6, 316, 38, 2] },
-  { type: "sticker", src: "assets/images/wesleyan-sticker-cropped.png", alt: "Wesleyan University", ar: 1.615, x: 63, y: 46, w: 12, r: -4, m: [36, 255, 22, -4] },
+  { type: "loose",   src: "assets/images/Scrabble-Style HUSTLE Tiles.png", alt: "HUSTLE", shadow: true, x: 60.5, y: 1, w: 38.5, r: 0, m: [28, 36, 70, 0] },
+  { type: "photo",   src: "assets/images/hike.jpeg", alt: "On a hike", x: 77, y: 17, w: 21, r: -3, m: [3, 222, 40, -3] },
+  { type: "photo",   src: "assets/images/central park.jpeg", alt: "Central Park", x: 69, y: 15, w: 12.5, r: -4, m: [6, 316, 38, 2] },
+  { type: "photo",   src: "assets/images/prince1.jpeg", alt: "Prince", x: 74, y: 37.5, w: 21, r: 3, m: [46, 224, 40, 3] },
+  { type: "sticker", src: "assets/images/purple-verbena.png", alt: "Purple verbena", ar: 1, x: 67.5, y: 35, w: 8.5, r: 6 },
+  { type: "sticker", src: "assets/images/hedgehog-sticker.png", alt: "Hedgehog", ar: 1.41, x: 71, y: 30, w: 15, r: -3 },
+  { type: "sticker", src: "assets/images/wesleyan-sticker-cropped.png", alt: "Wesleyan University", ar: 1.615, x: 66.5, y: 54.5, w: 12, r: -4, m: [36, 255, 22, -4] },
   { type: "sticker", src: "assets/images/utd.svg", alt: "UT Dallas", ar: 1, x: 87, y: 49, w: 12, r: 5, m: [62, 118, 22, 5] },
 
-  // --- notes in a row, same angle, slight overlaps
+  // --- notes along the bottom
   { type: "word",    hand: true, text: "work until you don’t have to introduce yourself.", color: "#f6e6a8", ar: 1, x: 38, y: 47.5, w: 15, r: -2, m: [4, 276, 58, -2] },
-  { type: "note",    text: "call mom back!!!", color: "#ffc99a", x: 52.5, y: 49.5, w: 10, r: -2, m: [52, 296, 30, 3] },
-  { type: "note",    text: "to do:\nmake cool stuff", color: "#cdeccf", x: 46.5, y: 11, w: 8.5, r: -5, m: [68, 274, 28, -4] },
+  { type: "note",    text: "call mom back!!!", color: "#ffc99a", x: 52.5, y: 52, w: 10, r: 3, m: [52, 296, 30, 3] },
+
+  // --- dream catcher sits above everything else
+  { type: "dream",   src: "assets/images/dream.png", alt: "Dream catcher", x: 47, y: 0.5, w: 28, r: 0, m: [2, 2, 24, 0] }
 ];
 
 (function renderBoard() {
