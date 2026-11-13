@@ -109,4 +109,36 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
   layout();
   setTimeout(() => show(0), 250);
+
+  /* Deep link (e.g. inspiration.html#books): start at the top, then scroll
+     through the stack on its own so the cards rise one after another and
+     settle on the requested one. */
+  function goToAnchor() {
+    const idx = cards.findIndex(c => c.dataset.anchor === location.hash.slice(1));
+    if (idx < 0) return;
+    const html = document.documentElement;
+
+    if (!stacked) {
+      setTimeout(() => cards[idx].scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" }), 400);
+      return;
+    }
+
+    const runwayTop = steps.getBoundingClientRect().top + window.scrollY - stick;
+    const target = runwayTop + idx * seg;
+    html.style.scrollBehavior = "auto";
+    if (reduceMotion) { window.scrollTo(0, target); html.style.scrollBehavior = ""; return; }
+
+    window.scrollTo(0, 0);
+    const from = 0, dur = 1400 + idx * 900;
+    setTimeout(() => {
+      const t0 = performance.now();
+      const tick = now => {
+        const p = Math.min((now - t0) / dur, 1);
+        window.scrollTo(0, from + (target - from) * easeInOut(p));
+        if (p < 1) requestAnimationFrame(tick); else html.style.scrollBehavior = "";
+      };
+      requestAnimationFrame(tick);
+    }, 700);
+  }
+  window.addEventListener("load", () => setTimeout(goToAnchor, 150));
 })();

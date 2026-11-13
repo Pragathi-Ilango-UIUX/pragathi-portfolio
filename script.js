@@ -446,25 +446,24 @@ document.querySelectorAll(".stack-image")
 // `m: [x, y, w, r]` is the arrangement on narrow/phone screens;
 // leave `m` out to hide that item on narrow screens.
 const BOARD_ITEMS = [
-  { type: "photo",   label: "photo",   x: 3,  y: 3,  w: 15, r: -4, m: [4, 4, 42, -4] },
-  { type: "note",    text: "ideas worth chasing", color: "#fff1a8", x: 19, y: 2,  w: 11, r: 3,  m: [52, 5, 30, 4] },
-  { type: "word",    text: "make it feel like something.", color: "#ffe1d0", x: 32, y: 4,  w: 21, r: -2, m: [10, 50, 62, -2] },
-  { type: "stamp",   label: "stamp",   x: 56, y: 3,  w: 8,  r: 7,  m: [72, 28, 19, 7] },
-  { type: "sticker", label: "flower",  x: 68, y: 1,  w: 13, r: 5,  m: [62, 56, 34, 5] },
-  { type: "photo",   label: "photo",   x: 84, y: 4,  w: 13, r: 3 },
+  { type: "photo",   src: "assets/images/baby.jpeg",   alt: "Baby photo",           x: 3,  y: 3,  w: 15, r: -4, m: [3, 3, 40, -4] },
+  { type: "sticker", src: "assets/images/utd-stickers.png", alt: "UT Dallas stickers", ar: 1, x: 19, y: 2,  w: 13, r: 3,  m: [50, 3, 34, 3] },
+  { type: "pass",    src: "assets/images/boarding-pass-nyc-la.png", alt: "Boarding pass, NYC to LA", x: 32, y: 6,  w: 24, r: -2, m: [8, 52, 60, -2] },
+  { type: "stamp",   src: "assets/images/beach.jpeg",  alt: "Beach at sunset",      x: 58, y: 3,  w: 8,  r: 7,  m: [80, 38, 16, 7] },
+  { type: "sticker", src: "assets/images/petunia.png", alt: "Petunia",              ar: 1.1, x: 68, y: 1,  w: 13, r: 5,  m: [66, 58, 30, 5] },
+  { type: "photo",   src: "assets/images/hike.jpeg",   alt: "On a hike",            x: 84, y: 4,  w: 13, r: 3,  m: [4, 82, 38, -3] },
 
-  { type: "note",    text: "buy more plants", color: "#ffd0dc", x: 6,  y: 25, w: 11, r: 5,  m: [4, 92, 30, 5] },
-  { type: "photo",   label: "photo",   x: 19, y: 21, w: 19, r: 2,  m: [36, 88, 44, 3] },
-  { type: "stamp",   label: "stamp",   x: 41, y: 24, w: 8,  r: -6, m: [82, 100, 15, -6] },
-  { type: "photo",   label: "photo",   x: 52, y: 20, w: 17, r: -3, m: [6, 122, 40, -3] },
-  { type: "word",    text: "hello!", color: "#d7e6ff", x: 72, y: 25, w: 14, r: 3,  m: [60, 150, 32, 3] },
-  { type: "note",    text: "to do:\nmake cool stuff", color: "#cdeccf", x: 87, y: 25, w: 11, r: -4, m: [52, 132, 36, -4] },
+  { type: "dream",   src: "assets/images/dream.png",   alt: "Dream catcher",        x: 5,  y: 23, w: 9,  r: 0,  m: [46, 82, 12, 0] },
+  { type: "photo",   src: "assets/images/nyc.jpeg",    alt: "Statue of Liberty",    x: 20, y: 22, w: 16, r: 2,  m: [6, 130, 38, 2] },
+  { type: "stamp",   src: "assets/images/canyon.jpeg", alt: "Canyon",               x: 40, y: 25, w: 8,  r: -6, m: [46, 128, 16, -6] },
+  { type: "photo",   src: "assets/images/prince1.jpeg", alt: "Prince",              x: 51, y: 20, w: 17, r: -3, m: [58, 98, 38, 3] },
+  { type: "sticker", src: "assets/images/western-sticker.svg", alt: "Western University", ar: 1, x: 72, y: 24, w: 13, r: 3,  m: [62, 150, 32, 3] },
+  { type: "note",    text: "to do:\nmake cool stuff", color: "#cdeccf", x: 87, y: 25, w: 11, r: -4, m: [8, 168, 28, -4] },
 
-  { type: "sticker", label: "sticker", x: 4,  y: 44, w: 11, r: -8 },
-  { type: "word",    text: "less noise, more soul.", color: "#f6e6a8", x: 24, y: 44, w: 24, r: 2 },
-  { type: "note",    text: "call mom", color: "#ffc99a", x: 54, y: 44, w: 11, r: -3 },
-  { type: "photo",   label: "photo",   x: 68, y: 40, w: 16, r: 3 },
-  { type: "stamp",   label: "stamp",   x: 87, y: 44, w: 7,  r: 6 }
+  { type: "sticker", src: "assets/images/juice-cup.png", alt: "Juice cup",          ar: 0.55, x: 4,  y: 43, w: 9,  r: -8, m: [48, 160, 14, -8] },
+  { type: "word",    hand: true, text: "work until you don’t have to introduce yourself.", color: "#f6e6a8", ar: 1.7, x: 19, y: 43, w: 27, r: 2, m: [6, 198, 58, 2] },
+  { type: "note",    text: "call mom back!!!", color: "#ffc99a", x: 50, y: 47, w: 12, r: -3, m: [64, 186, 30, -3] },
+  { type: "photo",   src: "assets/images/on.gif",      alt: "Bring it on",          x: 67, y: 42, w: 16, r: 3,  m: [50, 228, 40, 3] }
 ];
 
 (function renderBoard() {
@@ -498,6 +497,12 @@ const BOARD_ITEMS = [
       el.style.setProperty("--mr", "0deg");
     }
     el.style.setProperty("--z", index + 1);
+    if (item.ar) el.style.setProperty("--ar", item.ar);
+    if (item.hand) el.classList.add("pin-hand");
+    // each pin is viewed from a slightly different angle so it looks natural
+    const PIN_ANGLES = [-16, 11, -5, 19, -12, 7, 15, -9];
+    el.style.setProperty("--pn", PIN_ANGLES[index % PIN_ANGLES.length]);
+    el.style.setProperty("--ps", (0.86 + ((index * 37) % 14) / 100).toFixed(2));
     if (item.color) el.style.setProperty("--paper", item.color);
 
     if (item.type === "note" || item.type === "word") {

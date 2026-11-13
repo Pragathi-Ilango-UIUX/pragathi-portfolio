@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><path id="t" d="M27 100a73 73 0 0 1 146 0"/><path id="b" d="M19 100a81 81 0 0 0 162 0"/></defs>
+<circle cx="100" cy="100" r="97" fill="#fff"/><circle cx="100" cy="100" r="91" fill="#4f2683"/><circle cx="100" cy="100" r="62" fill="#fff"/>
+<text font-family="Georgia,serif" font-weight="700" font-size="14" letter-spacing="2" fill="#fff"><textPath href="#t" startOffset="50%" text-anchor="middle">WESTERN UNIVERSITY</textPath></text>
+<text font-family="Georgia,serif" font-weight="700" font-size="14" letter-spacing="3" fill="#fff"><textPath href="#b" startOffset="50%" text-anchor="middle">MUSTANGS</textPath></text>
+<text x="100" y="121" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="64" fill="#4f2683">W</text></svg>
